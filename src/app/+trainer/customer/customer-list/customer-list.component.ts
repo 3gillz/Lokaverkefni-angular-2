@@ -1,15 +1,75 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { Http, Headers, Response, RequestOptions } from '@angular/http';
+import { TrainerService } from '../../trainer.service';
+
+import { Observable } from "rxjs/Rx";
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+
+
+declare var $: any;
 
 @Component({
-  selector: 'app-customer-list',
+  selector: 'customer-list',
   templateUrl: './customer-list.component.html',
-  styleUrls: ['./customer-list.component.css']
+  styles: []
 })
 export class CustomerListComponent implements OnInit {
 
-  constructor() { }
 
-  ngOnInit() {
+  constructor(
+    @Inject("apiRoot") private apiRoot,
+    private http: Http,
+    private trainerService: TrainerService
+    ) { }
+
+  ngOnInit() {}
+
+  public REST_ROOT = this.apiRoot + "api/Customer/GetAllCustomers";
+  token = localStorage.getItem('access_token');
+  headers = new Headers({ 'Authorization': "Bearer " + this.token, 'Content-Type': 'application/x-www-form-urlencoded' });
+  requestOptions = new RequestOptions({ headers: this.headers });
+  options = {
+    dom: "Bfrtip",
+    ajax: (data, callback, settings) => {
+      this.http.get(this.REST_ROOT, this.requestOptions)
+        .map(this.extractData)
+        .catch(this.handleError)
+        .subscribe((data) => {
+          console.log('data from rest endpoint', data);
+          callback({
+            aaData: data.slice(0, 100)
+          })
+        })
+    },
+    columns: [
+      { data: "CID" },
+      { data: "name" },
+      { data: "email" },
+      { data: "phone" },
+    ]
+  };
+
+  alertTest(){
+    alert()
+  }
+
+  private extractData(res: Response) {
+    let body = res.json();
+    if (body) {
+      return body.data || body
+    } else {
+      return {}
+    }
+  }
+
+  private handleError(error: any) {
+    // In a real world app, we might use a remote logging infrastructure
+    // We'd also dig deeper into the error to get a better message
+    let errMsg = (error.message) ? error.message :
+      error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+    console.error(errMsg); // log to console instead
+    return Observable.throw(errMsg);
   }
 
 }

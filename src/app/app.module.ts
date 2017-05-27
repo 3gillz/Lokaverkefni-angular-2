@@ -23,6 +23,7 @@ import { JsonApiService } from './smartadmin/json-api.service';
 import { LayoutService } from './smartadmin/layout/layout.service';
 import { UserService } from './smartadmin/user/user.service';
 import { SoundService } from "./smartadmin/sound/sound.service";
+import { SmartadminDatatableModule } from './smartadmin/ui/datatable/smartadmin-datatable.module';
 //SmartAdmin end
 import { AccountService } from './services/account.service';
 
@@ -36,6 +37,7 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     SmartadminLayoutModule,
+    SmartadminDatatableModule,
     I18nModule,
     SmartadminWidgetsModule,
     UtilsModule,
