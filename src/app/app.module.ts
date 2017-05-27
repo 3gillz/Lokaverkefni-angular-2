@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppRoutingModule } from './app-routing.module';
+import { SmartAdminModule } from './smartadmin.module';
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -11,6 +12,7 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
+    SmartAdminModule,
     BrowserModule,
     FormsModule,
     HttpModule,
