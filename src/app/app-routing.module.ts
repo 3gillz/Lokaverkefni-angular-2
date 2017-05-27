@@ -6,7 +6,9 @@ import { LoginComponent } from './+landing-page/login/login.component';
 import { RegisterComponent } from './+landing-page/register/register.component';
 
 import { TraineeComponent } from './+trainee/trainee.component';
+
 import { TrainerComponent } from './+trainer/trainer.component';
+import { DashboardComponent } from './+trainer/dashboard/dashboard.component';
 
 const routes: Routes = [
   {
@@ -24,7 +26,12 @@ const routes: Routes = [
   },
   {
     path: 'trainer', //Trainer Admin page. Customer, Data, Programs etc.
-    component: TrainerComponent
+    component: TrainerComponent,
+    children:[
+      {path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      {path: 'dashboard', component: DashboardComponent }
+    ]
+  
   }
 ];
 
@@ -39,5 +46,6 @@ export const RoutedComponents = [
   LoginComponent,
   RegisterComponent,
   TraineeComponent,
-  TrainerComponent
+  TrainerComponent,
+  DashboardComponent
 ]
