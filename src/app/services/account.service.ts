@@ -20,7 +20,6 @@ export class AccountService {
       .subscribe(response => {
         localStorage.setItem('access_token', response.json().access_token);
         localStorage.setItem('userName', response.json().userName);
-        let id = localStorage.getItem('userName').split('@');
         if(response.json().path == "trainee"){
           this.router.navigate([ 'profile/' ]);
         }

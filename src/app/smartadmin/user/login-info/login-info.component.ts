@@ -10,7 +10,7 @@ import {LayoutService} from "../../layout/layout.service";
 export class LoginInfoComponent implements OnInit {
 
   user:any;
-
+  username: string;
   constructor(
     private userService: UserService,
               private layoutService: LayoutService) {
@@ -20,6 +20,8 @@ export class LoginInfoComponent implements OnInit {
     this.userService.getLoginInfo().subscribe(user => {
       this.user = user
     })
+    let name = localStorage.getItem('userName').split('@');
+    this.username = name[0];
 
   }
 
