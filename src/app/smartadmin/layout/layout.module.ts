@@ -5,6 +5,7 @@ import {FormsModule} from "@angular/forms";
 import {HeaderModule} from "./header/header.module";
 import {FooterComponent} from "./footer/footer.component";
 import {NavigationModule} from "./navigation/navigation.module";
+import {NavigationTrainerModule} from "./navigation-trainer/navigation-trainer.module";
 import {RibbonComponent} from "./ribbon/ribbon.component";
 import {ShortcutComponent} from "./shortcut/shortcut.component";
 import {ToggleActiveDirective} from "../utils/toggle-active.directive";
@@ -22,6 +23,7 @@ import {UtilsModule} from "../utils/utils.module";
     CommonModule,
     HeaderModule,
     NavigationModule,
+    NavigationTrainerModule,
     FormsModule,
     RouterModule,
 
@@ -44,6 +46,7 @@ import {UtilsModule} from "../utils/utils.module";
   exports:[
     HeaderModule,
     NavigationModule,
+    NavigationTrainerModule,
     FooterComponent,
     RibbonComponent,
     ShortcutComponent,
