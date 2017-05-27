@@ -18,6 +18,7 @@ export class AccountService {
     let options = new RequestOptions({ headers: headers });
     this.http.post(loginUrl, body, options)
       .subscribe(response => {
+        console.log(response.json())
         localStorage.setItem('access_token', response.json().access_token);
         localStorage.setItem('userName', response.json().userName);
         this.afterLoginNavigation(response.json().path);

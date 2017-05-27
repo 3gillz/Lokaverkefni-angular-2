@@ -7,6 +7,11 @@ export const languages: any = [
     "title": "English (US)"
   },
   {
+    "key": "is",
+    "alt": "Iceland",
+    "title": "Íslenska"
+  },
+  {
     "key": "fr",
     "alt": "France",
     "title": "Français"

@@ -9,6 +9,29 @@ import { TraineeComponent } from './+trainee/trainee.component';
 
 import { TrainerComponent } from './+trainer/trainer.component';
 import { DashboardComponent } from './+trainer/dashboard/dashboard.component';
+import { CustomerComponent } from './+trainer/customer/customer.component';
+import { CustomerListComponent } from './+trainer/customer/customer-list/customer-list.component';
+import { NewCustomerComponent } from './+trainer/customer/new-customer/new-customer.component';
+import { CustomerDetailComponent } from './+trainer/customer/customer-detail/customer-detail.component';
+
+import { TrainingProgramComponent } from './+trainer/training-program/training-program.component';
+import { TrainingProgramListComponent } from './+trainer/training-program/training-program-list/training-program-list.component';
+import { TrainingProgramNewComponent } from './+trainer/training-program/training-program-new/training-program-new.component';
+import { FoodProgramComponent } from './+trainer/food-program/food-program.component';
+import { FoodProgramNewComponent } from './+trainer/food-program/food-program-new/food-program-new.component';
+import { FoodProgramListComponent } from './+trainer/food-program/food-program-list/food-program-list.component';
+import { FoodItemsComponent } from './+trainer/food-items/food-items.component';
+import { FoodItemNewComponent } from './+trainer/food-items/food-item-new/food-item-new.component';
+import { FoodItemListComponent } from './+trainer/food-items/food-item-list/food-item-list.component';
+import { ExerciseComponent } from './+trainer/exercise/exercise.component';
+import { ExerciseListComponent } from './+trainer/exercise/exercise-list/exercise-list.component';
+import { ExerciseNewComponent } from './+trainer/exercise/exercise-new/exercise-new.component';
+
+import { TestsComponent } from './+trainer/tests/tests.component';
+import { LarusComponent } from './+trainer/tests/larus/larus.component';
+import { IvarComponent } from './+trainer/tests/ivar/ivar.component';
+import { EgillComponent } from './+trainer/tests/egill/egill.component';
+import { DavidComponent } from './+trainer/tests/david/david.component';
 
 const routes: Routes = [
   {
@@ -29,7 +52,52 @@ const routes: Routes = [
     component: TrainerComponent,
     children:[
       {path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      {path: 'dashboard', component: DashboardComponent }
+      {path: 'dashboard', component: DashboardComponent },
+      {path: 'customers', component: CustomerComponent,
+        children: [
+          {path: '', redirectTo: 'list', pathMatch: 'full'},
+          {path: 'list', component: CustomerListComponent},
+          {path: 'new', component: NewCustomerComponent},
+          {path: 'detail', component: CustomerDetailComponent}
+        ]
+      },
+      {path: 'trainingprograms', component: TrainingProgramComponent,
+        children: [
+          {path: '', redirectTo: 'list', pathMatch: 'full'},
+          {path: 'list', component: TrainingProgramListComponent},
+          {path: 'new', component: TrainingProgramNewComponent}
+        ]
+      },
+      {path: 'exercise', component: ExerciseComponent,
+        children: [
+          {path: '', redirectTo: 'list', pathMatch: 'full'},
+          {path: 'list', component: ExerciseListComponent},
+          {path: 'new', component: ExerciseNewComponent}
+        ]
+      },
+      {path: 'foodprograms', component: FoodProgramComponent,
+        children: [
+          {path: '', redirectTo: 'list', pathMatch: 'full'},
+          {path: 'list', component: FoodProgramListComponent},
+          {path: 'new', component: FoodProgramNewComponent}
+        ]
+      },
+      {path: 'fooditems', component: FoodItemsComponent,
+        children: [
+          {path: '', redirectTo: 'list', pathMatch: 'full'},
+          {path: 'list', component: FoodItemListComponent},
+          {path: 'new', component: FoodItemNewComponent}
+        ]
+      },
+      {path: 'test', component: TestsComponent,
+        children: [
+          {path: '', redirectTo: 'list', pathMatch: 'full'},
+          {path: 'larus', component: LarusComponent},
+          {path: 'ivar', component: IvarComponent},
+          {path: 'egill', component: EgillComponent},
+          {path: 'david', component: DavidComponent}
+        ]
+      }
     ]
   
   }
@@ -47,5 +115,27 @@ export const RoutedComponents = [
   RegisterComponent,
   TraineeComponent,
   TrainerComponent,
-  DashboardComponent
+  DashboardComponent,
+  CustomerComponent,
+  CustomerListComponent,
+  NewCustomerComponent,
+  CustomerDetailComponent,
+  TrainingProgramComponent,
+  TrainingProgramListComponent,
+  TrainingProgramNewComponent,
+  ExerciseComponent,
+  ExerciseListComponent,
+  ExerciseNewComponent,
+  FoodProgramComponent,
+  FoodProgramListComponent,
+  FoodProgramNewComponent,
+  FoodItemsComponent,
+  FoodItemListComponent,
+  FoodItemNewComponent,
+  //Test
+  TestsComponent,
+  LarusComponent,
+  IvarComponent,
+  EgillComponent,
+  DavidComponent
 ]
