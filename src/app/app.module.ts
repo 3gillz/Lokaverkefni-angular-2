@@ -23,12 +23,13 @@ import { UserService } from './smartadmin/user/user.service';
 import { SoundService } from "./smartadmin/sound/sound.service";
 //SmartAdmin end
 
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule, RoutedComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    RoutedComponents
   ],
   imports: [
     SmartadminLayoutModule,

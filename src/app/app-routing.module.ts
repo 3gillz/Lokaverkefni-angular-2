@@ -1,10 +1,30 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { LandingPageComponent } from './+landing-page/landing-page.component';
+import { LoginComponent } from './+landing-page/login/login.component';
+import { RegisterComponent } from './+landing-page/register/register.component';
+
+import { TraineeComponent } from './+trainee/trainee.component';
+import { TrainerComponent } from './+trainer/trainer.component';
+
 const routes: Routes = [
   {
     path: '',
-    children: []
+    component: LandingPageComponent,
+    children:[
+      {path: '', redirectTo: 'login', pathMatch: 'full' },
+      {path: 'login', component: LoginComponent },
+      {path: 'register', component: RegisterComponent }
+    ]
+  },
+  {
+    path: 'profile', //View subscribed programs and measurement data
+    component: TraineeComponent
+  },
+  {
+    path: 'trainer', //Trainer Admin page. Customer, Data, Programs etc.
+    component: TrainerComponent
   }
 ];
 
@@ -13,3 +33,11 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
+export const RoutedComponents = [
+  LandingPageComponent,
+  LoginComponent,
+  RegisterComponent,
+  TraineeComponent,
+  TrainerComponent
+]
