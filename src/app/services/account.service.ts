@@ -20,16 +20,19 @@ export class AccountService {
       .subscribe(response => {
         localStorage.setItem('access_token', response.json().access_token);
         localStorage.setItem('userName', response.json().userName);
-        if(response.json().path == "trainee"){
-          this.router.navigate([ 'profile/' ]);
-        }
-        else if(response.json().path == "trainer"){
-          this.router.navigate([ 'trainer/' ]);
-        }
+        this.afterLoginNavigation(response.json().path);
       }, error => {
         alert("Something Is Not Right");
         console.log(JSON.stringify(error.json()));
       });
+  }
+  afterLoginNavigation(path: string){
+    if(path == "trainee"){
+      this.router.navigate([ 'profile/' ]);
+    }
+    else if(path == "trainer"){
+      this.router.navigate([ 'trainer/' ]);
+    }
   }
   logout() {
     localStorage.clear()
