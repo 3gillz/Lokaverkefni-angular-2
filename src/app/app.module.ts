@@ -22,6 +22,7 @@ import { LayoutService } from './smartadmin/layout/layout.service';
 import { UserService } from './smartadmin/user/user.service';
 import { SoundService } from "./smartadmin/sound/sound.service";
 //SmartAdmin end
+import { AccountService } from './services/account.service';
 
 import { AppRoutingModule, RoutedComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -55,7 +56,9 @@ import { AppComponent } from './app.component';
     JsonApiService,
     LayoutService,
     UserService,
-    SoundService
+    SoundService,
+    {provide: "apiRoot", useValue: "http://localhost:55322/"},
+    AccountService
   ],
   bootstrap: [AppComponent]
 })
