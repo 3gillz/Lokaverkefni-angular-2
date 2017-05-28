@@ -1,20 +1,77 @@
-<sa-widget [editbutton]="false" color="blueDark">
+<div id="content">
+  <div class="row">
+    <sa-big-breadcrumbs [items]="['Customers', 'List']" icon="file-text-o" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></sa-big-breadcrumbs>
+  </div>
+  <!--
+      The ID "widget-grid" will start to initialize all widgets below
+      You do not need to use widgets if you dont want to. Simply remove
+      the <section></section> and you can use wells or panels instead
+      -->
+  <!-- widget grid -->
+  <sa-widgets-grid>
+    <!-- row -->
+    <div class="row">
+      <!-- NEW WIDGET START -->
+      <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+     
+        <!-- Widget ID (each widget will need unique ID)-->
+        <sa-widget class="well">
+          <!-- widget options:
+              usage: <sa-widget id="wid-id-0" [editbutton]="false">
+              [colorbutton]="false"
+              [editbutton]="false"
+              [togglebutton]="false"
+              [deletebutton]="false"
+              [fullscreenbutton]="false"
+              [custombutton]="false"
+              [collapsed]="true"
+              [sortable]="false"
+          -->
+          <header>
+            <span class="widget-icon"> <i class="fa fa-comments"></i> </span>
 
-  <sa-big-breadcrumbs [items]="['Customers', 'List']" icon="group" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></sa-big-breadcrumbs>
-	<div>
-		<div class="widget-body no-padding">
+            <h2>Widget Title </h2>
+          </header>
+          <!-- widget div-->
+          <div>
+            <!-- widget content -->
+            <div class="widget-body no-padding" data-sparkline-container="">
 
-			<sa-datatable [options]="options" tableClass="table table-striped table-bordered table-hover">
-				<thead>
-					<tr>
-						<th [style.width]="'8%'" data-hide="mobile-p">User ID</th>
-						<th [style.width]="'8%'" data-hide="mobile-p">Post ID</th>
-						<th>Title</th>
-						<th data-class="expand">Body</th>       
-					</tr>
-				</thead>
-			</sa-datatable>
+              <sa-datatable [options]="options"
+                         [detailsFormat]="detailsFormat"
+                         tableClass="display projects-table table table-striped table-bordered table-hover"
+                         width="100%">
+                <thead>
+                <tr>
+                  <th></th>
+                  <th>Name</th>
+                  <th><i
+                    class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i>
+                    Email
+                  </th>
+                  <th>Phone</th>
+                  <th>Kennitala</th>
+                  <th> Gender
+                    
+                  </th>
+                  <th><i
+                    class="fa fa-fw fa-calendar text-muted hidden-md hidden-sm hidden-xs"></i>
+                    Height
+                  </th>
+                </tr>
+                </thead>
 
-		</div>
-	</div>
-</sa-widget>
+              </sa-datatable>
+            </div>
+            <!-- end widget content -->
+          </div>
+          <!-- end widget div -->
+        </sa-widget>
+        <!-- end widget -->
+      </article>
+      <!-- WIDGET END -->
+    </div>
+    <!-- end row -->
+  </sa-widgets-grid>
+  <!-- end widget grid -->
+</div>
