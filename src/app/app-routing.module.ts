@@ -58,7 +58,7 @@ const routes: Routes = [
           {path: '', redirectTo: 'list', pathMatch: 'full'},
           {path: 'list', component: CustomerListComponent},
           {path: 'new', component: NewCustomerComponent},
-          {path: 'detail', component: CustomerDetailComponent}
+          {path: 'detail/:id', component: CustomerDetailComponent}
         ]
       },
       {path: 'trainingprograms', component: TrainingProgramComponent,
