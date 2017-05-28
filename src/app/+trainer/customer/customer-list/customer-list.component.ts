@@ -25,34 +25,39 @@ export class CustomerListComponent implements OnInit {
 
   ngOnInit() {}
 
-  public REST_ROOT = this.apiRoot + "api/Customer/GetAllCustomers";
+  public getAllCustomers = this.apiRoot + "api/Customer/GetAllCustomers";
   token = localStorage.getItem('access_token');
   headers = new Headers({ 'Authorization': "Bearer " + this.token, 'Content-Type': 'application/x-www-form-urlencoded' });
   requestOptions = new RequestOptions({ headers: this.headers });
   options = {
     dom: "Bfrtip",
     ajax: (data, callback, settings) => {
-      this.http.get(this.REST_ROOT, this.requestOptions)
+      this.http.get(this.getAllCustomers, this.requestOptions)
         .map(this.extractData)
         .catch(this.handleError)
         .subscribe((data) => {
-          console.log('data from rest endpoint', data);
           callback({
             aaData: data.slice(0, 100)
           })
         })
     },
+    select: true,
     columns: [
       { data: "CID" },
       { data: "name" },
       { data: "email" },
-      { data: "phone" },
+      { data: "phone" }
+    ],
+    buttons:[
+      {
+        extend: 'selected',
+          action: function ( e, dt ) {
+            var rowData = dt.row( { selected: true } ).data();
+            console.log( rowData );
+          }
+      }
     ]
   };
-
-  alertTest(){
-    alert()
-  }
 
   private extractData(res: Response) {
     let body = res.json();
