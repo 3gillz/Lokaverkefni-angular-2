@@ -1,6 +1,11 @@
 sa-big-breadcrumbs{
     width: fit-content;
 }
+sa-language-selector{
+    position: absolute;
+    margin-top: 2px;      
+    right: 50px;
+}
 sa-logout{
     position: absolute;
     margin-top: 2px;

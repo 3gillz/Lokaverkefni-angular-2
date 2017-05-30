@@ -12,7 +12,9 @@ export class TraineeComponent implements OnInit {
   constructor() { }
 
   date: any;
+  user: any;
   ngOnInit() {
+    this.user = JSON.parse(localStorage.getItem('user'));
     this.date = new Date();
   }
 

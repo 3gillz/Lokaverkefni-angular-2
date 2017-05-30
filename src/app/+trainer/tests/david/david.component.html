@@ -1,3 +1,56 @@
-<p>
-  david works!
-</p>
+<div id="content">
+  <div class="row">
+    <sa-big-breadcrumbs icon="bar-chart-o" [items]="['Graphs', 'Flot Chart']" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></sa-big-breadcrumbs>
+  </div>
+  <!-- widget grid -->
+  <sa-widgets-grid>
+    <article *ngIf="fetched" class="col-lg-4">
+      <sa-widget [editbutton]="false">
+        <header>
+          <span class="widget-icon"> <i class="fa fa-bar-chart-o"></i> </span>
+
+          <h2>{{'Weight' | i18n}}</h2>
+        </header>
+
+        <div>
+          <div class="widget-body ">
+            <sa-flot-chart [data]="kgTableData" [options]="kgChartOptions"></sa-flot-chart>
+          </div>
+        </div>
+      </sa-widget>
+    </article>
+    <article *ngIf="fetched" class="col-lg-4">
+      <sa-widget [editbutton]="false">
+        <header>
+          <span class="widget-icon"> <i class="fa fa-bar-chart-o"></i> </span>
+
+          <h2>{{'Fat Percentage' | i18n}}</h2>
+        </header>
+
+        <div>
+          <div class="widget-body ">
+            <sa-flot-chart [data]="fatpercentageTableData" [options]="percentageChartOptions"></sa-flot-chart>
+          </div>
+        </div>
+      </sa-widget>
+    </article>
+    <article class="col-lg-4">
+        <sa-widget [editbutton]="false">
+          <span id="fetchfood">
+            <input type="number" #inputId (keyup.enter)="getFoodItem(inputId.value)"/>
+            <button (click)="getFoodItem(inputId.value)" >Get</button>
+          </span>
+          <header>
+            <span class="widget-icon"> <i class="fa fa-bar-chart-o"></i> </span>
+            <h2>{{ foodname }}</h2>
+          </header>
+          <div *ngIf="radardatafetched">
+            <div class="widget-body">
+              <sa-chart-js type="radar" [data]="radardata"></sa-chart-js>
+            </div>
+          </div>
+        </sa-widget>
+    </article>
+  </sa-widgets-grid>
+  <!-- end widget grid -->
+</div>

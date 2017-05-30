@@ -15,6 +15,9 @@ import {I18nModule} from "./smartadmin/i18n/i18n.module";
 import {SmartadminWidgetsModule} from "./smartadmin/widgets/smartadmin-widgets.module";
 import {UtilsModule} from "./smartadmin/utils/utils.module";
 import {UserModule} from "./smartadmin/user/user.module";
+import { ChartJsModule } from "./smartadmin/graphs/chart-js/chart-js.module";
+import { MorrisGraphModule } from "./smartadmin/graphs/morris-graph/morris-graph.module";
+import { FlotChartModule } from "./smartadmin/graphs/flot-chart/flot-chart.module";
 import {StatsModule} from "./smartadmin/stats/stats.module";
 import {InlineGraphsModule} from "./smartadmin/graphs/inline/inline-graphs.module";
 import {SmartadminFormsLiteModule} from "./smartadmin/forms/smartadmin-forms-lite.module";
@@ -42,6 +45,9 @@ import { AppComponent } from './app.component';
     SmartadminWidgetsModule,
     UtilsModule,
     UserModule,
+    ChartJsModule,
+    MorrisGraphModule,
+    FlotChartModule,
     StatsModule,
     InlineGraphsModule,
     SmartadminFormsLiteModule,
