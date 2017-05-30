@@ -1,6 +1,6 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, HostListener } from '@angular/core';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
-
+import { Router } from '@angular/router';
 import { Observable } from "rxjs/Rx";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -13,13 +13,22 @@ export class CustomerListComponent implements OnInit {
 
   constructor(
     @Inject("apiRoot") private apiRoot,
-    private http: Http
-  ) {
+    private http: Http,
+    private router: Router
+  ) { 
+  };
+
+  @HostListener('document:click', ['$event'])
+  documentClick(event) {
+    if(event.target.id === "detail"){
+      this.router.navigate([ 'trainer/customers/detail/' + event.target.value ]);
+    }
   }
 
   ngOnInit() {
   }
-  public getAllCustomers = this.apiRoot + "api/Customer/GetAllCustomers";
+
+  public getAllCustomers = this.apiRoot + "api/Customer/GetAllCustomersByTRID";
   token = localStorage.getItem('access_token');
   headers = new Headers({ 'Authorization': "Bearer " + this.token, 'Content-Type': 'application/x-www-form-urlencoded' });
   requestOptions = new RequestOptions({ headers: this.headers });
@@ -36,7 +45,6 @@ export class CustomerListComponent implements OnInit {
         })
     },
     "iDisplayLength": 15,
-    select: true,
     "columns": [
       {
         "class": 'details-control',
@@ -51,11 +59,10 @@ export class CustomerListComponent implements OnInit {
       {"data": "gender"},
       {"data": "height"}
     ],
+     "buttons": [
+      'colvis'
+    ],  
     "order": [[1, 'asc']]
-  }
-
-  public details(){
-    console.log("click")
   }
 
   public detailsFormat(d) {
@@ -79,7 +86,7 @@ export class CustomerListComponent implements OnInit {
             </tr>
             <tr>
                 <td>Action:</td>
-                <td><button>Home</button></td>
+                <td><button id="detail" value="${d.CID}" class="btn btn-success">Detail</button></td>
             </tr></tbody>
         </table>`
   }

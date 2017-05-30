@@ -1,6 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {LoginInfoComponent} from "../../user/login-info/login-info.component";
-
+import { Component, OnInit } from '@angular/core';
+import { LoginInfoComponent } from "../../user/login-info/login-info.component";
 
 @Component({
 
@@ -11,8 +10,11 @@ export class NavigationTrainerComponent implements OnInit {
 
   constructor() {
   }
+  
+  trainer:any;
 
   ngOnInit() {
+    this.trainer = JSON.parse(localStorage.getItem('user'));
   }
   
 }

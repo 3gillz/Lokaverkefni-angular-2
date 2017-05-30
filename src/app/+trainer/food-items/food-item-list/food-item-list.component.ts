@@ -42,8 +42,10 @@ export class FoodItemListComponent implements OnInit {
       {data: 'water'}, 
       {data: 'colestrol'},
       {data: 'addedSugar'}
-    ]/*,
-    buttons:{}*/
+    ],
+    buttons: [
+      'colvis'
+    ]
   };
 
   private extractData(res: Response) {

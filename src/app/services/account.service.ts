@@ -18,23 +18,53 @@ export class AccountService {
     let options = new RequestOptions({ headers: headers });
     this.http.post(loginUrl, body, options)
       .subscribe(response => {
-        console.log(response.json())
         localStorage.setItem('access_token', response.json().access_token);
-        localStorage.setItem('userName', response.json().userName);
-        this.afterLoginNavigation(response.json().path);
+        this.afterLoginResolver(response.json().path);
       }, error => {
         alert("Something Is Not Right");
         console.log(JSON.stringify(error.json()));
       });
   }
-  afterLoginNavigation(path: string){
+
+  afterLoginResolver(path: string){
     if(path == "trainee"){
-      this.router.navigate([ 'profile/' ]);
+      this.getTraineeThenNavigate();
     }
     else if(path == "trainer"){
-      this.router.navigate([ 'trainer/' ]);
+      this.getTrainerThenNavigate();
     }
   }
+
+  getTrainerThenNavigate(){
+    let url = this.apiRoot + "api/Trainer/GetCurrentTrainer";
+    let token = localStorage.getItem('access_token');
+    let headers = new Headers({ 'Authorization': "Bearer " + token, 'Content-Type': 'application/x-www-form-urlencoded' });
+    let requestOptions = new RequestOptions({ headers: headers });
+    this.http.get(url, requestOptions)
+        .map(res => res.json())
+        .subscribe((data) => {  
+          localStorage.setItem('user', JSON.stringify(data));
+          this.router.navigate([ 'trainer/' ]);
+        })
+  }
+
+  getTraineeThenNavigate(){
+    let url = this.apiRoot + "api/Customer/GetCurrentCustomer";
+    let token = localStorage.getItem('access_token');
+    let headers = new Headers({ 'Authorization': "Bearer " + token, 'Content-Type': 'application/x-www-form-urlencoded' });
+    let requestOptions = new RequestOptions({ headers: headers });
+    this.http.get(url, requestOptions)
+        .map(res => res.json())
+        .subscribe((data) => {  
+          let user = data;
+          user.kennitala = user.kennitala.slice(0, 6) + "-" + user.kennitala.slice(6);
+          user.phone = user.phone.slice(0, 3) + "-" + user.phone.slice(3);
+          localStorage.setItem('user', JSON.stringify(user));
+          console.log(user)
+          this.router.navigate([ 'profile/' ]);
+        })
+  }
+
   logout() {
     localStorage.clear()
     this.router.navigate([""]);
