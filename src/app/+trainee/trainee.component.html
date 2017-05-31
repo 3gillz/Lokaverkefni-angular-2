@@ -97,7 +97,7 @@
                         </li>
                         <li>
                           <p class="text-muted">
-                            <i class="fa fa-pencil"></i>&#xA0;&#xA0;<span class="txt-color-darken"><button class="btn btn-info btn-xs">{{'Edit' | i18n}}</button></span>
+                            <i class="fa fa-pencil"></i>&#xA0;&#xA0;<span class="txt-color-darken" (click)="traineeService.infoOpened()"><button (click)="lgModal.show()" class="btn btn-info btn-xs">{{'Edit' | i18n}}</button></span>
                           </p>
                         </li>
                       </ul>
@@ -184,4 +184,73 @@
       </div>
     </div>
     <!-- end row -->
+  </div>
+
+
+  <!-- Modal -->
+
+
+  <div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" (click)="lgModal.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">{{'Edit Basic Info' | i18n}}</h4>
+        </div>
+        <form [formGroup]="traineeService.basicInfoForm" novalidate (ngSubmit)="submit(traineeService.basicInfoForm.value, traineeService.basicInfoForm.valid)">
+          <div class="smart-form">
+            <div class="modal-body">
+              <fieldset>
+                <section>
+                  <label class="label">{{'Name' | i18n}}</label>
+                  <label class="input"> <i class="icon-append fa fa-user"></i>
+                        <input type="text" [(ngModel)]="user.name" formControlName="name" autocomplete="off" >
+                      </label>
+                </section>
+                <section>
+                  <label class="label">{{'Phone' | i18n}}</label>
+                  <label class="input"> <i class="icon-append fa fa-phone"></i>
+                        <input type="text" [(ngModel)]="user.phone" formControlName="phone" autocomplete="off" >
+                      </label>
+                </section>
+                <section>
+                  <label class="label">{{'Email' | i18n}}</label>
+                  <label class="input"> <i class="icon-append fa fa-envelope"></i>
+                        <input type="text" [(ngModel)]="user.email" formControlName="email" autocomplete="off" >
+                      </label>
+                </section>
+                <section>
+                  <label class="label">{{'Address' | i18n}}</label>
+                  <label class="input"> <i class="icon-append fa fa-home"></i>
+                        <input type="text" [(ngModel)]="user.address" formControlName="address" autocomplete="off" >
+                      </label>
+                </section>
+                <section>
+                  <label class="label">{{'Allergy' | i18n}}</label>
+                  <label class="input"> <i class="icon-append fa fa-heartbeat"></i>
+                        <input type="text" [(ngModel)]="user.allergy" formControlName="allergy" autocomplete="off" >
+                      </label>
+                </section>
+                <section>
+                  <label class="label">{{'Food Pref' | i18n}}</label>
+                  <label class="input"> <i class="icon-append fa fa-delicious"></i>
+                        <input type="text" [(ngModel)]="user.foodPref" formControlName="foodPref" autocomplete="off" >
+                      </label>
+                </section>
+              </fieldset>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" (click)="lgModal.hide()">
+                {{'Cancel' | i18n}}
+              </button>
+            <button type="button" class="btn btn-primary" type="submit" [disabled]="!traineeService.infoChange">
+                {{'Save' | i18n}}
+              </button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>

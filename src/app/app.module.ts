@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -52,6 +52,7 @@ import { AppComponent } from './app.component';
     InlineGraphsModule,
     SmartadminFormsLiteModule,
     SmartProgressbarModule,
+    ModalModule.forRoot(),
     TooltipModule.forRoot(),
     BsDropdownModule.forRoot(),
     ProgressbarModule.forRoot(),
@@ -60,6 +61,7 @@ import { AppComponent } from './app.component';
     //SmartAdminEnd
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     BrowserAnimationsModule,
     AppRoutingModule
