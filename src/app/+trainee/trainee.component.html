@@ -16,49 +16,35 @@
             <div class="well well-light well-sm no-margin no-padding">
               <div class="row">
                 <div class="col-sm-12">
-                  <div id="myCarousel" class="carousel fade profile-carousel">
-                    <div class="air air-bottom-right padding-10">
-                      <a href="" class="btn txt-color-white bg-color-teal btn-sm"><i class="fa fa-check"></i> Follow</a>&#xA0;
-                      <a href="" class="btn txt-color-white bg-color-pinkDark btn-sm"><i class="fa fa-link"></i> Connect</a>
-                    </div>
-                    <div class="air air-top-left padding-10">
-                      <h4 class="txt-color-white font-md">{{ date | date: 'dd MMM, yyyy' }}</h4>
-                    </div>
-                    <ol class="carousel-indicators">
-                      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                      <li data-target="#myCarousel" data-slide-to="1" class=""></li>
-                      <li data-target="#myCarousel" data-slide-to="2" class=""></li>
-                    </ol>
-                    <div class="carousel-inner">
-                      <!-- Slide 1 -->
-                      <div class="item active">
-                        <img src="assets/img/demo/s1.jpg" alt="demo user">
-                      </div>
-                      <!-- Slide 2 -->
-                      <div class="item">
-                        <img src="assets/img/demo/s2.jpg" alt="demo user">
-                      </div>
-                      <!-- Slide 3 -->
-                      <div class="item">
-                        <img src="assets/img/demo/m3.jpg" alt="demo user">
-                      </div>
-                    </div>
+                  <carousel id="myCarousel" class="carousel fade profile-carousel">
+                    <slide>
+                      <img src="assets/img/demo/s1.jpg" alt="demo user">
+                    </slide>
+                    <slide>
+                      <img src="assets/img/demo/s2.jpg" alt="demo user">
+                    </slide>
+                    <slide>
+                      <img src="assets/img/demo/m3.jpg" alt="demo user">
+                    </slide>
+                  </carousel>
+                  <div class="air air-top-left padding-10">
+                    <h4 class="txt-color-white font-md">&#xA0;&#xA0;{{ date | date: 'dd MMM, yyyy' }}</h4>
                   </div>
                 </div>
                 <div class="col-sm-12">
                   <div class="row">
                     <div class="col-sm-3 profile-pic">
-                      <img [src]="traineeService.user.profileImagePath" alt="profile-pic" title="Change Profile Picture" (click)="changeImageModal.show()">
+                      <img [src]="traineeService.user.profileImagePath" alt="profile-pic" tooltip="Change Profile Picture" (click)="changeImageModal.show()">
 
                       <div class="padding-10">
-                        <h4 class="font-md"><strong>1,543</strong>
+                        <h4 class="font-md"><strong>18</strong>
                           <br>
-                          <small>Followers</small>
+                          <small>Days To Goal End</small>
                         </h4>
                         <br>
-                        <h4 class="font-md"><strong>419</strong>
+                        <h4 class="font-md"><strong>60%</strong>
                           <br>
-                          <small>Connections</small>
+                          <small>Left of Goal</small>
                         </h4>
                       </div>
                     </div>
@@ -311,7 +297,8 @@
           <button type="button" class="btn btn-default" (click)="changeImageModal.hide()" (click)="cancelImageChange()">
               {{'Cancel' | i18n}}
             </button>
-          <button (click)="saveNewImage(newImage)" (click)="changeImageModal.hide()" type="button" class="btn btn-primary" [disabled]="!validImage ||  traineeService.newProfileImagePath == traineeService.user.profileImagePath">
+          <button (click)="saveNewImage(newImage)" (click)="changeImageModal.hide()" type="button" class="btn btn-primary"
+                 [disabled]="!validImage ||  traineeService.newProfileImagePath == traineeService.user.profileImagePath">
               {{'Save' | i18n}}
           </button>
         </div>
