@@ -1,6 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {ModalDirective} from "ngx-bootstrap";
-
+import { Component, OnInit } from '@angular/core';
 import { TraineeService } from './trainee.service';
 
 @Component({
@@ -11,25 +9,21 @@ import { TraineeService } from './trainee.service';
 })
 export class TraineeComponent implements OnInit {
 
-  @ViewChild('lgModal') public lgModal:ModalDirective;
-
   constructor(
     public traineeService: TraineeService
   ) { }
 
-  invalidImage: boolean;
+  validImage: boolean;
   date: any;
   ngOnInit() {
     this.date = new Date();
   }
-
   cancelImageChange(){
     this.traineeService.newProfileImagePath = this.traineeService.user.profileImagePath;
   }
   saveNewImage(newImage){
     this.traineeService.saveProfileImage(newImage.src)
   }
-
   submit(model: any, isValid: boolean) {
     this.traineeService.submitNewInfo(model, isValid);
   }

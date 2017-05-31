@@ -54,12 +54,15 @@ import { AppComponent } from './app.component';
     SmartadminFormsLiteModule,
     SmartadminValidationModule,
     SmartProgressbarModule,
+    //ngx-bootstrap
     ModalModule.forRoot(),
     TooltipModule.forRoot(),
     BsDropdownModule.forRoot(),
     ProgressbarModule.forRoot(),
     AlertModule.forRoot(),
     TabsModule.forRoot(),
+    AccordionModule.forRoot(),
+    CarouselModule.forRoot(),
     //SmartAdminEnd
     BrowserModule,
     FormsModule,

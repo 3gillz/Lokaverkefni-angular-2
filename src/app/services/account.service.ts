@@ -55,7 +55,8 @@ export class AccountService {
     let requestOptions = new RequestOptions({ headers: headers });
     this.http.get(url, requestOptions)
         .map(res => res.json())
-        .subscribe((data) => {  
+        .subscribe((data) => {
+          console.log(data)
           localStorage.setItem('user', JSON.stringify(data));
           this.router.navigate([ 'profile/' ]);
         })
