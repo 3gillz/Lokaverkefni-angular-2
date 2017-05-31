@@ -56,11 +56,7 @@ export class AccountService {
     this.http.get(url, requestOptions)
         .map(res => res.json())
         .subscribe((data) => {  
-          let user = data;
-          user.kennitala = user.kennitala.slice(0, 6) + "-" + user.kennitala.slice(6);
-          user.phone = user.phone.slice(0, 3) + "-" + user.phone.slice(3);
-          localStorage.setItem('user', JSON.stringify(user));
-          console.log(user)
+          localStorage.setItem('user', JSON.stringify(data));
           this.router.navigate([ 'profile/' ]);
         })
   }

@@ -21,6 +21,7 @@ import { FlotChartModule } from "./smartadmin/graphs/flot-chart/flot-chart.modul
 import {StatsModule} from "./smartadmin/stats/stats.module";
 import {InlineGraphsModule} from "./smartadmin/graphs/inline/inline-graphs.module";
 import {SmartadminFormsLiteModule} from "./smartadmin/forms/smartadmin-forms-lite.module";
+import { SmartadminValidationModule } from "./smartadmin/forms/validation/smartadmin-validation.module";
 import {SmartProgressbarModule} from "./smartadmin/ui/smart-progressbar/smart-progressbar.module";
 import { JsonApiService } from './smartadmin/json-api.service';
 import { LayoutService } from './smartadmin/layout/layout.service';
@@ -51,6 +52,7 @@ import { AppComponent } from './app.component';
     StatsModule,
     InlineGraphsModule,
     SmartadminFormsLiteModule,
+    SmartadminValidationModule,
     SmartProgressbarModule,
     ModalModule.forRoot(),
     TooltipModule.forRoot(),
