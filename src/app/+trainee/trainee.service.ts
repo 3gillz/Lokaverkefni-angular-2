@@ -22,9 +22,10 @@ export class TraineeService {
 
   user = JSON.parse(localStorage.getItem('user'));
   infoChange: boolean;
-  infoOpened(){
+  sub: any;
+  subscribeToChange(){
     console.log("subscribed");
-    this.basicInfoForm.valueChanges.subscribe(data => {
+    this.sub = this.basicInfoForm.valueChanges.subscribe(data => {
       if(data.address != this.user.address || data.allergy != this.user.allergy || data.email != this.user.email || data.foodPref != this.user.foodPref || data.name != this.user.name || data.phone != this.user.phone){ 
         this.infoChange = true;
         console.log('Changed');
@@ -34,6 +35,10 @@ export class TraineeService {
         console.log('Unchanged');
       }
     })  
+  }
+  unsubscribeToChange(){
+    this.sub.unsubscribe();
+    console.log("UnSubscribed")
   }
 
 

@@ -97,7 +97,7 @@
                         </li>
                         <li>
                           <p class="text-muted">
-                            <i class="fa fa-pencil"></i>&#xA0;&#xA0;<span class="txt-color-darken" (click)="traineeService.infoOpened()"><button (click)="lgModal.show()" class="btn btn-info btn-xs">{{'Edit' | i18n}}</button></span>
+                            <i class="fa fa-pencil"></i>&#xA0;&#xA0;<span class="txt-color-darken"><button (click)="lgModal.show()" (click)="traineeService.subscribeToChange()" class="btn btn-info btn-xs">{{'Edit' | i18n}}</button></span>
                           </p>
                         </li>
                       </ul>
@@ -190,11 +190,11 @@
   <!-- Modal -->
 
 
-  <div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div bsModal #lgModal="bs-modal" class="modal fade" bsModal.backgr [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" (click)="lgModal.hide()" aria-label="Close">
+          <button type="button" class="close" (click)="lgModal.hide()" (click)="traineeService.unsubscribeToChange()" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
           <h4 class="modal-title">{{'Edit Basic Info' | i18n}}</h4>
@@ -243,7 +243,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" (click)="lgModal.hide()">
+            <button type="button" class="btn btn-default" (click)="lgModal.hide()" (click)="traineeService.unsubscribeToChange()">
                 {{'Cancel' | i18n}}
               </button>
             <button type="button" class="btn btn-primary" type="submit" [disabled]="!traineeService.infoChange">
