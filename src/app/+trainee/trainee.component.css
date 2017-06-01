@@ -14,6 +14,9 @@ sa-logout{
 .profile-pic img:hover{
     cursor: pointer;
 }
+section small{
+    color: red;
+}
 .image-modal-body{
     margin-top: 30px;
     min-height: 100px;
@@ -22,5 +25,4 @@ sa-logout{
 .image-modal-body textarea{
     margin-top: 20px;
     width: 100%;
-    height: 50px;
 }

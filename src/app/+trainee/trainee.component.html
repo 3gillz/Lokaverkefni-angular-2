@@ -34,7 +34,7 @@
                 <div class="col-sm-12">
                   <div class="row">
                     <div class="col-sm-3 profile-pic">
-                      <img [src]="traineeService.user.profileImagePath" alt="profile-pic" tooltip="Change Profile Picture" (click)="changeImageModal.show()">
+                      <img [src]="traineeService.user.profileImagePath" alt="profile-pic" tooltip="{{'Change Profile Picture' | i18n}}" (click)="changeImageModal.show()">
 
                       <div class="padding-10">
                         <h4 class="font-md"><strong>18</strong>
@@ -193,27 +193,58 @@
           <div class="smart-form">
             <div class="modal-body">
               <fieldset>
-                <section>
-                  <label class="label">{{'Name' | i18n}}</label>
-                  <label class="input"> <i class="icon-append fa fa-user"></i>
-                        <input type="text" [ngModel]="traineeService.user.name" formControlName="name" autocomplete="off" spellcheck="false">
-                      </label>
-                  <small [hidden]="traineeService.basicInfoForm.controls.name.valid">
-                    Please Enter Name.
-                  </small>
-                </section>
-                <section>
-                  <label class="label">{{'Phone' | i18n}}</label>
-                  <label class="input"> <i class="icon-append fa fa-phone"></i>
-                        <input type="text" [ngModel]="traineeService.user.phone" formControlName="phone" autocomplete="off" >
-                        <b class="tooltip tooltip-bottom-right">
-                        <i class="fa fa-warning txt-color-teal"></i>
-                        Some helpful information</b>
-                  </label>
-                  <small [hidden]="traineeService.basicInfoForm.controls.phone.valid">
-                    Valid phone is required.
-                  </small>
-                </section>
+                <div class="row"> 
+                  <section class="col col-5">
+                    <label class="label">{{'Name' | i18n}}</label>
+                    <label class="input"> <i class="icon-append fa fa-user"></i>
+                          <input type="text" [ngModel]="traineeService.user.name" formControlName="name" autocomplete="off" spellcheck="false">
+                        </label>
+                    <small [hidden]="traineeService.basicInfoForm.controls.name.valid">
+                      Please Enter Name.
+                    </small>
+                  </section>
+                  <section class="col col-4">
+                    <label class="label">{{'Kennitala' | i18n}}</label>
+                    <label class="input"> <i class="icon-append fa fa-user"></i>
+                          <input type="text" [ngModel]="traineeService.user.kennitala" formControlName="kennitala" autocomplete="off" spellcheck="false">
+                        </label>
+                    <small [hidden]="traineeService.basicInfoForm.controls.kennitala.valid">
+                      Please Enter Kennitala.
+                    </small>
+                  </section>
+                  <section class="col col-3">
+                    <label class="label">{{'Height' | i18n}}</label>
+                    <label class="input"> <i class="icon-append fa fa-expand"></i>
+                          <input type="number" [ngModel]="traineeService.user.height" formControlName="height" autocomplete="off" spellcheck="false">
+                        </label>
+                    <small [hidden]="traineeService.basicInfoForm.controls.height.valid">
+                      Please Enter Height.
+                    </small>
+                  </section>
+                </div>
+                <div class="row">
+                  <section class="col col-6">
+                    <label class="label">{{'Phone' | i18n}}</label>
+                    <label class="input"> <i class="icon-append fa fa-phone"></i>
+                          <input type="text" [ngModel]="traineeService.user.phone" formControlName="phone" autocomplete="off" >
+                          <b class="tooltip tooltip-bottom-right">
+                          <i class="fa fa-warning txt-color-teal"></i>
+                          Some helpful information</b>
+                    </label>
+                    <small [hidden]="traineeService.basicInfoForm.controls.phone.valid">
+                      Valid phone is required.
+                    </small>
+                  </section>
+                  <section class="col col-6">
+                    <label class="label">{{'Address' | i18n}}</label>
+                    <label class="input"> <i class="icon-append fa fa-home"></i>
+                          <input type="text" [ngModel]="traineeService.user.address" formControlName="address" autocomplete="off" spellcheck="false">
+                        </label>
+                    <small [hidden]="traineeService.basicInfoForm.controls.address.valid">
+                      Valid address is required.
+                    </small>
+                  </section>
+                </div>
                 <section>
                   <label class="label">{{'Email' | i18n}}</label>
                   <label class="input"> <i class="icon-append fa fa-envelope"></i>
@@ -223,42 +254,46 @@
                     Valid Email is required.
                   </small>
                 </section>
-                <section>
-                  <label class="label">{{'Address' | i18n}}</label>
-                  <label class="input"> <i class="icon-append fa fa-home"></i>
-                        <input type="text" [ngModel]="traineeService.user.address" formControlName="address" autocomplete="off" spellcheck="false">
-                      </label>
-                  <small [hidden]="traineeService.basicInfoForm.controls.address.valid">
-                    Valid address is required.
-                  </small>
-                </section>
-                <section>
-                  <label class="label">{{'Allergy' | i18n}}</label>
-                  <label class="input"> <i class="icon-append fa fa-heartbeat"></i>
-                        <input type="text" [ngModel]="traineeService.user.allergy" formControlName="allergy" autocomplete="off" spellcheck="false">
-                      </label>
-                  <small [hidden]="traineeService.basicInfoForm.controls.allergy.valid">
-                    Valid allergy is required.
-                  </small>
-                </section>
-                <section>
-                  <label class="label">{{'Injury' | i18n}}</label>
-                  <label class="input"> <i class="icon-append fa fa-hospital-o"></i>
-                        <input type="text" [ngModel]="traineeService.user.injury" formControlName="injury" autocomplete="off" spellcheck="false">
-                      </label>
-                  <small [hidden]="traineeService.basicInfoForm.controls.injury.valid">
-                    Valid injury is required.
-                  </small>
-                </section>
-                <section>
-                  <label class="label">{{'Food Pref' | i18n}}</label>
-                  <label class="input"> <i class="icon-append fa fa-delicious"></i>
-                        <input type="text" [ngModel]="traineeService.user.foodPref" formControlName="foodPref" autocomplete="off" spellcheck="false">
-                      </label>
-                  <small [hidden]="traineeService.basicInfoForm.controls.foodPref.valid">
-                    Valid foodPref is required.
-                  </small>
-                </section>
+                <div class="row">
+                  <section class="col col-6">
+                    <label class="label">{{'Allergy' | i18n}}</label>
+                    <label class="input"> <i class="icon-append fa fa-heartbeat"></i>
+                          <input type="text" [ngModel]="traineeService.user.allergy" formControlName="allergy" autocomplete="off" spellcheck="false">
+                        </label>
+                    <small [hidden]="traineeService.basicInfoForm.controls.allergy.valid">
+                      Valid allergy is required.
+                    </small>
+                  </section>
+                  <section class="col col-6">
+                    <label class="label">{{'Injury' | i18n}}</label>
+                    <label class="input"> <i class="icon-append fa fa-hospital-o"></i>
+                          <input type="text" [ngModel]="traineeService.user.injury" formControlName="injury" autocomplete="off" spellcheck="false">
+                        </label>
+                    <small [hidden]="traineeService.basicInfoForm.controls.injury.valid">
+                      Valid injury is required.
+                    </small>
+                  </section>
+                </div>
+                <div class="row">
+                  <section class="col col-6">
+                    <label class="label">{{'Food Pref' | i18n}}</label>
+                    <label class="input"> <i class="icon-append fa fa-delicious"></i>
+                          <input type="text" [ngModel]="traineeService.user.foodPref" formControlName="foodPref" autocomplete="off" spellcheck="false">
+                        </label>
+                    <small [hidden]="traineeService.basicInfoForm.controls.foodPref.valid">
+                      Valid foodPref is required.
+                    </small>
+                  </section>
+                  <section class="col col-6">
+                    <label class="label">{{'Job Difficulty' | i18n}}</label>
+                    <label class="input"> <i class="icon-append fa fa-delicious"></i>
+                          <input type="number" min="0" max="5" [ngModel]="traineeService.user.jobDifficulty" formControlName="jobDifficulty" autocomplete="off" spellcheck="false">
+                        </label>
+                    <small [hidden]="traineeService.basicInfoForm.controls.jobDifficulty.valid">
+                      Valid Job Difficulty is required.
+                    </small>
+                  </section>
+                </div>
               </fieldset>
             </div>
           </div>
@@ -291,7 +326,7 @@
           </div>
           <br />
           <br />
-          <textarea placeholder="Image Path" [(ngModel)]="traineeService.newProfileImagePath"></textarea>
+          <textarea rows="4" placeholder="Image Path" [(ngModel)]="traineeService.newProfileImagePath"></textarea>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" (click)="changeImageModal.hide()" (click)="cancelImageChange()">
