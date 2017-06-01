@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -21,6 +21,7 @@ import { FlotChartModule } from "./smartadmin/graphs/flot-chart/flot-chart.modul
 import {StatsModule} from "./smartadmin/stats/stats.module";
 import {InlineGraphsModule} from "./smartadmin/graphs/inline/inline-graphs.module";
 import {SmartadminFormsLiteModule} from "./smartadmin/forms/smartadmin-forms-lite.module";
+import { SmartadminValidationModule } from "./smartadmin/forms/validation/smartadmin-validation.module";
 import {SmartProgressbarModule} from "./smartadmin/ui/smart-progressbar/smart-progressbar.module";
 import { JsonApiService } from './smartadmin/json-api.service';
 import { LayoutService } from './smartadmin/layout/layout.service';
@@ -51,15 +52,21 @@ import { AppComponent } from './app.component';
     StatsModule,
     InlineGraphsModule,
     SmartadminFormsLiteModule,
+    SmartadminValidationModule,
     SmartProgressbarModule,
+    //ngx-bootstrap
+    ModalModule.forRoot(),
     TooltipModule.forRoot(),
     BsDropdownModule.forRoot(),
     ProgressbarModule.forRoot(),
     AlertModule.forRoot(),
     TabsModule.forRoot(),
+    AccordionModule.forRoot(),
+    CarouselModule.forRoot(),
     //SmartAdminEnd
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     BrowserAnimationsModule,
     AppRoutingModule

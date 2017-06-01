@@ -9,13 +9,23 @@ import { TraineeService } from './trainee.service';
 })
 export class TraineeComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public traineeService: TraineeService
+  ) { }
 
+  validImage: boolean;
   date: any;
-  user: any;
   ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem('user'));
     this.date = new Date();
+  }
+  cancelImageChange(){
+    this.traineeService.newProfileImagePath = this.traineeService.user.profileImagePath;
+  }
+  saveNewImage(newImage){
+    this.traineeService.saveProfileImage(newImage.src)
+  }
+  submit(model: any, isValid: boolean) {
+    this.traineeService.submitNewInfo(model, isValid);
   }
 
 }

@@ -11,3 +11,21 @@ sa-logout{
     margin-top: 2px;
     right: 10px;
 }
+.carousel-image{
+    width: 100%;
+}
+.profile-pic img:hover{
+    cursor: pointer;
+}
+section small{
+    color: red;
+}
+.image-modal-body{
+    margin-top: 30px;
+    min-height: 100px;
+    align-content: center;
+}
+.image-modal-body textarea{
+    margin-top: 20px;
+    width: 100%;
+}

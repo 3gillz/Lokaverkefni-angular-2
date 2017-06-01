@@ -16,88 +16,79 @@
             <div class="well well-light well-sm no-margin no-padding">
               <div class="row">
                 <div class="col-sm-12">
-                  <div id="myCarousel" class="carousel fade profile-carousel">
-                    <div class="air air-bottom-right padding-10">
-                      <a href="" class="btn txt-color-white bg-color-teal btn-sm"><i class="fa fa-check"></i> Follow</a>&#xA0;
-                      <a href="" class="btn txt-color-white bg-color-pinkDark btn-sm"><i class="fa fa-link"></i> Connect</a>
-                    </div>
-                    <div class="air air-top-left padding-10">
-                      <h4 class="txt-color-white font-md">{{ date | date: 'dd MMM, yyyy' }}</h4>
-                    </div>
-                    <ol class="carousel-indicators">
-                      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                      <li data-target="#myCarousel" data-slide-to="1" class=""></li>
-                      <li data-target="#myCarousel" data-slide-to="2" class=""></li>
-                    </ol>
-                    <div class="carousel-inner">
-                      <!-- Slide 1 -->
-                      <div class="item active">
-                        <img src="assets/img/demo/s1.jpg" alt="demo user">
-                      </div>
-                      <!-- Slide 2 -->
-                      <div class="item">
-                        <img src="assets/img/demo/s2.jpg" alt="demo user">
-                      </div>
-                      <!-- Slide 3 -->
-                      <div class="item">
-                        <img src="assets/img/demo/m3.jpg" alt="demo user">
-                      </div>
-                    </div>
+                  <carousel id="myCarousel" class="carousel fade profile-carousel">
+                    <slide>
+                      <img class="carousel-image" src="assets/img/demo/s1.jpg" alt="demo user">
+                    </slide>
+                    <slide>
+                      <img src="assets/img/demo/s2.jpg" alt="demo user">
+                    </slide>
+                    <slide>
+                      <img src="assets/img/demo/m3.jpg" alt="demo user">
+                    </slide>
+                  </carousel>
+                  <div class="air air-top-left padding-10">
+                    <h4 class="txt-color-white font-md">&#xA0;&#xA0;{{ date | date: 'dd MMM, yyyy' }}</h4>
                   </div>
                 </div>
                 <div class="col-sm-12">
                   <div class="row">
                     <div class="col-sm-3 profile-pic">
-                      <img [src]="user.profileImagePath" alt="profile-pic">
+                      <img [src]="traineeService.user.profileImagePath" alt="profile-pic" tooltip="{{'Change Profile Picture' | i18n}}" (click)="changeImageModal.show()">
 
                       <div class="padding-10">
-                        <h4 class="font-md"><strong>1,543</strong>
+                        <h4 class="font-md"><strong>18</strong>
                           <br>
-                          <small>Followers</small>
+                          <small>Days To Goal End</small>
                         </h4>
                         <br>
-                        <h4 class="font-md"><strong>419</strong>
+                        <h4 class="font-md"><strong>60%</strong>
                           <br>
-                          <small>Connections</small>
+                          <small>Left of Goal</small>
                         </h4>
                       </div>
                     </div>
-                    <div *ngIf="user" class="col-sm-6">
-                      <h1>{{ user.name }}</h1>
+                    <div *ngIf="traineeService.user" class="col-sm-6">
+                      <h1>{{ traineeService.user.name }}</h1>
                       <ul class="list-unstyled">
                         <li>
                           <p class="text-muted">
-                            <i class="fa fa-phone"></i>&#xA0;&#xA0;(<span class="txt-color-darken">+354</span>) <span class="txt-color-darken">{{user.phone}}</span>
+                            <i class="fa fa-phone"></i>&#xA0;&#xA0;(<span class="txt-color-darken">+354</span>) <span class="txt-color-darken">{{ traineeService.user.phone }}</span>
                           </p>
                         </li>
                         <li>
                           <p class="text-muted">
-                            <i class="fa fa-envelope"></i>&#xA0;&#xA0;<a>{{ user.email }}</a>
+                            <i class="fa fa-envelope"></i>&#xA0;&#xA0;<a>{{ traineeService.user.email }}</a>
                           </p>
                         </li>
                         <li>
                           <p class="text-muted">
-                            <i class="fa fa-home"></i>&#xA0;&#xA0;<span class="txt-color-darken">{{ user.address }}</span>
-                          </p>
-                        </li>
-                        <li *ngIf="user.allergy">
-                          <p class="text-muted">
-                            <i class="fa fa-heartbeat"></i>&#xA0;&#xA0;<span class="txt-color-darken">{{ user.allergy }}</span>
-                          </p>
-                        </li>
-                        <li *ngIf="user.foodPref">
-                          <p class="text-muted">
-                            <i class="fa fa-tachometer"></i>&#xA0;&#xA0;<span class="txt-color-darken">{{ user.foodPref }}</span>
+                            <i class="fa fa-home"></i>&#xA0;&#xA0;<span class="txt-color-darken">{{ traineeService.user.address }}</span>
                           </p>
                         </li>
                         <li>
                           <p class="text-muted">
-                            <i class="fa fa-delicious"></i>&#xA0;&#xA0;<span class="txt-color-darken">{{ user.kennitala }}</span>
+                            <i class="fa fa-expand"></i>&#xA0;&#xA0;<span class="txt-color-darken">{{ traineeService.user.height }} cm.</span>
+                          </p>
+                        </li>
+                        <li *ngIf="traineeService.user.allergy">
+                          <p class="text-muted">
+                            <i class="fa fa-heartbeat"></i>&#xA0;&#xA0;<span class="txt-color-darken">{{ traineeService.user.allergy }}</span>
+                          </p>
+                        </li>
+                        <li *ngIf="traineeService.user.injury">
+                          <p class="text-muted">
+                            <i class="fa fa-ban"></i>&#xA0;&#xA0;<span class="txt-color-darken">{{ traineeService.user.injury }}</span>
+                          </p>
+                        </li>
+                        <li *ngIf="traineeService.user.foodPref">
+                          <p class="text-muted">
+                            <i class="fa fa-tachometer"></i>&#xA0;&#xA0;<span class="txt-color-darken">{{ traineeService.user.foodPref }}</span>
                           </p>
                         </li>
                         <li>
                           <p class="text-muted">
-                            <i class="fa fa-pencil"></i>&#xA0;&#xA0;<span class="txt-color-darken"><button class="btn btn-info btn-xs">{{'Edit' | i18n}}</button></span>
+                            <i class="fa fa-pencil"></i>&#xA0;&#xA0;<span class="txt-color-darken"><button (click)="changeInfoModal.show()" (click)="traineeService.subscribeToChange()" class="btn btn-info btn-xs">{{'Edit' | i18n}}</button></span>
                           </p>
                         </li>
                       </ul>
@@ -185,3 +176,171 @@
     </div>
     <!-- end row -->
   </div>
+
+
+  <!-- changeInfoModal -->
+  <div bsModal #changeInfoModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" (click)="changeInfoModal.hide()" (click)="traineeService.unsubscribeToChange()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">{{'Edit Basic Info' | i18n}}</h4>
+        </div>
+        <form [formGroup]="traineeService.basicInfoForm" novalidate (ngSubmit)="submit(traineeService.basicInfoForm.value, traineeService.basicInfoForm.valid)">
+          <div class="smart-form">
+            <div class="modal-body">
+              <fieldset>
+                <div class="row"> 
+                  <section class="col col-5">
+                    <label class="label">{{'Name' | i18n}}</label>
+                    <label class="input"> <i class="icon-append fa fa-user"></i>
+                          <input type="text" [ngModel]="traineeService.user.name" formControlName="name" autocomplete="off" spellcheck="false">
+                        </label>
+                    <small [hidden]="traineeService.basicInfoForm.controls.name.valid">
+                      Please Enter Name.
+                    </small>
+                  </section>
+                  <section class="col col-4">
+                    <label class="label">{{'Kennitala' | i18n}}</label>
+                    <label class="input"> <i class="icon-append fa fa-user"></i>
+                          <input type="text" [ngModel]="traineeService.user.kennitala" formControlName="kennitala" autocomplete="off" spellcheck="false">
+                        </label>
+                    <small [hidden]="traineeService.basicInfoForm.controls.kennitala.valid">
+                      Please Enter Kennitala.
+                    </small>
+                  </section>
+                  <section class="col col-3">
+                    <label class="label">{{'Height' | i18n}}</label>
+                    <label class="input"> <i class="icon-append fa fa-expand"></i>
+                          <input type="number" [ngModel]="traineeService.user.height" formControlName="height" autocomplete="off" spellcheck="false">
+                        </label>
+                    <small [hidden]="traineeService.basicInfoForm.controls.height.valid">
+                      Please Enter Height.
+                    </small>
+                  </section>
+                </div>
+                <div class="row">
+                  <section class="col col-6">
+                    <label class="label">{{'Phone' | i18n}}</label>
+                    <label class="input"> <i class="icon-append fa fa-phone"></i>
+                          <input type="text" [ngModel]="traineeService.user.phone" formControlName="phone" autocomplete="off" >
+                          <b class="tooltip tooltip-bottom-right">
+                          <i class="fa fa-warning txt-color-teal"></i>
+                          Some helpful information</b>
+                    </label>
+                    <small [hidden]="traineeService.basicInfoForm.controls.phone.valid">
+                      Valid phone is required.
+                    </small>
+                  </section>
+                  <section class="col col-6">
+                    <label class="label">{{'Address' | i18n}}</label>
+                    <label class="input"> <i class="icon-append fa fa-home"></i>
+                          <input type="text" [ngModel]="traineeService.user.address" formControlName="address" autocomplete="off" spellcheck="false">
+                        </label>
+                    <small [hidden]="traineeService.basicInfoForm.controls.address.valid">
+                      Valid address is required.
+                    </small>
+                  </section>
+                </div>
+                <section>
+                  <label class="label">{{'Email' | i18n}}</label>
+                  <label class="input"> <i class="icon-append fa fa-envelope"></i>
+                        <input type="text" [ngModel]="traineeService.user.email" formControlName="email" autocomplete="off" ngControl="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" spellcheck="false">
+                      </label>
+                  <small [hidden]="traineeService.basicInfoForm.controls.email.valid">
+                    Valid Email is required.
+                  </small>
+                </section>
+                <div class="row">
+                  <section class="col col-6">
+                    <label class="label">{{'Allergy' | i18n}}</label>
+                    <label class="input"> <i class="icon-append fa fa-heartbeat"></i>
+                          <input type="text" [ngModel]="traineeService.user.allergy" formControlName="allergy" autocomplete="off" spellcheck="false">
+                        </label>
+                    <small [hidden]="traineeService.basicInfoForm.controls.allergy.valid">
+                      Valid allergy is required.
+                    </small>
+                  </section>
+                  <section class="col col-6">
+                    <label class="label">{{'Injury' | i18n}}</label>
+                    <label class="input"> <i class="icon-append fa fa-hospital-o"></i>
+                          <input type="text" [ngModel]="traineeService.user.injury" formControlName="injury" autocomplete="off" spellcheck="false">
+                        </label>
+                    <small [hidden]="traineeService.basicInfoForm.controls.injury.valid">
+                      Valid injury is required.
+                    </small>
+                  </section>
+                </div>
+                <div class="row">
+                  <section class="col col-6">
+                    <label class="label">{{'Food Pref' | i18n}}</label>
+                    <label class="input"> <i class="icon-append fa fa-delicious"></i>
+                          <input type="text" [ngModel]="traineeService.user.foodPref" formControlName="foodPref" autocomplete="off" spellcheck="false">
+                        </label>
+                    <small [hidden]="traineeService.basicInfoForm.controls.foodPref.valid">
+                      Valid foodPref is required.
+                    </small>
+                  </section>
+                  <section class="col col-6">
+                    <label class="label">{{'Job Difficulty' | i18n}}</label>
+                    <label class="input"> <i class="icon-append fa fa-delicious"></i>
+                          <input type="number" min="0" max="5" [ngModel]="traineeService.user.jobDifficulty" formControlName="jobDifficulty" autocomplete="off" spellcheck="false">
+                        </label>
+                    <small [hidden]="traineeService.basicInfoForm.controls.jobDifficulty.valid">
+                      Valid Job Difficulty is required.
+                    </small>
+                  </section>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" (click)="changeInfoModal.hide()" (click)="traineeService.unsubscribeToChange()">
+                {{'Cancel' | i18n}}
+              </button>
+            <button type="button" class="btn btn-primary" type="submit" (click)="changeInfoModal.hide()">
+                {{'Save' | i18n}}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- changeImageModal -->
+  <div bsModal #changeImageModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+    aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" (click)="changeImageModal.hide()" (click)="cancelImageChange()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">{{'Change Profile Picture' | i18n}}</h4>
+        </div>
+        <div class="modal-body image-modal-body">
+          <div class="col-sm-3 col-sm-offset-3 profile-pic">
+            <img #newImage src="{{ traineeService.newProfileImagePath }}" alt="profile-pic" (error)="validImage = false" (load)="validImage = true">
+          </div>
+          <br />
+          <br />
+          <textarea rows="4" placeholder="Image Path" [(ngModel)]="traineeService.newProfileImagePath"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" (click)="changeImageModal.hide()" (click)="cancelImageChange()">
+              {{'Cancel' | i18n}}
+            </button>
+          <button (click)="saveNewImage(newImage)" (click)="changeImageModal.hide()" type="button" class="btn btn-primary"
+                 [disabled]="!validImage">
+              {{'Save' | i18n}}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Modal Section ends-->
+
+
+</div>
