@@ -51,7 +51,7 @@ export class TraineeService {
   }
 
   submitNewInfo(model: any, isValid: boolean) {
-    if (isValid) {
+    if (isValid && this.infoChange) {
       let optionalBody = '';
       for (let x = 6; x < Object.keys(model).length; x++) {
         let value = (<any>Object).values(model)[x];
@@ -68,6 +68,7 @@ export class TraineeService {
       this.http.put(url, body, requestOptions)
         .map(res => res.json())
         .subscribe((data) => {
+          console.log(data)          
           localStorage.setItem('user', JSON.stringify(data));
           this.user = data;
           this.updateInfoSuccess();
@@ -80,24 +81,26 @@ export class TraineeService {
   }
 
   saveProfileImage(image: string) {
-    let url = this.apiRoot + "api/Customer/UpdateProfileImage";
-    let token = localStorage.getItem('access_token');
-    let headers = new Headers({ 'Authorization': "Bearer " + token, 'Content-Type': 'application/x-www-form-urlencoded' });
-    let requestOptions = new RequestOptions({ headers: headers });
-    let body = `profileImagePath=${image}`;
-    this.http.put(url, body, requestOptions)
-      .map(res => res.json())
-      .subscribe((data) => {
-        let user = JSON.parse(localStorage.getItem('user'));
-        user.profileImagePath = data;
-        localStorage.setItem('user', JSON.stringify(user));
-        this.user = user;
-        this.updateImageSuccess();
-      },
-      error => {
-        this.errorMessage();
-      }
-      )
+    if(image != this.user.profileImagePath){
+      let url = this.apiRoot + "api/Customer/UpdateProfileImage";
+      let token = localStorage.getItem('access_token');
+      let headers = new Headers({ 'Authorization': "Bearer " + token, 'Content-Type': 'application/x-www-form-urlencoded' });
+      let requestOptions = new RequestOptions({ headers: headers });
+      let body = `profileImagePath=${image}`;
+      this.http.put(url, body, requestOptions)
+        .map(res => res.json())
+        .subscribe((data) => {
+          let user = JSON.parse(localStorage.getItem('user'));
+          user.profileImagePath = data;
+          localStorage.setItem('user', JSON.stringify(user));
+          this.user = user;
+          this.updateImageSuccess();
+        },
+        error => {
+          this.errorMessage();
+        }
+        )
+    }
   }
 
   updateInfoSuccess() {

@@ -20,12 +20,12 @@
                     <slide>
                       <img class="carousel-image" src="assets/img/demo/s1.jpg" alt="demo user">
                     </slide>
-<!--                    <slide>
+                    <slide>
                       <img src="assets/img/demo/s2.jpg" alt="demo user">
                     </slide>
                     <slide>
                       <img src="assets/img/demo/m3.jpg" alt="demo user">
-                    </slide>-->
+                    </slide>
                   </carousel>
                   <div class="air air-top-left padding-10">
                     <h4 class="txt-color-white font-md">&#xA0;&#xA0;{{ date | date: 'dd MMM, yyyy' }}</h4>
@@ -301,7 +301,7 @@
             <button type="button" class="btn btn-default" (click)="changeInfoModal.hide()" (click)="traineeService.unsubscribeToChange()">
                 {{'Cancel' | i18n}}
               </button>
-            <button type="button" class="btn btn-primary" type="submit" (click)="changeInfoModal.hide()" [disabled]="!traineeService.infoChange || !traineeService.basicInfoForm.valid">
+            <button type="button" class="btn btn-primary" type="submit" (click)="changeInfoModal.hide()">
                 {{'Save' | i18n}}
             </button>
           </div>
@@ -333,7 +333,7 @@
               {{'Cancel' | i18n}}
             </button>
           <button (click)="saveNewImage(newImage)" (click)="changeImageModal.hide()" type="button" class="btn btn-primary"
-                 [disabled]="!validImage ||  traineeService.newProfileImagePath == traineeService.user.profileImagePath">
+                 [disabled]="!validImage">
               {{'Save' | i18n}}
           </button>
         </div>
