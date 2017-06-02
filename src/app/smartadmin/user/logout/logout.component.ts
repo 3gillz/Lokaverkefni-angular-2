@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import {Router} from "@angular/router";
 import {NotificationService} from "../../utils/notification.service";
 import { AccountService } from '../../../services/account.service';
+import { I18nService } from '../../i18n/i18n.service';
 
 declare var $:any;
 
@@ -19,17 +20,23 @@ export class LogoutComponent implements OnInit {
 
   constructor(private router: Router,
               private notificationService: NotificationService,
-              private accountService: AccountService
-              ) { }
+              private accountService: AccountService,
+              private i18nService: I18nService
+              ) {
 
+               }
   showPopup(){
+    let contentText: string = this.i18nService.getTranslation("You can improve your security further after logging out by closing this opened browser");
+    let titleText: string = this.i18nService.getTranslation("Logout");
+    let yes: string = this.i18nService.getTranslation("Yes");
+    let no: string = this.i18nService.getTranslation("No");
     this.notificationService.smartMessageBox({
-      title : "<i class='fa fa-sign-out txt-color-orangeDark'></i> Logout <span class='txt-color-orangeDark'><strong>" + $('#show-shortcut').text() + "</strong></span> ?",
-      content : "You can improve your security further after logging out by closing this opened browser",
-      buttons : '[No][Yes]'
+      title : "<i class='fa fa-sign-out txt-color-orangeDark'></i>"+titleText+"<span class='txt-color-orangeDark'><strong>" + $('#show-shortcut').text() + "</strong></span> ?",
+      content : contentText,
+      buttons : '['+no+']['+yes+']'
 
     }, (ButtonPressed) => {
-      if (ButtonPressed == "Yes") {
+      if (ButtonPressed == "Yes" || ButtonPressed == "Já") {
         this.logout()
       }
     });

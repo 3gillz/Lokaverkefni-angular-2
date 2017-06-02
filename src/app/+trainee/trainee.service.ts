@@ -3,6 +3,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from "rxjs/Rx";
 import { NotificationService } from "../smartadmin/utils/notification.service";
+import { TraineePopUpService } from "./trainee-popup.service";
 
 @Injectable()
 export class TraineeService {
@@ -11,7 +12,8 @@ export class TraineeService {
     @Inject("apiRoot") private apiRoot,
     private fb: FormBuilder,
     private http: Http,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private traineePopUpService: TraineePopUpService,
   ) {
     this.basicInfoForm = new FormGroup({
       name: new FormControl('', [<any>Validators.required, <any>Validators.maxLength(48)]),
@@ -71,10 +73,10 @@ export class TraineeService {
           console.log(data)          
           localStorage.setItem('user', JSON.stringify(data));
           this.user = data;
-          this.updateInfoSuccess();
+          this.traineePopUpService.updateInfoSuccess("Info updated");
         },
         error => {
-          this.errorMessage();
+          this.traineePopUpService.errorMessage();
         }
         )
     }
@@ -94,39 +96,13 @@ export class TraineeService {
           user.profileImagePath = data;
           localStorage.setItem('user', JSON.stringify(user));
           this.user = user;
-          this.updateImageSuccess();
+          this.traineePopUpService.updateInfoSuccess("Profile image updated");
         },
         error => {
-          this.errorMessage();
+          this.traineePopUpService.errorMessage();
         }
         )
     }
   }
 
-  updateInfoSuccess() {
-    this.notificationService.smallBox({
-      title: "Profile Updated",
-      content: "<i class='fa fa-clock-o'></i> <i>Just now...</i>",
-      color: "#296191",
-      iconSmall: "fa fa-thumbs-up bounce animated",
-      timeout: 4000
-    });
-  }
-  updateImageSuccess() {
-    this.notificationService.smallBox({
-      title: "Profile Image Updated",
-      content: "<i class='fa fa-clock-o'></i> <i>Just now...</i>",
-      color: "#296191",
-      iconSmall: "fa fa-thumbs-up bounce animated",
-      timeout: 4000
-    });
-  }
-  errorMessage() {
-    this.notificationService.smallBox({
-      title: "Sorry something went wrong",
-      color: "#C46A69",
-      iconSmall: "fa fa-thumbs-down bounce animated",
-      timeout: 4000
-    });
-  }
 }
