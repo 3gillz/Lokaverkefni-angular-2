@@ -21,10 +21,10 @@
                       <img class="carousel-image" src="assets/img/demo/s1.jpg" alt="demo user">
                     </slide>
                     <slide>
-                      <img src="assets/img/demo/s2.jpg" alt="demo user">
+                      <img class="carousel-image" src="assets/img/demo/s2.jpg" alt="demo user">
                     </slide>
                     <slide>
-                      <img src="assets/img/demo/m3.jpg" alt="demo user">
+                      <img class="carousel-image" src="assets/img/demo/m3.jpg" alt="demo user">
                     </slide>
                   </carousel>
                   <div class="air air-top-left padding-10">
@@ -39,12 +39,12 @@
                       <div class="padding-10">
                         <h4 class="font-md"><strong>18</strong>
                           <br>
-                          <small>Days To Goal End</small>
+                          <small>Days to goal end</small>
                         </h4>
                         <br>
                         <h4 class="font-md"><strong>60%</strong>
                           <br>
-                          <small>Left of Goal</small>
+                          <small>Left of goal</small>
                         </h4>
                       </div>
                     </div>
@@ -96,7 +96,7 @@
                       <br>
 
                       <p class="font-md">
-                        <i>{{'My Goal' | i18n}}...</i>
+                        <i>{{'My goal' | i18n}}...</i>
                       </p>
 
                       <p>
@@ -108,7 +108,7 @@
                     </div>
                     <div class="col-sm-3">
                       <h1>
-                        <small>{{'Progress Images' | i18n}}</small>
+                        <small>{{'Progress images' | i18n}}</small>
                       </h1>
                       <ul class="list-inline friends-list">
                         <li><img src="assets/img/avatars/1.png" alt="friend-1">
@@ -124,7 +124,7 @@
                         <li><img src="assets/img/avatars/male.png" alt="friend-6">
                         </li>
                         <li>
-                          <a href="">{{'See All' | i18n}}</a>
+                          <a href="">{{'See all' | i18n}}</a>
                         </li>
                       </ul>
                       <h1>
@@ -150,10 +150,13 @@
               <div class="padding-10">
                 <ul class="nav nav-tabs tabs-pull-right">
                   <li class="active">
-                    <a href="#a1" data-toggle="tab">{{'My Programs' | i18n}}</a>
+                    <a href="#a1" data-toggle="tab">{{'My programs' | i18n}}</a>
                   </li>
                   <li>
-                    <a href="#a2" data-toggle="tab">{{'My Measurements' | i18n}}</a>
+                    <a href="#a2" data-toggle="tab">{{'My measurements' | i18n}}</a>
+                  </li>                  
+                  <li>
+                    <a href="#a3" data-toggle="tab">{{'Progress images' | i18n}}</a>
                   </li>
                   <li class="pull-left">
                     <span class="margin-top-10 display-inline"><i class="fa fa-rss text-success"></i> Activity</span>
@@ -164,6 +167,9 @@
 
                   </div>
                   <div class="tab-pane fade" id="a2">
+
+                  </div>
+                  <div class="tab-pane fade" id="a3">
 
                   </div>
                   <!-- end tab -->
@@ -187,7 +193,7 @@
           <button type="button" class="close" (click)="changeInfoModal.hide()" (click)="traineeService.unsubscribeToChange()" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-          <h4 class="modal-title">{{'Edit Basic Info' | i18n}}</h4>
+          <h4 class="modal-title">{{'Edit basic info' | i18n}}</h4>
         </div>
         <form [formGroup]="traineeService.basicInfoForm" novalidate (ngSubmit)="submit(traineeService.basicInfoForm.value, traineeService.basicInfoForm.valid)">
           <div class="smart-form">
@@ -276,7 +282,7 @@
                 </div>
                 <div class="row">
                   <section class="col col-6">
-                    <label class="label">{{'Food Pref' | i18n}}</label>
+                    <label class="label">{{'Food pref' | i18n}}</label>
                     <label class="input"> <i class="icon-append fa fa-delicious"></i>
                           <input type="text" [ngModel]="traineeService.user.foodPref" formControlName="foodPref" autocomplete="off" spellcheck="false">
                         </label>
@@ -285,7 +291,7 @@
                     </small>
                   </section>
                   <section class="col col-6">
-                    <label class="label">{{'Job Difficulty' | i18n}}</label>
+                    <label class="label">{{'Job difficulty' | i18n}}</label>
                     <label class="input"> <i class="icon-append fa fa-delicious"></i>
                           <input type="number" min="0" max="5" [ngModel]="traineeService.user.jobDifficulty" formControlName="jobDifficulty" autocomplete="off" spellcheck="false">
                         </label>
@@ -318,15 +324,13 @@
           <button type="button" class="close" (click)="changeImageModal.hide()" (click)="cancelImageChange()" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-          <h4 class="modal-title">{{'Change Profile Picture' | i18n}}</h4>
+          <h4 class="modal-title">{{'Change profile picture' | i18n}}</h4>
         </div>
         <div class="modal-body image-modal-body">
-          <div class="col-sm-3 col-sm-offset-3 profile-pic">
-            <img #newImage src="{{ traineeService.newProfileImagePath }}" alt="profile-pic" (error)="validImage = false" (load)="validImage = true">
-          </div>
+          <img class="display-image" #newImage src="{{ traineeService.newProfileImagePath }}" alt="{{'Profile image' | i18n}}" (error)="validImage = false" (load)="validImage = true">
           <br />
           <br />
-          <textarea rows="4" placeholder="Image Path" [(ngModel)]="traineeService.newProfileImagePath"></textarea>
+          <textarea rows="4" placeholder="{{'Image path' | i18n}}" [(ngModel)]="traineeService.newProfileImagePath"></textarea>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" (click)="changeImageModal.hide()" (click)="cancelImageChange()">
