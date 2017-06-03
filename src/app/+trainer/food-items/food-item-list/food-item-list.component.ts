@@ -33,6 +33,7 @@ export class FoodItemListComponent implements OnInit {
           })
         })
     },
+    iDisplayLength: 25,
     columns: [ 
       {data: 'name'}, 
       {data: 'carbohydrate'}, 

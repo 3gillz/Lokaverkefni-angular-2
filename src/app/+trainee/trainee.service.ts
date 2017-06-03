@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from "rxjs/Rx";
-import { TraineePopUpService } from "./trainee-popup.service";
+import { PopUpService } from "../services/popup.service";
 
 @Injectable()
 export class TraineeService {
@@ -9,7 +9,7 @@ export class TraineeService {
   constructor(
     @Inject("apiRoot") private apiRoot,
     private http: Http,
-    private traineePopUpService: TraineePopUpService,
+    private popUpService: PopUpService
   ) {
     this.user = JSON.parse(localStorage.getItem('user'));
   }
@@ -36,10 +36,10 @@ export class TraineeService {
         .subscribe((data) => {        
           localStorage.setItem('user', JSON.stringify(data));
           this.user = data;
-          this.traineePopUpService.updateInfoSuccess("Info updated");
+          this.popUpService.updateInfoSuccess("Info updated");
         },
         error => {
-          this.traineePopUpService.errorMessage();
+          this.popUpService.errorMessage();
         }
         )
     }
@@ -59,10 +59,10 @@ export class TraineeService {
           user.profileImagePath = data;
           localStorage.setItem('user', JSON.stringify(user));
           this.user = user;
-          this.traineePopUpService.updateInfoSuccess("Profile image updated");
+          this.popUpService.updateInfoSuccess("Profile image updated");
         },
         error => {
-          this.traineePopUpService.errorMessage();
+          this.popUpService.errorMessage();
         }
         )
     }

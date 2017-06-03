@@ -31,6 +31,7 @@ import { SoundService } from "./smartadmin/sound/sound.service";
 import { SmartadminDatatableModule } from './smartadmin/ui/datatable/smartadmin-datatable.module';
 //SmartAdmin end
 import { AccountService } from './services/account.service';
+import { PopUpService } from "./services/popup.service";
 
 import { AppRoutingModule, RoutedComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -93,7 +94,8 @@ import { TraineeMeasurementsComponent } from './+trainee/trainee-tabs/trainee-me
     UserService,
     SoundService,
     {provide: "apiRoot", useValue: "http://localhost:55322/"},
-    AccountService
+    AccountService,
+    PopUpService
   ],
   bootstrap: [AppComponent]
 })

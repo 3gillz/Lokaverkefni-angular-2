@@ -3,7 +3,7 @@ import { NotificationService } from "../smartadmin/utils/notification.service";
 import { I18nService } from '../smartadmin/i18n/i18n.service';
 
 @Injectable()
-export class TraineePopUpService {
+export class PopUpService {
     
     constructor(
         private notificationService: NotificationService,

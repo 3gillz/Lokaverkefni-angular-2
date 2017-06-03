@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { TrainerService } from '../../trainer.service';
 
 @Component({
   selector: 'app-exercise-new',
@@ -7,38 +9,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExerciseNewComponent implements OnInit {
 
-  constructor() { }
+  public exerciseForm: FormGroup;
+  constructor(
+    private trainerService: TrainerService
+  ) 
+  {
+    this.exerciseForm = new FormGroup({
+      name: new FormControl('', <any>Validators.required),
+      link: new FormControl(''),
+      type: new FormControl(''),
+      description: new FormControl('')
+    });
+   }
 
   ngOnInit() {
   }
-  submitExercise(exerciseform, nafn){
-    console.log(exerciseform.name);    
-    console.log(exerciseform.name.attr);
 
-  }
-  public exerciseOptions:any = {
-    rules: {
-      name: {
-        required: true
-      },
-      link: {
-        url: true
-      },
-      description: {
-        required: true,
-        minlength: 10
-      }
-    },
-    messages: {
-      name: {
-        required: 'Please enter name'
-      },
-      link: {
-        url: 'Please enter a VALID url'
-      },
-      description: {
-        required: 'Please enter description'
-      }
+  submitExercise(exerciseForm){
+    if(exerciseForm.valid){
+      this.trainerService.addNewExercise(exerciseForm.value)
+      .then((resolve)=> {
+        if(resolve === true){
+          this.exerciseForm.reset();
+        }
+      });
     }
-  };
+  }
+
+
 }
