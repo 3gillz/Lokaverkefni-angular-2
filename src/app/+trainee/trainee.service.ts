@@ -1,8 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from "rxjs/Rx";
-import { NotificationService } from "../smartadmin/utils/notification.service";
 import { TraineePopUpService } from "./trainee-popup.service";
 
 @Injectable()
@@ -10,50 +8,16 @@ export class TraineeService {
 
   constructor(
     @Inject("apiRoot") private apiRoot,
-    private fb: FormBuilder,
     private http: Http,
-    private notificationService: NotificationService,
     private traineePopUpService: TraineePopUpService,
   ) {
-    this.basicInfoForm = new FormGroup({
-      name: new FormControl('', [<any>Validators.required, <any>Validators.maxLength(48)]),
-      kennitala: new FormControl('', <any>Validators.required),
-      phone: new FormControl('', <any>Validators.required),
-      email: new FormControl('', [<any>Validators.required, <any>Validators.email]),
-      address: new FormControl('', <any>Validators.required),
-      jobDifficulty: new FormControl('', <any>Validators.required),
-      height: new FormControl('', <any>Validators.required),
-      allergy: new FormControl(''),
-      injury: new FormControl(''),
-      foodPref: new FormControl('')
-    });
     this.user = JSON.parse(localStorage.getItem('user'));
-    this.newProfileImagePath = this.user.profileImagePath;
   }
 
-  public basicInfoForm: FormGroup;
   user: any;
-  infoChange: boolean;
-  newProfileImagePath: string;
-  sub: any;
-  subscribeToChange() {
-    this.sub = this.basicInfoForm.valueChanges.subscribe(data => {
-      if (data.address != this.user.address || data.allergy != this.user.allergy || data.email != this.user.email || data.jobDifficulty != this.user.jobDifficulty ||
-        data.foodPref != this.user.foodPref || data.name != this.user.name || data.phone != this.user.phone || data.injury != this.user.injury
-        || data.kennitala != this.user.kennitala || data.height != this.user.height) {
-        this.infoChange = true;
-      }
-      else {
-        this.infoChange = false;
-      }
-    })
-  }
-  unsubscribeToChange() {
-    this.sub.unsubscribe();
-  }
 
   submitNewInfo(model: any, isValid: boolean) {
-    if (isValid && this.infoChange) {
+    if (isValid) {
       let optionalBody = '';
       for (let x = 6; x < Object.keys(model).length; x++) {
         let value = (<any>Object).values(model)[x];
@@ -69,8 +33,7 @@ export class TraineeService {
       let requestOptions = new RequestOptions({ headers: headers });
       this.http.put(url, body, requestOptions)
         .map(res => res.json())
-        .subscribe((data) => {
-          console.log(data)          
+        .subscribe((data) => {        
           localStorage.setItem('user', JSON.stringify(data));
           this.user = data;
           this.traineePopUpService.updateInfoSuccess("Info updated");

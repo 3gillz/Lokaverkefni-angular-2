@@ -1,0 +1,25 @@
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" (click)="closeModal()" (click)="cancelImageChange()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">{{'Change profile picture' | i18n}}</h4>
+        </div>
+        <div class="modal-body image-modal-body">
+          <img class="display-image" #newImage src="{{ newProfileImagePath }}" alt="{{'Profile image' | i18n}}" (error)="validImage = false" (load)="validImage = true">
+          <br />
+          <br />
+          <textarea rows="4" placeholder="{{'Image path' | i18n}}" [(ngModel)]="newProfileImagePath"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" (click)="closeModal()" (click)="cancelImageChange()">
+              {{'Cancel' | i18n}}
+            </button>
+          <button (click)="saveNewImage(newImage)" (click)="closeModal()" type="button" class="btn btn-primary"
+                 [disabled]="!validImage">
+              {{'Save' | i18n}}
+          </button>
+        </div>
+      </div>
+    </div>

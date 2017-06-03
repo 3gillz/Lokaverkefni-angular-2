@@ -11,22 +11,9 @@ import { TraineePopUpService } from "./trainee-popup.service";
 export class TraineeComponent implements OnInit {
 
   constructor(
-    public traineeService: TraineeService
   ) { }
 
-  validImage: boolean;
-  date: any;
   ngOnInit() {
-    this.date = new Date();
-  }
-  cancelImageChange(){
-    this.traineeService.newProfileImagePath = this.traineeService.user.profileImagePath;
-  }
-  saveNewImage(newImage){
-    this.traineeService.saveProfileImage(newImage.src)
-  }
-  submit(model: any, isValid: boolean) {
-    this.traineeService.submitNewInfo(model, isValid);
   }
 
 }

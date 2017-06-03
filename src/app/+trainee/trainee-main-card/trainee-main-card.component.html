@@ -1,0 +1,142 @@
+<div class="well well-light well-sm no-margin no-padding">
+  <div class="row">
+    <div class="col-sm-12">
+      <carousel id="myCarousel" class="carousel fade profile-carousel">
+        <slide>
+          <img class="carousel-image" src="assets/img/demo/s1.jpg" alt="demo user">
+        </slide>
+        <slide>
+          <img class="carousel-image" src="assets/img/demo/s2.jpg" alt="demo user">
+        </slide>
+        <slide>
+          <img class="carousel-image" src="assets/img/demo/m3.jpg" alt="demo user">
+        </slide>
+      </carousel>
+      <div class="air air-top-left padding-10">
+        <h4 class="txt-color-white font-md">&#xA0;&#xA0;{{ date | date: 'dd MMM, yyyy' }}</h4>
+      </div>
+    </div>
+    <div class="col-sm-12">
+      <div class="row">
+        <div class="col-xs-3 profile-pic">
+          <img [src]="traineeService.user.profileImagePath" alt="profile-pic" tooltip="{{'Change Profile Picture' | i18n}}" (click)="changeImageModal.show()">
+
+          <div class="padding-10">
+            <h4 class="font-md"><strong>18</strong>
+              <br>
+              <small>Days to goal end</small>
+            </h4>
+            <br>
+            <h4 class="font-md"><strong>60%</strong>
+              <br>
+              <small>Left of goal</small>
+            </h4>
+          </div>
+        </div>
+        <div *ngIf="traineeService.user" class="col-xs-6">
+          <h1>{{ traineeService.user.name }}</h1>
+          <ul class="list-unstyled">
+            <li>
+              <p class="text-muted">
+                <i class="fa fa-phone"></i>&#xA0;&#xA0;(<span class="txt-color-darken">+354</span>) <span class="txt-color-darken">{{ traineeService.user.phone }}</span>
+              </p>
+            </li>
+            <li>
+              <p class="text-muted">
+                <i class="fa fa-envelope"></i>&#xA0;&#xA0;<a>{{ traineeService.user.email }}</a>
+              </p>
+            </li>
+            <li>
+              <p class="text-muted">
+                <i class="fa fa-home"></i>&#xA0;&#xA0;<span class="txt-color-darken">{{ traineeService.user.address }}</span>
+              </p>
+            </li>
+            <li>
+              <p class="text-muted">
+                <i class="fa fa-expand"></i>&#xA0;&#xA0;<span class="txt-color-darken">{{ traineeService.user.height }} cm.</span>
+              </p>
+            </li>
+            <li *ngIf="traineeService.user.allergy">
+              <p class="text-muted">
+                <i class="fa fa-heartbeat"></i>&#xA0;&#xA0;<span class="txt-color-darken">{{ traineeService.user.allergy }}</span>
+              </p>
+            </li>
+            <li *ngIf="traineeService.user.injury">
+              <p class="text-muted">
+                <i class="fa fa-ban"></i>&#xA0;&#xA0;<span class="txt-color-darken">{{ traineeService.user.injury }}</span>
+              </p>
+            </li>
+            <li *ngIf="traineeService.user.foodPref">
+              <p class="text-muted">
+                <i class="fa fa-tachometer"></i>&#xA0;&#xA0;<span class="txt-color-darken">{{ traineeService.user.foodPref }}</span>
+              </p>
+            </li>
+            <li>
+              <p class="text-muted">
+                <i class="fa fa-pencil"></i>&#xA0;&#xA0;<span class="txt-color-darken"><button (click)="changeInfoModal.show()" class="btn btn-info btn-xs">{{'Edit' | i18n}}</button></span>
+              </p>
+            </li>
+          </ul>
+          <br>
+          <br>
+
+          <p class="font-md">
+            <i>{{'My goal' | i18n}}...</i>
+          </p>
+
+          <p>
+            Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque
+            nihil impedit quo minus id quod maxime placeat facere
+          </p>
+          <br>
+          <br>
+        </div>
+        <div class="col-xs-3">
+          <app-trainee-trainer></app-trainee-trainer>
+       <!--   <h1>
+            <small>{{'Progress images' | i18n}}</small>
+          </h1>
+          <ul class="list-inline friends-list">
+            <li><img src="assets/img/avatars/1.png" alt="friend-1">
+            </li>
+            <li><img src="assets/img/avatars/2.png" alt="friend-2">
+            </li>
+            <li><img src="assets/img/avatars/3.png" alt="friend-3">
+            </li>
+            <li><img src="assets/img/avatars/4.png" alt="friend-4">
+            </li>
+            <li><img src="assets/img/avatars/5.png" alt="friend-5">
+            </li>
+            <li><img src="assets/img/avatars/male.png" alt="friend-6">
+            </li>
+            <li>
+              <a href="">{{'See all' | i18n}}</a>
+            </li>
+          </ul>
+          <h1>
+            <small>Recent visitors</small>
+          </h1>
+          <ul class="list-inline friends-list">
+            <li><img src="assets/img/avatars/male.png" alt="friend-1">
+            </li>
+            <li><img src="assets/img/avatars/female.png" alt="friend-2">
+            </li>
+            <li><img src="assets/img/avatars/female.png" alt="friend-3">
+            </li>
+          </ul>-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- changeInfoModal -->
+<div bsModal #changeInfoModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+  aria-hidden="true">
+  <app-trainee-info-modal (close)="changeInfoModal.hide()"></app-trainee-info-modal>
+</div>
+<!-- changeImageModal -->
+<div bsModal #changeImageModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+  aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <app-trainee-profile-image-modal (close)="changeImageModal.hide()"></app-trainee-profile-image-modal>
+</div>

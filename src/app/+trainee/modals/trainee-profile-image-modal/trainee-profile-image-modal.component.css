@@ -1,0 +1,11 @@
+.image-modal-body{
+    min-height: 100px;
+    align-content: center;
+}
+.image-modal-body .display-image{
+    width: 100%;
+    margin: 0 auto;
+}
+.image-modal-body textarea{
+    width: 100%;
+}

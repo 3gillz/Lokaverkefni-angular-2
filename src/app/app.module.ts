@@ -18,6 +18,7 @@ import {UserModule} from "./smartadmin/user/user.module";
 import { ChartJsModule } from "./smartadmin/graphs/chart-js/chart-js.module";
 import { MorrisGraphModule } from "./smartadmin/graphs/morris-graph/morris-graph.module";
 import { FlotChartModule } from "./smartadmin/graphs/flot-chart/flot-chart.module";
+import { SmartadminGalleryModule } from "./smartadmin/ui/gallery/gallery.module";
 import {StatsModule} from "./smartadmin/stats/stats.module";
 import {InlineGraphsModule} from "./smartadmin/graphs/inline/inline-graphs.module";
 import {SmartadminFormsLiteModule} from "./smartadmin/forms/smartadmin-forms-lite.module";
@@ -33,11 +34,25 @@ import { AccountService } from './services/account.service';
 
 import { AppRoutingModule, RoutedComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { TraineeMainCardComponent } from './+trainee/trainee-main-card/trainee-main-card.component';
+import { TraineeTrainerComponent } from './+trainee/trainee-main-card/trainee-trainer/trainee-trainer.component';
+import { TraineeInfoModalComponent } from './+trainee/modals/trainee-info-modal/trainee-info-modal.component';
+import { TraineeProfileImageModalComponent } from './+trainee/modals/trainee-profile-image-modal/trainee-profile-image-modal.component';
+import { TraineeProgressImagesComponent } from './+trainee/trainee-tabs/trainee-progress-images/trainee-progress-images.component';
+import { TraineeProgramsComponent } from './+trainee/trainee-tabs/trainee-programs/trainee-programs.component';
+import { TraineeMeasurementsComponent } from './+trainee/trainee-tabs/trainee-measurements/trainee-measurements.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RoutedComponents
+    RoutedComponents,
+    TraineeMainCardComponent,
+    TraineeTrainerComponent,
+    TraineeInfoModalComponent,
+    TraineeProfileImageModalComponent,
+    TraineeProgressImagesComponent,
+    TraineeProgramsComponent,
+    TraineeMeasurementsComponent
   ],
   imports: [
     SmartadminLayoutModule,
@@ -54,6 +69,7 @@ import { AppComponent } from './app.component';
     SmartadminFormsLiteModule,
     SmartadminValidationModule,
     SmartProgressbarModule,
+    SmartadminGalleryModule,
     //ngx-bootstrap
     ModalModule.forRoot(),
     TooltipModule.forRoot(),

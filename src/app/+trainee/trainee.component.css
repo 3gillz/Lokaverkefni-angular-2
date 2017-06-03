@@ -4,30 +4,10 @@ sa-big-breadcrumbs{
 sa-language-selector{
     position: absolute;
     margin-top: 2px;      
-    right: 50px;
+    right: 60px;
 }
 sa-logout{
     position: absolute;
     margin-top: 2px;
     right: 10px;
-}
-.carousel-image{
-    width: 100%;
-}
-.profile-pic img:hover{
-    cursor: pointer;
-}
-section small{
-    color: red;
-}
-.image-modal-body{
-    min-height: 100px;
-    align-content: center;
-}
-.image-modal-body .display-image{
-    width: 100%;
-    margin: 0 auto;
-}
-.image-modal-body textarea{
-    width: 100%;
 }
