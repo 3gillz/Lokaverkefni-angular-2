@@ -1,3 +1,47 @@
-<p>
-  exercise-new works!
-</p>
+<sa-widget [editbutton]="false" [custombutton]="false">
+  <header>
+    <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+    <h2>{{'New exercise' | i18n}}</h2>
+  </header>
+  <div>
+    <div class="widget-body no-padding">
+      <form id="exercise-form" #exerciseform class="smart-form" (submit)="submitExercise(exerciseform, nafn)" novalidate="novalidate" [saUiValidate]="exerciseOptions">
+        <fieldset>
+          <div class="row">
+            <section class="col col-6">
+              <label class="label">{{'Name' | i18n}}</label>
+              <label class="input">
+                <i class="icon-append fa fa-user"></i>
+                <input type="text" name="name" autocomplete="off" spellcheck="false"/>
+              </label>
+            </section>
+            <section class="col col-6">
+              <label class="label">{{'Link' | i18n}}</label>
+              <label class="input">
+                <i class="icon-append fa fa-globe"></i>
+                <input type="url" name="link" autocomplete="off" spellcheck="false"/>
+              </label>
+            </section>
+          </div>
+          <section>
+            <label class="label">{{'Type' | i18n}}</label>
+            <label class="input">
+              <i class="icon-append fa fa-tag"></i>
+              <input type="text" name="type" autocomplete="off" spellcheck="false"/>
+            </label>
+          </section>
+          <section>
+            <label class="label">{{'Description' | i18n}}</label>
+            <label class="textarea">
+              <i class="icon-append fa fa-comment"></i>
+              <textarea rows="4" name="description" autocomplete="off" spellcheck="false"></textarea>
+            </label>
+          </section>
+        </fieldset>
+        <footer>
+          <button type="submit" class="btn btn-primary">{{'Create' | i18n}}</button>
+        </footer>
+      </form>
+    </div>
+  </div>
+</sa-widget>
