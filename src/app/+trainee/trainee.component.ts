@@ -13,7 +13,8 @@ export class TraineeComponent implements OnInit {
   constructor(
   ) { }
 
+  date: any;
   ngOnInit() {
+    this.date = new Date();
   }
-
 }

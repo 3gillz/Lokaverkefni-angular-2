@@ -1,8 +1,8 @@
-.carousel-image{
-    width: 100%;
-}
 .profile-pic img:hover{
     cursor: pointer;
+}
+.profile-pic{
+    margin-top: 30px;
 }
 .well{
     border: none;

@@ -1,13 +1,20 @@
 sa-big-breadcrumbs{
+    height: 50px;
+    margin-top: -10px;
+}
+sa-big-breadcrumbs{
     width: fit-content;
 }
 sa-language-selector{
     position: absolute;
-    margin-top: 2px;      
+    margin-top: -8px;      
     right: 60px;
 }
 sa-logout{
     position: absolute;
-    margin-top: 2px;
+    margin-top: -8px;
     right: 10px;
+}
+.carousel-image{
+    width: 100%;
 }

@@ -12,9 +12,9 @@ export class TraineeMainCardComponent implements OnInit {
       public traineeService: TraineeService
   ) { }
 
-  date: any;
+
   ngOnInit() {
-    this.date = new Date();
+
   }
   
 }
