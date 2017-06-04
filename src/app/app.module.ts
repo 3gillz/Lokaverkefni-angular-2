@@ -42,6 +42,7 @@ import { TraineeProfileImageModalComponent } from './+trainee/modals/trainee-pro
 import { TraineeProgressImagesComponent } from './+trainee/trainee-tabs/trainee-progress-images/trainee-progress-images.component';
 import { TraineeProgramsComponent } from './+trainee/trainee-tabs/trainee-programs/trainee-programs.component';
 import { TraineeMeasurementsComponent } from './+trainee/trainee-tabs/trainee-measurements/trainee-measurements.component';
+import { ExerciseVideoModalComponent } from './+trainer/+modals/exercise-video-modal/exercise-video-modal.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { TraineeMeasurementsComponent } from './+trainee/trainee-tabs/trainee-me
     TraineeProfileImageModalComponent,
     TraineeProgressImagesComponent,
     TraineeProgramsComponent,
-    TraineeMeasurementsComponent
+    TraineeMeasurementsComponent,
+    ExerciseVideoModalComponent
   ],
   imports: [
     SmartadminLayoutModule,

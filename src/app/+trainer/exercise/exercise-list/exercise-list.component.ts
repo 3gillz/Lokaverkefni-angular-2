@@ -1,6 +1,6 @@
-import { Component, OnInit, Inject, HostListener } from '@angular/core';
+import { Component, OnInit, Inject, HostListener, ViewChild } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
-import { Router } from '@angular/router';
 import { Observable } from "rxjs/Rx";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -12,13 +12,36 @@ import 'rxjs/add/operator/catch';
 })
 export class ExerciseListComponent implements OnInit {
 
+  videoPlaying: boolean;
+  videoUrl: SafeUrl;
+
   constructor(
     @Inject("apiRoot") private apiRoot,
     private http: Http,
-    private router: Router
+    private sanitizer: DomSanitizer
   ) { 
   };
 
+  @ViewChild('videoModal') videoModal;
+  @HostListener('document:click', ['$event'])
+  documentClick(event) {
+    if(event.target.id === "video"){
+      let code = event.target.value.split('=');
+      this.videoUrl = this.sanitizeUrl(code[1]);
+      this.videoModal.show();
+      this.videoPlaying = true;
+    }
+  }
+  closeVideoModal(){
+    this.videoModal.hide();
+    setTimeout(() => {
+      this.videoPlaying = false;
+    }, 500);
+  }
+  sanitizeUrl(youTubeCode: string) : SafeResourceUrl {
+       let dangerousVideoUrl = 'https://www.youtube.com/embed/' + youTubeCode + "?autoplay=1";
+      return this.sanitizer.bypassSecurityTrustResourceUrl(dangerousVideoUrl);
+  }
   ngOnInit() {
   }
 
@@ -33,7 +56,6 @@ export class ExerciseListComponent implements OnInit {
         .map(this.extractData)
         .catch(this.handleError)
         .subscribe((data) => {
-          console.log(data)
           callback({
             aaData: data
           })
@@ -65,7 +87,7 @@ export class ExerciseListComponent implements OnInit {
             </tr>
             <tr>
                 <td>Link:</td>
-                <td><a href=${d.link} target="_blank">${d.link}</a></td>
+                <td>${d.link}&#xA0;&#xA0;<button value=${d.link} id="video" class="btn btn-xs btn-primary">Watch Video</button></td>
             </tr>
             <tr>
                 <td>Description:</td>

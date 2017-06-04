@@ -30,3 +30,11 @@
     </div>
   </sa-widgets-grid>
 </div>
+
+<!-- changeInfoModal -->
+<div bsModal #videoModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+  aria-hidden="true">
+  <div *ngIf="videoPlaying">
+      <app-exercise-video-modal (close)="closeVideoModal()" [videoUrl]="videoUrl"></app-exercise-video-modal>
+  </div>
+</div>
