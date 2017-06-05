@@ -18,9 +18,9 @@ export class TrainerService {
   ) {
     this.exerciseForm = new FormGroup({
       name: new FormControl('', <any>Validators.required),
-      link: new FormControl(''),
-      type: new FormControl(''),
-      description: new FormControl('')
+      link: new FormControl('', <any>Validators.required),
+      type: new FormControl('', <any>Validators.required),
+      description: new FormControl('', <any>Validators.required)
     });
   }
 

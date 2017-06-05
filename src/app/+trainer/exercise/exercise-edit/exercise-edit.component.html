@@ -41,6 +41,9 @@
               <i class="icon-append fa fa-odnoklassniki"></i>
               <input type="text" [ngModel]="exercise.type" formControlName="type" autocomplete="off" spellcheck="false"/>
             </label>
+              <small [hidden]="exerciseForm.controls.type.valid">
+                Type is required.
+              </small>
             </section>
             <section>
               <label class="label">{{'Description' | i18n}}</label>
@@ -48,6 +51,9 @@
               <i class="icon-append fa fa-comment"></i>
               <textarea rows="4" [ngModel]="exercise.description" formControlName="description" autocomplete="off" spellcheck="false"></textarea>
             </label>
+              <small [hidden]="exerciseForm.controls.description.valid">
+                Description is required.
+              </small>
             </section>
           </fieldset>
           <footer>

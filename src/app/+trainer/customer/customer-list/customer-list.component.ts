@@ -44,7 +44,7 @@ export class CustomerListComponent implements OnInit {
           })
         })
     },
-    "iDisplayLength": 15,
+    "iDisplayLength": 25,
     "columns": [
       {
         "class": 'details-control',
@@ -58,9 +58,6 @@ export class CustomerListComponent implements OnInit {
       {"data": "kennitala"},
       {"data": "gender"},
       {"data": "height"}
-    ],
-     "buttons": [
-      'colvis'
     ],  
     "order": [[1, 'asc']]
   }

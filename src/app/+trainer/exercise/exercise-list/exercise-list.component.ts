@@ -75,7 +75,8 @@ export class ExerciseListComponent implements OnInit {
         "defaultContent": ''
       },
       {"data": "name"},
-      {"data": "type"}
+      {"data": "type"},
+      {"data": "madeBy"}
     ], 
     "order": [[1, 'asc']]
   }

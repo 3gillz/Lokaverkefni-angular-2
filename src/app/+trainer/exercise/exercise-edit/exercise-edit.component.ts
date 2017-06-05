@@ -22,6 +22,9 @@ export class ExerciseEditComponent implements OnInit {
   }
 
   ngOnInit() {
+    if(!this.exercise){
+      this.goBack();
+    }
   }
   
   goBack(){
