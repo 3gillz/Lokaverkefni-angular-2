@@ -101,10 +101,13 @@ export class DatatableComponent implements OnInit {
         var tr = $(this).closest('tr');
         var row = _dataTable.row( tr );
         if ( row.child.isShown() ) {
-          row.child.hide();
-          tr.removeClass('shown');
+            row.child.hide();
+            tr.removeClass('shown');     
         }
         else {
+          if ( _dataTable.row( '.shown' ).length ) {
+              $('.details-control', _dataTable.row( '.shown' ).node()).click();
+          }
           row.child( format(row.data()) ).show();
           tr.addClass('shown');
         }
