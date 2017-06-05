@@ -4,6 +4,7 @@ import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from "rxjs/Rx";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import { TrainerService } from '../../trainer.service';
 
 @Component({
   selector: 'app-exercise-list',
@@ -18,7 +19,8 @@ export class ExerciseListComponent implements OnInit {
   constructor(
     @Inject("apiRoot") private apiRoot,
     private http: Http,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private trainerService: TrainerService
   ) { 
   };
 
@@ -30,6 +32,9 @@ export class ExerciseListComponent implements OnInit {
       this.videoUrl = this.sanitizeUrl(code[1]);
       this.videoModal.show();
       this.videoPlaying = true;
+    }
+    else if(event.target.id === "edit"){
+      this.trainerService.getExerciseForEdit(event.target.value);
     }
   }
   closeVideoModal(){
@@ -45,7 +50,7 @@ export class ExerciseListComponent implements OnInit {
   ngOnInit() {
   }
 
-  public getAllCustomers = this.apiRoot + "api/Exercise/GetAll";
+  public getAllCustomers = this.apiRoot + "api/Exercise/GetAllByTrid";
   token = localStorage.getItem('access_token');
   headers = new Headers({ 'Authorization': "Bearer " + this.token, 'Content-Type': 'application/x-www-form-urlencoded' });
   requestOptions = new RequestOptions({ headers: this.headers });
@@ -95,7 +100,7 @@ export class ExerciseListComponent implements OnInit {
             </tr>
             <tr>
                 <td>Action:</td>
-                <td><button id="edit" value="${d.EID}" class="btn btn-success">Edit</button></td>
+                <td><button id="edit" value="${d.EID}" class="btn btn-xs btn-success">Edit</button></td>
             </tr></tbody>
         </table>`
   }

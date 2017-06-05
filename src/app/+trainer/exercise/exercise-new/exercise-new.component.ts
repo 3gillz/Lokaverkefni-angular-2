@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { TrainerService } from '../../trainer.service';
 
 @Component({
@@ -9,20 +8,16 @@ import { TrainerService } from '../../trainer.service';
 })
 export class ExerciseNewComponent implements OnInit {
 
-  public exerciseForm: FormGroup;
+  public exerciseForm: any;
   constructor(
     private trainerService: TrainerService
   ) 
   {
-    this.exerciseForm = new FormGroup({
-      name: new FormControl('', <any>Validators.required),
-      link: new FormControl(''),
-      type: new FormControl(''),
-      description: new FormControl('')
-    });
-   }
+    this.exerciseForm = trainerService.exerciseForm;
+  }
 
   ngOnInit() {
+    this.exerciseForm.reset();
   }
 
   submitExercise(exerciseForm){

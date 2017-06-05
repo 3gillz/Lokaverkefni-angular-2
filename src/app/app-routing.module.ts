@@ -26,6 +26,7 @@ import { FoodItemListComponent } from './+trainer/food-items/food-item-list/food
 import { ExerciseComponent } from './+trainer/exercise/exercise.component';
 import { ExerciseListComponent } from './+trainer/exercise/exercise-list/exercise-list.component';
 import { ExerciseNewComponent } from './+trainer/exercise/exercise-new/exercise-new.component';
+import { ExerciseEditComponent } from './+trainer/exercise/exercise-edit/exercise-edit.component';
 
 import { TestsComponent } from './+trainer/tests/tests.component';
 import { LarusComponent } from './+trainer/tests/larus/larus.component';
@@ -72,7 +73,8 @@ const routes: Routes = [
         children: [
           {path: '', redirectTo: 'list', pathMatch: 'full'},
           {path: 'list', component: ExerciseListComponent},
-          {path: 'new', component: ExerciseNewComponent}
+          {path: 'new', component: ExerciseNewComponent},
+          {path: 'edit/:id', component: ExerciseEditComponent}
         ]
       },
       {path: 'foodprograms', component: FoodProgramComponent,
@@ -126,6 +128,7 @@ export const RoutedComponents = [
   ExerciseComponent,
   ExerciseListComponent,
   ExerciseNewComponent,
+  ExerciseEditComponent,
   FoodProgramComponent,
   FoodProgramListComponent,
   FoodProgramNewComponent,
