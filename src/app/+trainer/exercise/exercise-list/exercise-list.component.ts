@@ -4,7 +4,7 @@ import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from "rxjs/Rx";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import { TrainerService } from '../../trainer.service';
+import { ExerciseService } from '../../exercise.service';
 
 @Component({
   selector: 'app-exercise-list',
@@ -20,7 +20,7 @@ export class ExerciseListComponent implements OnInit {
     @Inject("apiRoot") private apiRoot,
     private http: Http,
     private sanitizer: DomSanitizer,
-    private trainerService: TrainerService
+    private exerciseService: ExerciseService
   ) { 
   };
 
@@ -34,7 +34,7 @@ export class ExerciseListComponent implements OnInit {
       this.videoPlaying = true;
     }
     else if(event.target.id === "edit"){
-      this.trainerService.getExerciseForEdit(event.target.value);
+      this.exerciseService.getExerciseForEdit(event.target.value);
     }
   }
   closeVideoModal(){
@@ -50,17 +50,12 @@ export class ExerciseListComponent implements OnInit {
   ngOnInit() {
   }
 
-  public getAllCustomers = this.apiRoot + "api/Exercise/GetAllByTrid";
-  token = localStorage.getItem('access_token');
-  headers = new Headers({ 'Authorization': "Bearer " + this.token, 'Content-Type': 'application/x-www-form-urlencoded' });
-  requestOptions = new RequestOptions({ headers: this.headers });
   options = {
     dom: "Bfrtip",
     ajax: (data, callback, settings) => {
-      this.http.get(this.getAllCustomers, this.requestOptions)
-        .map(this.extractData)
+      this.exerciseService.getExercises()
         .catch(this.handleError)
-        .subscribe((data) => {
+        .then((data) => {
           callback({
             aaData: data
           })
@@ -114,12 +109,5 @@ export class ExerciseListComponent implements OnInit {
     console.error(errMsg); // log to console instead
     return Observable.throw(errMsg);
   }
-  private extractData(res: Response) {
-    let body = res.json();
-    if (body) {
-      return body.data || body
-    } else {
-      return {}
-    }
-  }
+  
 }

@@ -1,3 +1,4 @@
+import { ExerciseService } from './../../exercise.service';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { TrainerService } from '../../trainer.service';
@@ -13,12 +14,12 @@ export class ExerciseEditComponent implements OnInit {
   public exercise: any;
 
   constructor(
-    private trainerService: TrainerService,
+    private exerciseService: ExerciseService,
     private location: Location
   ) 
   {
-    this.exerciseForm = trainerService.exerciseForm;
-    this.exercise = trainerService.editExercise;
+    this.exerciseForm = exerciseService.exerciseForm;
+    this.exercise = exerciseService.editExercise;
   }
 
   ngOnInit() {
@@ -32,6 +33,6 @@ export class ExerciseEditComponent implements OnInit {
   }
 
   updateExercise(exerciseForm){
-    this.trainerService.updateExercise(exerciseForm.value)
+    this.exerciseService.updateExercise(exerciseForm.value)
   }
 }

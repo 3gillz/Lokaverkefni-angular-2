@@ -1,0 +1,20 @@
+<sa-widget color="blueDark" [editbutton]="false" [colorbutton]="false" [togglebutton]="false" [fullscreenbutton]="false"
+  [deletebutton]="false" [sortable]="false">
+  <header>
+    <h2>{{ 'Save' | i18n }}</h2>
+  </header>
+    <div class="form-actions padding-10">
+      <div class="row">
+        <div class="col-xs-9 col-sm-7 col-md-7 col-lg-7">
+          <div class="input-group">
+            <input class="form-control" #name placeholder="{{ 'Name' | i18n }}" type="text">
+          </div>
+        </div>
+        <div class="col-xs-3 col-sm-5 col-md-5 col-lg-5 text-right">
+          <button class="btn btn-success" (click)="saveTrainingProgram(name)">
+            <i class="fa fa-plus"></i> <span>{{ 'Save' | i18n }} </span>
+          </button>
+        </div>
+      </div>
+  </div>
+</sa-widget>

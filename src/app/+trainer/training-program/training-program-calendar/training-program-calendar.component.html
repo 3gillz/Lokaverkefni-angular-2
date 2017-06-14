@@ -1,0 +1,17 @@
+<sa-widget color="blueDark" id="wid-id-calendar" 
+              [sortable]="false" 
+              [colorbutton]="false"
+              [editbutton]="false"
+              [togglebutton]="false"
+              [deletebutton]="false"
+              >
+  <header>
+    <span class="widget-icon"> <i class="fa fa-calendar"></i> </span>
+    <h2>{{ 'Training program' | i18n }}</h2>
+  </header>
+  <div>
+    <div class="widget-body no-padding">
+      <div id="calendar"></div>
+    </div>
+  </div>
+</sa-widget>

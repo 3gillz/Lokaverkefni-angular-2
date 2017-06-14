@@ -17,6 +17,7 @@ import { CustomerDetailComponent } from './+trainer/customer/customer-detail/cus
 import { TrainingProgramComponent } from './+trainer/training-program/training-program.component';
 import { TrainingProgramListComponent } from './+trainer/training-program/training-program-list/training-program-list.component';
 import { TrainingProgramNewComponent } from './+trainer/training-program/training-program-new/training-program-new.component';
+import { TrainingProgramViewComponent } from './+trainer/training-program/training-program-view/training-program-view.component';
 import { FoodProgramComponent } from './+trainer/food-program/food-program.component';
 import { FoodProgramNewComponent } from './+trainer/food-program/food-program-new/food-program-new.component';
 import { FoodProgramListComponent } from './+trainer/food-program/food-program-list/food-program-list.component';
@@ -66,7 +67,8 @@ const routes: Routes = [
         children: [
           {path: '', redirectTo: 'list', pathMatch: 'full'},
           {path: 'list', component: TrainingProgramListComponent},
-          {path: 'new', component: TrainingProgramNewComponent}
+          {path: 'new', component: TrainingProgramNewComponent},
+          {path: ':id', component: TrainingProgramViewComponent}
         ]
       },
       {path: 'exercise', component: ExerciseComponent,
@@ -125,6 +127,7 @@ export const RoutedComponents = [
   TrainingProgramComponent,
   TrainingProgramListComponent,
   TrainingProgramNewComponent,
+  TrainingProgramViewComponent,
   ExerciseComponent,
   ExerciseListComponent,
   ExerciseNewComponent,

@@ -17,6 +17,10 @@ export class SmartTimepickerDirective implements OnInit{
 
 
   render(){
-    $(this.el.nativeElement).timepicker();
+    $(this.el.nativeElement).timepicker({
+      showMeridian: false,
+      use24hours: true,
+      defaultTime: null
+    });
   }
 }
