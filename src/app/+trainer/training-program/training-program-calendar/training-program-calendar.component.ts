@@ -52,12 +52,7 @@ export class TrainingProgramCalendarComponent implements OnInit {
         droppable: false,
         eventLimit: false,
         defaultView: 'basicWeek',
-        axisFormat: 'HH:mm',
         displayEventTime: false,
-        minTime: "06:00:00",
-        eventClick: (event) => {
-            this.creationMode ? console.log(event) : null;
-        },
         columnFormat: {
           week: 'dddd',
           day: 'dddd'

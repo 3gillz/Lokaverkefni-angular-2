@@ -28,7 +28,7 @@ export class SaveTrainingProgramComponent implements OnInit {
       this.popUpService.promtWithButtons("Save program?", "Programs cannot be edited once saved.", ["Edit More", "Save"])
         .then((data) => {
           if (data == "Save" || data == "Vista") {
-            this.trainingProgramService.createTrainingProgram(name.value)
+            this.trainingProgramService.getTrainingProgramDifficulty(name);
           }
         })
     }

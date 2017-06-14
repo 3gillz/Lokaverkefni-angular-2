@@ -44,9 +44,13 @@ import { TraineeProgressImagesComponent } from './+trainee/trainee-tabs/trainee-
 import { TraineeProgramsComponent } from './+trainee/trainee-tabs/trainee-programs/trainee-programs.component';
 import { TraineeMeasurementsComponent } from './+trainee/trainee-tabs/trainee-measurements/trainee-measurements.component';
 import { ExerciseVideoModalComponent } from './+trainer/+modals/exercise-video-modal/exercise-video-modal.component';
+import { AddTrainingComponent } from './+trainer/training-program/training-program-new/add-training/add-training.component';
+import { SaveTrainingProgramComponent } from './+trainer/training-program/training-program-new/save-training-program/save-training-program.component';
+import { TrainingProgramCalendarComponent } from './+trainer/training-program/training-program-calendar/training-program-calendar.component';
 
 @NgModule({
   declarations: [
+    MaskedInput,
     AppComponent,
     RoutedComponents,
     TraineeMainCardComponent,
@@ -57,7 +61,9 @@ import { ExerciseVideoModalComponent } from './+trainer/+modals/exercise-video-m
     TraineeProgramsComponent,
     TraineeMeasurementsComponent,
     ExerciseVideoModalComponent,
-    MaskedInput
+    AddTrainingComponent,
+    TrainingProgramCalendarComponent,
+    SaveTrainingProgramComponent
   ],
   imports: [
     SmartadminLayoutModule,

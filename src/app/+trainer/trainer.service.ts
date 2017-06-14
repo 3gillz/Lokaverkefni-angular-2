@@ -1,14 +1,21 @@
 import { Injectable, Inject } from '@angular/core';
+import { Http, Headers, RequestOptions } from '@angular/http';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { PopUpService } from "../services/popup.service";
+import { Router } from '@angular/router';
 
 @Injectable()
 export class TrainerService {
 
   constructor(
-    @Inject("apiRoot") private apiRoot
+    @Inject("apiRoot") private apiRoot,
+    private popUpService: PopUpService,
+    private http: Http,
+    private router: Router
   ) { }
 
 
-      addNewCustomer(customerForm): Promise<boolean>{
+  addNewCustomer(customerForm): Promise<boolean>{
     let optionalBody = '';
     for (let x = 1; x < Object.keys(customerForm).length; x++) {
       let value = (<any>Object).values(customerForm)[x];
@@ -26,7 +33,7 @@ export class TrainerService {
         .map(res => res.json())
         .subscribe((data) => {
           resolve(data);
-          data === true ? this.popUpService.updateInfoSuccess("Customer added") : this.popUpService.errorMessage();
+          data === true ? this.popUpService.successMessage("Customer added", "Just now") : this.popUpService.errorMessage("Sorry, something went wrong");
         })
     });
     }

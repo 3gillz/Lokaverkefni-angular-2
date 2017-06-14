@@ -42,7 +42,7 @@ export class ExerciseService {
     for (let x = 1; x < Object.keys(exerciseForm).length; x++) {
       let value = (<any>Object).values(exerciseForm)[x];
       if (value !== null && value !== "") {
-        optionalBody += `&${Object.keys(exerciseForm)[x]}=${(<any>Object).values(exerciseForm)[x]}`;
+        optionalBody += `&${Object.keys(exerciseForm)[x]}=${value}`;
       }
     }
     let body = `name=${exerciseForm.name}` + optionalBody;

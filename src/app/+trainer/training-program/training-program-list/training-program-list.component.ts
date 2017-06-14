@@ -29,7 +29,7 @@ export class TrainingProgramListComponent implements OnInit {
   options = {
     dom: "Bfrtip",
     ajax: (data, callback, settings) => {
-      this.trainingProgramService.getTrainingProgramsByTRID()
+      this.trainingProgramService.getTrainingProgramListByTRID()
         .catch(this.handleError)
         .then((data) => {
           callback({

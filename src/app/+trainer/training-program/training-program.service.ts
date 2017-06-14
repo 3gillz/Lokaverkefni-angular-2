@@ -28,7 +28,6 @@ export class TrainingProgramService {
     this.trainingEvents.push(event);
     this.eventAdded.next(true);
   }
-
   removeEvent(event){
     this.trainingEvents.splice(this.trainingEvents.findIndex(it => it.id == event.id), 1);
   }
@@ -55,28 +54,39 @@ export class TrainingProgramService {
   generateId() {
     return this.id++;
   }
-  
-  getTrainingProgramsByTRID(){
-    let url = this.apiRoot + "api/TrainingProgram/GetByTRID";
-    let token = localStorage.getItem('access_token');
-    let headers = new Headers({ 'Authorization': "Bearer " + token, 'Content-Type': 'application/x-www-form-urlencoded' });
-    let requestOptions = new RequestOptions({ headers: headers });
-    return new Promise((resolve) => {
-      this.http.get(url, requestOptions)
-        .map(res => res.json())
-        .subscribe((data) => {
-          resolve(data);
-        })
-    });
+
+  dowCounter: number[] = [];
+  getTrainingProgramDifficulty(name){
+    for(let x = 0; x < this.trainingEvents.length; x++){
+      this.trainingEvents[x].dow.some(x => x == 0) ? this.addToDowCounter(0) : null,
+      this.trainingEvents[x].dow.some(x => x == 1) ? this.addToDowCounter(1) : null,
+      this.trainingEvents[x].dow.some(x => x == 2) ? this.addToDowCounter(2) : null,
+      this.trainingEvents[x].dow.some(x => x == 3) ? this.addToDowCounter(3) : null,
+      this.trainingEvents[x].dow.some(x => x == 4) ? this.addToDowCounter(4) : null,
+      this.trainingEvents[x].dow.some(x => x == 5) ? this.addToDowCounter(5) : null,
+      this.trainingEvents[x].dow.some(x => x == 6) ? this.addToDowCounter(6) : null
+    }
+    let difficulty = this.calcDifficultyFromDow(); 
+    this.createTrainingProgram(name.value, difficulty);
+  }
+  addToDowCounter(dow: number){
+    this.dowCounter.some(x => x == dow ) ? null : this.dowCounter.push(dow);
+  }
+  calcDifficultyFromDow(): number{
+    let lenght = this.dowCounter.length;
+    if(lenght <= 3){
+      return 1;
+    }
+    if(lenght > 3 && lenght <= 5 ){
+      return 2
+    }else if(lenght > 5){
+      return 3
+    }
   }
 
-  viewTrainingProgram(TPID: number) {
-    this.router.navigate(['trainer/trainingprograms/' + TPID ]);
-  }
-
-  createTrainingProgram(name){
+  createTrainingProgram(name, difficulty){
     let url = this.apiRoot + "api/TrainingProgram/Add";
-    let body = `name=${name}&difficulty=2`;
+    let body = `name=${name}&difficulty=${difficulty}`;
     let token = localStorage.getItem('access_token');
     let headers = new Headers({ 'Authorization': "Bearer " + token, 'Content-Type': 'application/x-www-form-urlencoded' });
     let requestOptions = new RequestOptions({ headers: headers });
@@ -89,6 +99,7 @@ export class TrainingProgramService {
         })
     });
   }
+
   prepTrainingsForDb(TPID: number, name){
     let dtoArray: TrainingDTO[] = [];
     for(let x = 0; x < this.trainingEvents.length; x++){
@@ -139,7 +150,26 @@ export class TrainingProgramService {
       localStorage.removeItem('tempProgram')
     }
     this.trainingEvents = [];
+    this.dowCounter = [];
     this.router.navigate(['trainer/trainingprograms/' + TPID]);
+  }
+  
+  getTrainingProgramListByTRID(){
+    let url = this.apiRoot + "api/TrainingProgram/GetByTRID";
+    let token = localStorage.getItem('access_token');
+    let headers = new Headers({ 'Authorization': "Bearer " + token, 'Content-Type': 'application/x-www-form-urlencoded' });
+    let requestOptions = new RequestOptions({ headers: headers });
+    return new Promise((resolve) => {
+      this.http.get(url, requestOptions)
+        .map(res => res.json())
+        .subscribe((data) => {
+          resolve(data);
+        })
+    });
+  }
+
+  viewTrainingProgram(TPID: number) {
+    this.router.navigate(['trainer/trainingprograms/' + TPID ]);
   }
 
   trainingProgram: TrainingProgram;
@@ -213,6 +243,5 @@ export class TrainingProgramService {
     trainings.saturday ? dow.push(6) : null;
     return dow;
   }
-
-
+  
 }
