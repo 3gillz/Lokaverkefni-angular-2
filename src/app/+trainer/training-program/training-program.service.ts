@@ -73,13 +73,13 @@ export class TrainingProgramService {
     this.dowCounter.some(x => x == dow ) ? null : this.dowCounter.push(dow);
   }
   calcDifficultyFromDow(): number{
-    let lenght = this.dowCounter.length;
-    if(lenght <= 3){
+    let length = this.dowCounter.length;
+    if(length <= 3){
       return 1;
     }
-    if(lenght > 3 && lenght <= 5 ){
+    if(length > 3 && length <= 5 ){
       return 2
-    }else if(lenght > 5){
+    }else if(length > 5){
       return 3
     }
   }
@@ -151,9 +151,9 @@ export class TrainingProgramService {
     }
     this.trainingEvents = [];
     this.dowCounter = [];
-    this.router.navigate(['trainer/trainingprograms/' + TPID]);
+    this.viewTrainingProgram(TPID);
   }
-  
+  trainingProgramLoaded: boolean;
   getTrainingProgramListByTRID(){
     let url = this.apiRoot + "api/TrainingProgram/GetByTRID";
     let token = localStorage.getItem('access_token');
@@ -172,8 +172,9 @@ export class TrainingProgramService {
     this.router.navigate(['trainer/trainingprograms/' + TPID ]);
   }
 
-  trainingProgram: TrainingProgram;
+  trainingProgramName: String;
   getTrainingProgramByTPID(TPID: number){
+    this.trainingProgramLoaded = false;        
     let url = this.apiRoot + "api/TrainingProgram/"+ TPID;
     let token = localStorage.getItem('access_token');
     let headers = new Headers({ 'Authorization': "Bearer " + token, 'Content-Type': 'application/x-www-form-urlencoded' });
@@ -184,8 +185,9 @@ export class TrainingProgramService {
         .subscribe(
           response => {
             if(response){
-              this.trainingProgram = response;
-              this.getTrainingsInProgram(this.trainingProgram.TPID);
+              response as TrainingProgram;
+              this.trainingProgramName = response.name;
+              this.getTrainingsInProgram(response.TPID);
             }else{
               this.popUpService.errorMessage("You don't have access to this program");
               setTimeout(() => //Skítamix, let cullCelendar render before navigation// betra að hafa routerGuard?
@@ -206,9 +208,8 @@ export class TrainingProgramService {
       this.http.get(url, requestOptions)
         .map(res => res.json())
         .subscribe(
-          data => {
-            let trainings: TrainingDTO = data;
-            this.prepTrainingsForCalendar(trainings);
+          data => {           
+            this.prepTrainingsForCalendar(data as TrainingDTO);
           }
         )
     });
@@ -231,6 +232,7 @@ export class TrainingProgramService {
       this.trainingEvents.push(training);
     }
     this.eventAdded.next(true);
+    this.trainingProgramLoaded = true;
   }
   getDow(trainings):number[]{
     let dow = [];

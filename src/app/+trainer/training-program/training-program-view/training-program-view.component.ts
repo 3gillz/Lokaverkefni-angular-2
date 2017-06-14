@@ -20,6 +20,7 @@ export class TrainingProgramViewComponent implements OnInit {
   private sub: any;
   
   goBack(){
+    this.trainingProgramService.trainingProgramName = null;
     this.location.back();
   }
   

@@ -1,20 +1,27 @@
 <div id="content">
-  <div class="row" *ngIf="trainingProgramService.trainingProgram">
+  <div class="row">
     <span class="col-xs-6">
       <h1 class="page-title txt-color-blueDark">
       <i class="fa-fw fa fa fa-calendar"></i>{{'Training programs' | i18n }}
-      <span> > {{ trainingProgramService.trainingProgram.name }}</span>
+      <span *ngIf="trainingProgramService.trainingProgramName"> > {{ trainingProgramService.trainingProgramName }}</span>
       </h1>
     </span>
   </div>
   <sa-widgets-grid>
     <div class="row">
-      <article class="col-sm-12 col-md-12 col-lg-12">
+      <article class="col-sm-12 col-md-12 col-lg-12" *ngIf="trainingProgramService.trainingProgramLoaded; else loading">
           <header>
             <a (click)="goBack()" class="btn btn-labeled btn-default"> <span class="btn-label"><i class="glyphicon glyphicon-chevron-left"></i></span>Back </a>
           </header>
-          <app-training-program-calendar [creationMode]="false" ></app-training-program-calendar>
+          <app-training-program-calendar [creationMode]="false"></app-training-program-calendar>
       </article>
+      <ng-template #loading>
+        <article id="loading-spinner">
+          <i class='fa fa-spinner fa-spin '></i> 
+          Loading training program
+          <span class="loader-dot">.</span><span class="loader-dot">.</span><span class="loader-dot">.</span>
+        </article>
+      </ng-template>
     </div>
   </sa-widgets-grid>
 </div>
