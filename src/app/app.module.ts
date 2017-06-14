@@ -29,6 +29,7 @@ import { LayoutService } from './smartadmin/layout/layout.service';
 import { UserService } from './smartadmin/user/user.service';
 import { SoundService } from "./smartadmin/sound/sound.service";
 import { SmartadminDatatableModule } from './smartadmin/ui/datatable/smartadmin-datatable.module';
+import { MaskedInput } from './smartadmin/forms/input/masked-input.directive'
 //SmartAdmin end
 import { AccountService } from './services/account.service';
 import { PopUpService } from "./services/popup.service";
@@ -55,7 +56,8 @@ import { ExerciseVideoModalComponent } from './+trainer/+modals/exercise-video-m
     TraineeProgressImagesComponent,
     TraineeProgramsComponent,
     TraineeMeasurementsComponent,
-    ExerciseVideoModalComponent
+    ExerciseVideoModalComponent,
+    MaskedInput
   ],
   imports: [
     SmartadminLayoutModule,
