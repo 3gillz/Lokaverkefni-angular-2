@@ -23,8 +23,8 @@ export class TrainerRegisterFormComponent implements OnInit {
       confirmPassword: new FormControl('', [<any>Validators.required, this.validatePasswordConfirmation.bind(this)]),
       address: new FormControl('', <any>Validators.required),
       location: new FormControl('', <any>Validators.required),
-      phone: new FormControl('', <any>Validators.required),
-      kennitala: new FormControl('', <any>Validators.required),
+      phone: new FormControl('', [<any>Validators.required, <any>Validators.maxLength(7), <any>Validators.minLength(7)]),
+      kennitala: new FormControl('', [<any>Validators.required, this.validateKennitalaControl.bind(this), <any>Validators.maxLength(10), <any>Validators.minLength(10)]),
       gender: new FormControl('', <any>Validators.required),
       terms: new FormControl('', <any>Validators.required)
     });
@@ -34,6 +34,31 @@ export class TrainerRegisterFormComponent implements OnInit {
     if(this.regiserTrainerForm) {
       return control.value === this.regiserTrainerForm.get('password').value ? null : { notSame: true}
     }
+  }
+  validateKennitalaControl(control: FormControl): any {
+    if(this.regiserTrainerForm) {
+      return this.vartoluProfun(control.value) ? null : { notValid: true}
+    }
+  }
+  vartoluProfun(kennitala: string): boolean{
+    var intKtSum = 0;
+    intKtSum += (parseInt(kennitala.charAt(0)) * 3);
+    intKtSum += (parseInt(kennitala.charAt(1)) * 2);
+    intKtSum += (parseInt(kennitala.charAt(2)) * 7);
+    intKtSum += (parseInt(kennitala.charAt(3)) * 6);
+    intKtSum += (parseInt(kennitala.charAt(4)) * 5);
+    intKtSum += (parseInt(kennitala.charAt(5)) * 4);
+    intKtSum += (parseInt(kennitala.charAt(6)) * 3);
+    intKtSum += (parseInt(kennitala.charAt(7)) * 2);
+    intKtSum -= (intKtSum / 11 * 11)
+    intKtSum = 11 - intKtSum;
+    if (intKtSum >= 11){
+      intKtSum = 0;
+    }
+    if (parseInt(kennitala.charAt(8)) == intKtSum)
+    return true;
+    else
+    return false;
   }
 
   ngOnInit() {
