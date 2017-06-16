@@ -22,7 +22,6 @@ export class LandingPageService {
         .map(res => res.json())
         .subscribe((data) => {
           this.trainer = data;
-          console.log(this.trainer)
         })
     });
   }

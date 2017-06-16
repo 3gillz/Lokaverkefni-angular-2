@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+declare var $: any;
 
 @Component({
   selector: 'app-trainer-register-form',
@@ -9,29 +10,38 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class TrainerRegisterFormComponent implements OnInit {
 
   public regiserTrainerForm: FormGroup;
+  public submitted: boolean = false;
 
   constructor()
   {
     this.regiserTrainerForm = new FormGroup({
       name: new FormControl('', <any>Validators.required),
       email: new FormControl('', <any>Validators.required),
-      userName: new FormControl('', <any>Validators.required),
       password: new FormControl('', <any>Validators.required),
-      confirmPassword: new FormControl('', <any>Validators.required),
+      confirmPassword: new FormControl('', [<any>Validators.required, this.validatePasswordConfirmation.bind(this)]),
       address: new FormControl('', <any>Validators.required),
+      location: new FormControl('', <any>Validators.required),
       phone: new FormControl('', <any>Validators.required),
       kennitala: new FormControl('', <any>Validators.required),
       gender: new FormControl('', <any>Validators.required),
-      profileImagePath: new FormControl('', <any>Validators.required)
+      terms: new FormControl('', <any>Validators.required)
     });
-  }
 
-//regex for password
-// one lower case letter, one upper case letter, 
-// one digit and one special character, min length 6
-// => "^.*(?=.{6,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$"
+  }
+  validatePasswordConfirmation(control: FormControl): any {
+    if(this.regiserTrainerForm) {
+      return control.value === this.regiserTrainerForm.get('password').value ? null : { notSame: true}
+    }
+  }
 
   ngOnInit() {
   }
+
+  submit(regiserTrainerForm){
+    this.submitted = true;
+    console.log("valid : " + regiserTrainerForm.valid)
+    console.log(regiserTrainerForm.value)
+  }
+
 
 }

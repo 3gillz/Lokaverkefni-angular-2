@@ -1,61 +1,69 @@
-<form id="smart-form-register" class="smart-form client-form">
+<form [formGroup]="regiserTrainerForm" class="smart-form client-form" (ngSubmit)="submit(regiserTrainerForm)" >
   <header>
     Registration is FREE*
   </header>
   <fieldset>
     <section>
-      <label class="input"> <i class="icon-append fa fa-user"></i>
-        <input type="text" name="username" placeholder="Username">
-        <b class="tooltip tooltip-bottom-right">Used to enter the website</b>
-      </label>
-    </section>
-    <section>
       <label class="input"> <i class="icon-append fa fa-envelope"></i>
-        <input type="email" name="email" placeholder="Email address">
-        <b class="tooltip tooltip-bottom-right">Needed to verify your account</b>
+        <input type="email" formControlName="email" placeholder="Email address" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" spellcheck="false" autocomplete="off">
+        <b class="tooltip tooltip-bottom-right">Used to enter the website and verify your account</b>
       </label>
+      <small *ngIf="submitted && !regiserTrainerForm.controls.email.valid">
+        A valid email is required.
+      </small>
     </section>
     <section>
       <label class="input"> <i class="icon-append fa fa-lock"></i>
-        <input type="password" name="password" placeholder="Password" id="password" autocomplete="off">
+        <input type="password" formControlName="password" placeholder="Pick password" pattern="((?=.*\d)(?=.*[A-Z])(?=.*\W).{6,24})" autocomplete="off">
         <b class="tooltip tooltip-bottom-right">Don't forget your password</b>
       </label>
+      <small *ngIf="submitted && !regiserTrainerForm.controls.password.valid">
+        Valid password is 6-24 digits long and must contain one lower case letter, one upper case letter, 
+        one digit and one special character.
+      </small>
     </section>
     <section>
       <label class="input"> <i class="icon-append fa fa-lock"></i>
-        <input type="password" name="passwordConfirm" placeholder="Confirm password" autocomplete="off">
+        <input type="password" formControlName="confirmPassword" placeholder="Confirm password" autocomplete="off">
         <b class="tooltip tooltip-bottom-right">Don't forget your password</b>
       </label>
+      <small *ngIf="submitted && !regiserTrainerForm.controls.confirmPassword.valid">
+        Password do not match.
+      </small>
     </section>
   </fieldset>
   <fieldset>
     <section>
+         <!--pattern="^[^0-9]+$"-->
       <label class="input"> <i class="icon-append fa fa-user"></i>
-        <input type="text" name="name" placeholder="Full name">
+        <input type="text" formControlName="name" placeholder="Full name" spellcheck="false">
       </label>
+      <small *ngIf="submitted && !regiserTrainerForm.controls.name.valid">
+        Name not valid
+      </small>
     </section>      
     <section>      
       <label class="input"><i class="icon-append fa fa-columns"></i>
-        <input type="text" name="kennitala" placeholder="Kennitala" saMaskedInput="999999-9999" saMaskedPlaceholder="x">
+        <input type="text" formControlName="kennitala" placeholder="Kennitala">
       </label>
     </section>
     <div class="row">
       <section class="col col-6">
         <label class="input"> <i class="icon-append fa fa-home"></i>
-          <input type="text" name="address" placeholder="Address">
+          <input type="text" formControlName="address" placeholder="Address">
         </label>
       </section>
       <section class="col col-6">
         <label class="input"> <i class="icon-append fa fa-location-arrow"></i>
-          <input type="text" name="location" placeholder="Location">
+          <input type="text" formControlName="location" placeholder="Location">
         </label>
       </section>
     </div>
     <div class="row">
       <section class="col col-6">
         <label class="select">
-          <select name="gender">
-            <option value="0" selected disabled>Gender</option>
+          <select formControlName="gender">
+            <option selected disabled>{{'Gender' | i18n}}</option>
             <option value="1">Male </option>
             <option value="2">Female </option>
           </select> <i></i> 
@@ -63,22 +71,19 @@
       </section>
       <section class="col col-6">
         <label class="input"> <i class="icon-append fa fa-phone"></i>
-          <input type="text" name="phone" placeholder="Phone number" saMaskedInput="999-9999" saMaskedPlaceholder="x">
+          <input type="text" formControlName="phone" placeholder="Phone number">
         </label>
       </section>
     </div>
     <section>
       <label class="checkbox">
-        <input type="checkbox" name="subscription" id="subscription">
-        <i></i>I want to receive news and special offers</label>
-      <label class="checkbox">
-        <input type="checkbox" name="terms" id="terms">
+        <input type="checkbox" formControlName="terms" id="terms">
         <i></i>I agree with the <a href="#" data-toggle="modal" data-target="#trainerTermsModal"> Terms and Conditions </a>
       </label>
     </section>
   </fieldset>
   <footer>
-    <button (click)="register($event)" class="btn btn-primary">
+    <button type="submit" class="btn btn-primary">
       Register
     </button>
   </footer>
