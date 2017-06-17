@@ -12,15 +12,18 @@ export class AccountService {
   ) { }
 
   login(email, password) {
+    console.log("login")
     let loginUrl = this.apiRoot + "token";
     let body = `grant_type=password&username=${email.value}&password=${password.value}`;
     let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
     let options = new RequestOptions({ headers: headers });
     this.http.post(loginUrl, body, options)
       .subscribe(response => {
+        console.log(response)
         localStorage.setItem('access_token', response.json().access_token);
         this.afterLoginResolver(response.json().path);
       }, error => {
+        console.log(error)        
         alert("Something Is Not Right");
         console.log(JSON.stringify(error.json()));
       });
