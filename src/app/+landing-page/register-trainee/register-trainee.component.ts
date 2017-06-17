@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { LandingPageService } from './../landing-page.service';
+import { Http, Headers, RequestOptions } from '@angular/http';
 
 @Component({
   selector: 'app-register-trainee',
@@ -10,14 +10,30 @@ import { LandingPageService } from './../landing-page.service';
 export class RegisterTraineeComponent implements OnInit {
 
   constructor(
+    @Inject("apiRoot") private apiRoot,
     private route: ActivatedRoute,
-    private landingPageService: LandingPageService 
+    private http: Http
   ) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       +params['id'];
-        this.landingPageService.getTrainerCard(+params['id']);
+        this.getTrainerCard(+params['id']);
     });
   }
+
+  trainer: any;
+  getTrainerCard(TRID: number){
+    let url = this.apiRoot + "api/Trainer/card/" + TRID;
+    let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    let requestOptions = new RequestOptions({ headers: headers });
+    return new Promise(() => {
+      this.http.get(url, requestOptions)
+        .map(res => res.json())
+        .subscribe((data) => {
+          this.trainer = data;
+        })
+    });
+  }
+
 }

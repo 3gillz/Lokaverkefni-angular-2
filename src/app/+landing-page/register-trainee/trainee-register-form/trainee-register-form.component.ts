@@ -1,4 +1,4 @@
-import { LandingPageService } from './../../landing-page.service';
+import { AccountService } from './../../../services/account.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class TraineeRegisterFormComponent implements OnInit {
 
   constructor(
-    private landingPageService: LandingPageService
+    private accountService: AccountService
   ) { }
 
   ngOnInit() {

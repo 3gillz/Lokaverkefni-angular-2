@@ -32,6 +32,7 @@ import { SmartadminDatatableModule } from './smartadmin/ui/datatable/smartadmin-
 import { MaskedInput } from './smartadmin/forms/input/masked-input.directive'
 //SmartAdmin end
 import { AccountService } from './services/account.service';
+import { MiscService } from './services/misc.service';
 import { PopUpService } from "./services/popup.service";
 import { AppRoutingModule, RoutedComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -120,6 +121,7 @@ import { TrainingProgramCalendarComponent } from './+trainer/training-program/tr
     SoundService,
     {provide: "apiRoot", useValue: "http://localhost:55322/"},
     AccountService,
+    MiscService,
     PopUpService
   ],
   bootstrap: [AppComponent]

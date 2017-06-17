@@ -14,7 +14,7 @@
     </section>
     <section>
       <label class="input"> <i class="icon-append fa fa-lock"></i>
-        <input type="password" formControlName="password" placeholder="Pick password" pattern="{{emailPattern}}" autocomplete="off">
+        <input type="password" formControlName="password" placeholder="Pick password"  pattern="((?=.*\d)(?=.*[A-Z])(?=.*\W).{6,24})">
         <b class="tooltip tooltip-bottom-right">Don't forget your password</b>
       </label>
       <small *ngIf="submitted && !registerTrainerForm.controls.password.valid">
@@ -36,7 +36,7 @@
     <section>
      <label class="input"> <i class="icon-append fa fa-user"></i>
         <input type="text" formControlName="name" placeholder="Full name" spellcheck="false"
-         pattern="{{namePattern}}"
+         pattern="{{miscService.namePattern}}"
          >
       </label>
       <small *ngIf="submitted && !registerTrainerForm.controls.name.valid">

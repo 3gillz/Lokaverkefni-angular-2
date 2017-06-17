@@ -18,17 +18,17 @@
           <sa-language-selector></sa-language-selector>
           <br />
           <br />
-          <div class="card" *ngIf="landingPageService.trainer">
+          <div class="card" *ngIf="trainer">
               <a class="banner"></a>
             <div>
-              <img alt="{{landingPageService.trainer.name}}" [src]="landingPageService.trainer.profileImagePath" class="avatar">
+              <img alt="{{trainer.name}}" [src]="trainer.profileImagePath" class="avatar">
               <div class="info">
                 <div class="name">
-                  {{landingPageService.trainer.name}}
+                  {{trainer.name}}
                 </div>
                 <span>
-                  <div class="desc">{{landingPageService.trainer.email}}</div>
-                  <div class="desc">{{landingPageService.trainer.location}}</div>
+                  <div class="desc">{{trainer.email}}</div>
+                  <div class="desc">{{trainer.location}}</div>
                 </span>
               </div>
             </div>
