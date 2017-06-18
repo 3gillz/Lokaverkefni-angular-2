@@ -1,3 +1,23 @@
+<div id="content">
+  
+    <h1 class="page-title txt-color-blueDark">
+    <i class="fa-fw fa fa-file-text-o"></i>{{'Customers' | i18n }}
+    <span>> {{'New' | i18n}}</span>
+    </h1>
+  </div>
+  <sa-widgets-grid>
+      <div class="row">
+      <!-- NEW WIDGET START -->
+      <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+      <sa-widget class="well">
+
+                <header>
+            <span class="widget-icon"> <i class="fa fa-comments"></i> </span>
+
+            <h2>Widget Title </h2>
+          </header>
+
 <form [formGroup]="customerForm"  novalidate="novalidate" class="smart-form" (submit)="submitCustomer(customerForm)">
 
   <fieldset>
@@ -120,3 +140,10 @@
     <button type="submit" class="btn btn-primary">{{'Create' | i18n}}</button>
   </footer>
 </form>
+
+ </sa-widget>
+
+      </article>
+      <!-- WIDGET END -->
+    </div>
+  </sa-widgets-grid>
