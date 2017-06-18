@@ -12,12 +12,12 @@ export class I18nService {
   public state;
   public data:{};
   public currentLanguage:any;
-  public calendarLang: BehaviorSubject<string> = new BehaviorSubject<string>("en");
+  public calendarLang: BehaviorSubject<string> = new BehaviorSubject<string>("is");
 
   constructor(private jsonApiService:JsonApiService, private ref:ApplicationRef) {
     this.state = new Subject();
 
-    this.initLanguage(config.defaultLocale || 'us');
+    this.initLanguage(config.defaultLocale || 'is');
     this.fetch(this.currentLanguage.key)
   }
 

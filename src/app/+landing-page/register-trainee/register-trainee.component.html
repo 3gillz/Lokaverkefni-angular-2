@@ -15,9 +15,12 @@
       </div>
       <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
         <div class="well no-padding">
-          <sa-language-selector></sa-language-selector>
-          <br />
-          <br />
+          <form class="smart-form client-form"> 
+            <header>
+              Registration is FREE*
+            </header>
+            <sa-language-selector></sa-language-selector>
+          </form>
           <div class="card" *ngIf="trainer">
               <a class="banner"></a>
             <div>
@@ -35,7 +38,7 @@
           </div>
           <app-trainee-register-form></app-trainee-register-form>
         </div>
-        <p class="note text-center">*FREE Registration ends on October 2015.</p>
+        <p class="note text-center">*TrainingMaster does not charge trainees for access.</p>
       </div>
     </div>
   </div>

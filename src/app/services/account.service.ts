@@ -72,8 +72,9 @@ export class AccountService {
 
   registerUser(model: any, role: string){
     let url = this.apiRoot + "api/Account/Register";
-    let body = "Email=" + model.email + "&password=" + model.password + "&ConfirmPassword=" + model.confirmPassword
-      + "&role=" + role;
+    let body = "Email=" + model.email + "&password=" + model.password 
+                + "&ConfirmPassword=" + model.confirmPassword
+                + "&role=" + role;
     let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
     let requestOptions = new RequestOptions({ headers: headers });
     return new Promise((resolve) => {
@@ -90,26 +91,41 @@ export class AccountService {
     });
   }
 
-  registerTrainer(model: any, data: any){
-    let id = data.replace(/^"(.*)"$/, '$1');
-    let url = this.apiRoot + "api/Trainer/Register";
+  registerTrainerUrl: string = "api/Trainer/Register";
+  trainerBody(model: any): string{
     let body = "Name=" + model.name + "&email=" + model.email + "&phone=" + model.phone
-               + "&kennitala=" + model.kennitala + "&gender=" + model.gender + "&address="
-               + model.address + "&location=" + model.location + "&Id=" + id;
+            + "&kennitala=" + model.kennitala + "&gender=" + model.gender + "&address="
+            + model.address + "&location=" + model.location;
+    return body;
+  }
+  registerTraineeUrl: string = "api/Customer/Register";
+  traineeBody(model: any): string{
+    let body =  "Name=" + model.name + "&email=" + model.email + "&kennitala=" + model.kennitala 
+             + "&gender=" + model.gender + "&address=" + model.address + "&height=" + model.height
+             + "&jobDifficulty=" + model.jobDifficulty + "&trainer_TRID=" + model.TRID + "&foodPref=" 
+             + model.foodPref + "&injury=" + model.injury + "&allergy=" + model.allergy;
+    return body;
+  }
+
+  registerTrainerOrTrainee(model: any, data: any, trainer: boolean){
+    let id = data.replace(/^"(.*)"$/, '$1');
+    let body = trainer ? this.trainerBody(model) : this.traineeBody(model);
+    let url = trainer ? this.registerTrainerUrl : this.registerTraineeUrl;
     let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
     let requestOptions = new RequestOptions({ headers: headers });
     return new Promise((resolve) => {
-      this.http.post(url, body, requestOptions)
+      this.http.post(this.apiRoot + url, body + "&Id=" + id, requestOptions)
         .map(res => res.json())
         .subscribe((data) => {
           resolve(data)
           if(data){
-            this.popUpService.successMessage("Trainer registered", "Just now...")
+            this.popUpService.successMessage("User registered", "Just now...")
           }else if(!data){
             this.popUpService.errorMessage("Sorry, something went wrong");
           }
         });
     });
   }
+  
 
 }

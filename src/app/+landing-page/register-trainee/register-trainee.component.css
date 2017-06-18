@@ -1,8 +1,16 @@
+#header{
+    position: relative;
+}
+sa-language-selector{
+    position: absolute;
+    z-index: 3000;
+    margin-top: -50px; 
+    right: 10px;
+}
 .card {
     background: #fff none repeat scroll 0 0;
     border: 1px solid #e1e8ed;
-    border-radius: 6px;
-    padding: 10px;
+    padding: 10px 10px 20px 10px;
 }
 .banner {
     background-image: url("http://andersonfamilyfitness.com/images/header/weights.jpg");
@@ -20,8 +28,8 @@
     border-radius: 7px;
     box-sizing: border-box;
     color: #fff;
-    width: 72px;
-    height: auto;
+    height: 95px;
+    width: auto;
     float: left;
 }
 .info {

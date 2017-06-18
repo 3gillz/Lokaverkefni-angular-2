@@ -11,12 +11,12 @@ export class RegisterTraineeComponent implements OnInit {
 
   constructor(
     @Inject("apiRoot") private apiRoot,
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private http: Http
   ) { }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
+    this.activatedRoute.params.subscribe(params => {
       +params['id'];
         this.getTrainerCard(+params['id']);
     });

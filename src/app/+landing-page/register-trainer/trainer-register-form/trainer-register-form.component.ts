@@ -56,13 +56,13 @@ export class TrainerRegisterFormComponent implements OnInit {
       this.accountService.registerUser(registerTrainerForm.value, "trainer")
       .then( data => {
         if(data[0]){
-          this.accountService.registerTrainer(registerTrainerForm.value, data[1]._body)
+          this.accountService.registerTrainerOrTrainee(registerTrainerForm.value, data[1]._body, true)
           .then( data =>{
             if(data){
               this.router.navigate(['login']);
               this.resolved = true;              
             }else if(!data){
-              this.resolved = true;              
+              this.resolved = true;
             }
           })
         }
