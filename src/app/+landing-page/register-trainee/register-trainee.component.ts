@@ -22,8 +22,9 @@ export class RegisterTraineeComponent implements OnInit {
         this.getTrainerCard(+params['id']);
     });
   }
-
+  agreedValue: boolean = false;
   termsAgreed(){
+    this.agreedValue = !this.agreedValue;
     $('#terms').prop('checked', true);
   }
 

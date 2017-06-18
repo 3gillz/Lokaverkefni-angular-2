@@ -1,6 +1,6 @@
 import { AccountService } from './../../../services/account.service';
 import { MiscService } from './../../../services/misc.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -9,8 +9,9 @@ import { Router } from '@angular/router';
   templateUrl: './trainer-register-form.component.html',
   styleUrls: ['./trainer-register-form.component.css']
 })
-export class TrainerRegisterFormComponent implements OnInit {
-
+export class TrainerRegisterFormComponent implements OnInit, OnChanges {
+  
+  @Input() agreedInput: boolean;
   public registerTrainerForm: FormGroup;
   public submitted: boolean = false;
   resolved: boolean = true;
@@ -31,9 +32,14 @@ export class TrainerRegisterFormComponent implements OnInit {
       phone: new FormControl('', [<any>Validators.required, <any>Validators.maxLength(7), <any>Validators.minLength(7)]),
       kennitala: new FormControl('', [<any>Validators.required, this.validateKennitalaControl.bind(this), <any>Validators.maxLength(10), <any>Validators.minLength(10)]),
       gender: new FormControl('', <any>Validators.required),
-      terms: new FormControl('', <any>Validators.required)
+      terms: new FormControl('', [<any>Validators.required, this.beTrue.bind(this)])
     });
 
+  }
+  beTrue(control: FormControl): any  {
+    if(this.registerTrainerForm) {
+      return control.value == true ? null : { notValid: true};
+    }
   }
   validatePasswordConfirmation(control: FormControl): any {
     if(this.registerTrainerForm) {
@@ -45,7 +51,9 @@ export class TrainerRegisterFormComponent implements OnInit {
       return this.miscService.vartoluProfun(control.value) ? null : { notValid: true}
     }
   }
-
+  ngOnChanges(){
+    this.registerTrainerForm.patchValue({terms: this.agreedInput})
+  }
   ngOnInit() {
   }
 

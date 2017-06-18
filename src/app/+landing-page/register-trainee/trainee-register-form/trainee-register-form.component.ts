@@ -3,7 +3,7 @@ import { I18nService } from './../../../smartadmin/i18n/i18n.service';
 import { languages } from './../../../smartadmin/i18n/languages.model';
 import { AccountService } from './../../../services/account.service';
 import { MiscService } from './../../../services/misc.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, OnChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
@@ -13,8 +13,9 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './trainee-register-form.component.html',
   styleUrls: ['./trainee-register-form.component.css']
 })
-export class TraineeRegisterFormComponent implements OnInit {
+export class TraineeRegisterFormComponent implements OnInit, OnChanges {
 
+  @Input() agreedInput: boolean;
   public registerTraineeForm: FormGroup;
   public submitted: boolean = false;
   resolved: boolean = true;
@@ -39,7 +40,7 @@ export class TraineeRegisterFormComponent implements OnInit {
       phone: new FormControl('', [<any>Validators.maxLength(7), <any>Validators.minLength(7)]),
       kennitala: new FormControl('', [<any>Validators.required, this.validateKennitalaControl.bind(this), <any>Validators.maxLength(10), <any>Validators.minLength(10)]),
       gender: new FormControl('', <any>Validators.required),
-      terms: new FormControl('', <any>Validators.required),
+      terms: new FormControl('', [<any>Validators.required, this.beTrue.bind(this)]),
       country: new FormControl('Iceland', <any>Validators.required),
       height: new FormControl('', [<any>Validators.required, <any>Validators.maxLength(3), <any>Validators.minLength(2)]),
       jobDifficulty: new FormControl('', <any>Validators.required),
@@ -51,7 +52,9 @@ export class TraineeRegisterFormComponent implements OnInit {
     });
 
   }
-
+  ngOnChanges(){
+    this.registerTraineeForm.patchValue({terms: this.agreedInput})
+  }
   ngOnInit() {
     this.countries = languages;
     this.currentCountry = this.i18nService.currentLanguage.alt;
@@ -61,7 +64,11 @@ export class TraineeRegisterFormComponent implements OnInit {
     this.miscService.getZipcodes()
       .then(z => this.zipcodes = z);
   }
-
+  beTrue(control: FormControl): any  {
+    if(this.registerTraineeForm) {
+      return control.value == true ? null : { notValid: true};
+    }
+  }
   nonNegative(control: FormControl): any  {
     if(this.registerTraineeForm) {
       return control.value < 0 ? { notValid: true} : null;

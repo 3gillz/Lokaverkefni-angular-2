@@ -13,8 +13,9 @@ export class RegisterTrainerComponent implements OnInit {
   ngOnInit() {
   }
 
+  agreedValue: boolean = false;
   termsAgreed(){
+    this.agreedValue = !this.agreedValue;
     $('#terms').prop('checked', true);
   }
-
 }
