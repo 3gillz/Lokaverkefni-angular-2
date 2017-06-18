@@ -3,21 +3,21 @@
     <span id="logo"> <img src="assets/img/logo.png" alt="TrainingMaster"> </span>
   </div>
   <span id="extr-page-header-space">
-    <span class="hidden-mobile hiddex-xs">Already registered?</span> 
-    <a routerLink="/login" class="btn btn-danger">Sign In</a>
+    <span class="hidden-mobile hiddex-xs">{{'Already registered' | i18n}}?</span> 
+    <a routerLink="/login" class="btn btn-danger">{{'Sign in' | i18n}}</a>
   </span>
 </header>
 <div id="main" role="main" class="animated fadeInDown">
   <div id="content" class="container">
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 hidden-xs hidden-sm">
-        <app-landing-page-info-card [trainee]="true" ></app-landing-page-info-card>
+        <app-landing-page-info-card [role]="'trainee'"></app-landing-page-info-card>
       </div>
       <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
         <div class="well no-padding">
           <form class="smart-form client-form"> 
             <header>
-              Registration is FREE*
+              {{'Registration is FREE*' | i18n}}
             </header>
             <sa-language-selector></sa-language-selector>
           </form>
@@ -38,10 +38,10 @@
           </div>
           <app-trainee-register-form></app-trainee-register-form>
         </div>
-        <p class="note text-center">*TrainingMaster does not charge trainees for access.</p>
+        <p class="note text-center">{{'*TrainingMaster does not charge trainees for access' | i18n}}</p>
       </div>
     </div>
   </div>
 </div>
 
-<app-trainee-terms-modal></app-trainee-terms-modal>
+<app-terms-modal [user]="'Trainee'" (agreed)="termsAgreed()"></app-terms-modal>

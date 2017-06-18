@@ -37,11 +37,10 @@ import { PopUpService } from "./services/popup.service";
 import { AppRoutingModule, RoutedComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 //LandingSection
-import { TrainerRegisterFormComponent } from './+landing-page/register-trainer/trainer-register-form/trainer-register-form.component';
-import { TrainerTermsModalComponent } from './+landing-page/register-trainer/trainer-terms-modal/trainer-terms-modal.component';
-import { TraineeRegisterFormComponent } from './+landing-page/register-trainee/trainee-register-form/trainee-register-form.component';
-import { TraineeTermsModalComponent } from './+landing-page/register-trainee/trainee-terms-modal/trainee-terms-modal.component';
 import { LandingPageInfoCardComponent } from './+landing-page/landing-page-info-card/landing-page-info-card.component';
+import { TermsModalComponent } from './+landing-page/terms-modal/terms-modal.component';
+import { TrainerRegisterFormComponent } from './+landing-page/register-trainer/trainer-register-form/trainer-register-form.component';
+import { TraineeRegisterFormComponent } from './+landing-page/register-trainee/trainee-register-form/trainee-register-form.component';
 //TraineeSection
 import { TraineeMainCardComponent } from './+trainee/trainee-main-card/trainee-main-card.component';
 import { TraineeTrainerComponent } from './+trainee/trainee-main-card/trainee-trainer/trainee-trainer.component';
@@ -63,9 +62,8 @@ import { TrainingProgramCalendarComponent } from './+trainer/training-program/tr
     RoutedComponents,
     //LandingPage
     LandingPageInfoCardComponent,
+    TermsModalComponent,
     TrainerRegisterFormComponent,
-    TrainerTermsModalComponent,
-    TraineeTermsModalComponent,
     TraineeRegisterFormComponent,
     //Trainee
     TraineeMainCardComponent,

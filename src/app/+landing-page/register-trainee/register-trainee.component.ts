@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Http, Headers, RequestOptions } from '@angular/http';
+declare var $: any;
 
 @Component({
   selector: 'app-register-trainee',
@@ -20,6 +21,10 @@ export class RegisterTraineeComponent implements OnInit {
       +params['id'];
         this.getTrainerCard(+params['id']);
     });
+  }
+
+  termsAgreed(){
+    $('#terms').prop('checked', true);
   }
 
   trainer: any;

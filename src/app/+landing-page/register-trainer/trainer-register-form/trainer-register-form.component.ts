@@ -14,7 +14,7 @@ export class TrainerRegisterFormComponent implements OnInit {
   public registerTrainerForm: FormGroup;
   public submitted: boolean = false;
   resolved: boolean = true;
-
+  
   constructor(
     private accountService: AccountService,
     public miscService: MiscService,

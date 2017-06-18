@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class LandingPageInfoCardComponent implements OnInit {
 
-  @Input() trainee: boolean;
+  @Input() role: string;
 
   constructor( ) { }
 

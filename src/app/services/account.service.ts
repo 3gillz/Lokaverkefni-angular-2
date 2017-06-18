@@ -22,9 +22,8 @@ export class AccountService {
       .subscribe(response => {
         localStorage.setItem('access_token', response.json().access_token);
         this.afterLoginResolver(response.json().path);
-      }, error => {      
-        alert("Something Is Not Right");
-        console.log(JSON.stringify(error.json()));
+      }, error => {
+        this.popUpService.errorMessage(error.json().error_description)
       });
   }
 
@@ -58,7 +57,6 @@ export class AccountService {
     this.http.get(url, requestOptions)
         .map(res => res.json())
         .subscribe((data) => {
-          console.log(data)
           localStorage.setItem('user', JSON.stringify(data));
           this.router.navigate([ 'profile/' ]);
         })
@@ -66,7 +64,7 @@ export class AccountService {
 
   logout() {
     localStorage.clear()
-    this.router.navigate([""]);
+    this.router.navigate(["login/"]);
   }
 
 

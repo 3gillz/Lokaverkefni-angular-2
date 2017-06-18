@@ -1,4 +1,4 @@
-<div class="modal fade" id="traineeTermsModal" tabindex="-1" role="dialog" aria-labelledby="traineeTermsModalLabel" aria-hidden="true">
+<div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="traineeTermsModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -13,7 +13,7 @@
 
 
 
-          <h1>TRAINEE TERMS & CONDITIONS TEMPLATE</h1>
+          <h1>{{ title }}</h1>
 
 
 
@@ -41,12 +41,8 @@
         <button type="button" class="btn btn-default" data-dismiss="modal">
           Cancel
         </button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal">
+        <button type="button" class="btn btn-primary" (click)="termsAgreed()" data-dismiss="modal">
           <i class="fa fa-check"></i> I Agree
-        </button>
-
-        <button type="button" class="btn btn-danger pull-left" id="print">
-          <i class="fa fa-print"></i> Print
         </button>
       </div>
     </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+declare var $: any;
 
 @Component({
   selector: 'app-register-trainer',
@@ -10,6 +11,10 @@ export class RegisterTrainerComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  termsAgreed(){
+    $('#terms').prop('checked', true);
   }
 
 }
