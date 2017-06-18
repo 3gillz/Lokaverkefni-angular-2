@@ -3,10 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { LandingPageComponent } from './+landing-page/landing-page.component';
 import { LoginComponent } from './+landing-page/login/login.component';
-import { RegisterComponent } from './+landing-page/register/register.component';
+import { RegisterTrainerComponent } from './+landing-page/register-trainer/register-trainer.component';
+import { RegisterTraineeComponent } from './+landing-page/register-trainee/register-trainee.component';
 
 import { TraineeComponent } from './+trainee/trainee.component';
-
 import { TrainerComponent } from './+trainer/trainer.component';
 import { DashboardComponent } from './+trainer/dashboard/dashboard.component';
 import { CustomerComponent } from './+trainer/customer/customer.component';
@@ -42,7 +42,8 @@ const routes: Routes = [
     children:[
       {path: '', redirectTo: 'login', pathMatch: 'full' },
       {path: 'login', component: LoginComponent },
-      {path: 'register', component: RegisterComponent }
+      {path: 'register', component: RegisterTrainerComponent },
+      {path: 'register/:id', component: RegisterTraineeComponent }
     ]
   },
   {
@@ -116,7 +117,8 @@ export class AppRoutingModule { }
 export const RoutedComponents = [
   LandingPageComponent,
   LoginComponent,
-  RegisterComponent,
+  RegisterTrainerComponent,
+  RegisterTraineeComponent,
   TraineeComponent,
   TrainerComponent,
   DashboardComponent,

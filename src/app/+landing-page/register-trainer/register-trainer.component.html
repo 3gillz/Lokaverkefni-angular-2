@@ -1,0 +1,26 @@
+<header id="header" class="animated fadeInDown">
+  <div id="logo-group">
+    <span id="logo"> <img src="assets/img/logo.png" alt="TrainingMaster"> </span>
+  </div>
+  <span id="extr-page-header-space">
+    <span class="hidden-mobile hiddex-xs">{{ 'Already registered' | i18n }}?</span>
+    <a routerLink="/login" class="btn btn-danger">{{ 'Sign in' | i18n }}</a>
+  </span>
+</header>
+<div id="main" role="main" class="animated fadeInDown">
+  <div id="content" class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 hidden-xs hidden-sm">
+        <app-landing-page-info-card [role]="'trainer'"></app-landing-page-info-card>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+        <div class="well no-padding">
+          <sa-language-selector></sa-language-selector>
+          <app-trainer-register-form [agreedInput]="agreedValue"></app-trainer-register-form>
+        </div>
+        <p class="note text-center">{{ '*FREE Registration for under five customers' | i18n }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<app-terms-modal [user]="'Trainer'" (agreed)="termsAgreed()"></app-terms-modal>

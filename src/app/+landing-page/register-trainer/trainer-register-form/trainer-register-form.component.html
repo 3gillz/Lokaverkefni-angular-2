@@ -1,0 +1,108 @@
+<form [formGroup]="registerTrainerForm" class="smart-form client-form" (ngSubmit)="submit(registerTrainerForm)" >
+  <header>
+    {{'Registration is FREE*' | i18n}}
+  </header>
+  <fieldset>
+    <section>
+      <label class="input"> <i class="icon-append fa fa-envelope"></i>
+        <input type="email" formControlName="email" placeholder="{{'Email' | i18n}}" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" spellcheck="false" autocomplete="off">
+      </label>
+      <small *ngIf="submitted && !registerTrainerForm.controls.email.valid">
+        {{'A valid email is required' | i18n}}
+      </small>
+    </section>
+    <section>
+      <label class="input"> <i class="icon-append fa fa-lock"></i>
+        <input type="password" formControlName="password" placeholder="{{'Pick password' | i18n}}"  pattern="((?=.*\d)(?=.*[A-Z])(?=.*\W).{6,24})">
+        <b class="tooltip tooltip-bottom-right">{{ miscService.passwordConditions | i18n}}</b> 
+      </label>
+      <small *ngIf="submitted && !registerTrainerForm.controls.password.valid">
+        {{ miscService.passwordConditions | i18n}}
+      </small>
+    </section>
+    <section>
+      <label class="input"> <i class="icon-append fa fa-lock"></i>
+        <input type="password" formControlName="confirmPassword" placeholder="{{'Confirm password' | i18n}}" autocomplete="off">
+      </label>
+      <small *ngIf="submitted && !registerTrainerForm.controls.confirmPassword.valid">
+        {{'Password do not match' | i18n}}
+      </small>
+    </section>
+  </fieldset>
+  <fieldset>
+    <section>
+     <label class="input"> <i class="icon-append fa fa-user"></i>
+        <input type="text" formControlName="name" placeholder="{{'Full name' | i18n}}" spellcheck="false"
+         pattern="{{miscService.namePattern}}"
+         >
+        <b class="tooltip tooltip-bottom-right">{{ 'Name cannot contain digits or special characters' | i18n}}</b>          
+      </label>
+      <small *ngIf="submitted && !registerTrainerForm.controls.name.valid">
+        {{'Name not valid' | i18n}}
+      </small>
+    </section>      
+    <section>      
+      <label class="input"><i class="icon-append fa fa-columns"></i>
+        <input type="text" formControlName="kennitala" placeholder="Kennitala" maxlength="10">
+      </label>
+      <small *ngIf="submitted && !registerTrainerForm.controls.kennitala.valid">
+        {{'Kennitala not valid' | i18n}}
+      </small>
+    </section>
+    <div class="row">
+      <section class="col col-6">
+        <label class="input"> <i class="icon-append fa fa-home"></i>
+          <input type="text" formControlName="address" placeholder="{{'Address' | i18n}}">
+        </label>
+        <small *ngIf="submitted && !registerTrainerForm.controls.address.valid">
+          {{'Please enter address' | i18n}}
+        </small>
+      </section>
+      <section class="col col-6">
+        <label class="input"> <i class="icon-append fa fa-location-arrow"></i>
+          <input type="text" formControlName="location" placeholder="{{'Location' | i18n}}">
+          <b class="tooltip tooltip-bottom-right">{{'Where do you work' | i18n}}?</b>
+        </label>
+        <small *ngIf="submitted && !registerTrainerForm.controls.location.valid">
+          {{'Please enter location' | i18n}}
+        </small>
+      </section>
+    </div>
+    <div class="row">
+      <section class="col col-6">
+        <label class="select">
+          <select formControlName="gender">
+            <option selected disabled>{{'Gender' | i18n}}</option>
+            <option value="1">{{'Male' | i18n}}</option>
+            <option value="2">{{'Female' | i18n}}</option>
+          </select> <i></i> 
+        </label>
+        <small *ngIf="submitted && !registerTrainerForm.controls.gender.valid">
+          {{'Please select gender' | i18n}}
+        </small>
+      </section>
+      <section class="col col-6">
+        <label class="input"> <i class="icon-append fa fa-phone"></i>
+          <input type="text" formControlName="phone" placeholder="{{'Phone' | i18n}}" maxlength="7">
+        </label>
+        <small *ngIf="submitted && !registerTrainerForm.controls.phone.valid">
+          {{'Please enter phone number' | i18n}}
+        </small>
+      </section>
+    </div>
+    <section>
+      <label class="checkbox">
+        <input type="checkbox" formControlName="terms" id="terms">
+        <i></i>{{'I agree with the' | i18n}} <a href="#" data-toggle="modal" data-target="#termsModal">{{'Terms and Conditions' | i18n}}</a>
+      </label>
+      <small *ngIf="submitted && !registerTrainerForm.controls.terms.valid">
+        {{'You must agree to the terms of use' | i18n}}
+      </small>
+    </section>
+  </fieldset>
+  <footer>
+     <button type="submit" class="btn btn-primary" [disabled]="!resolved">
+       <i *ngIf="!resolved" class="fa fa-spinner fa-spin"></i> {{'Register' | i18n}}
+    </button>
+  </footer>
+</form>

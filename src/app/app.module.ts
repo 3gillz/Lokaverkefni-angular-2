@@ -32,10 +32,16 @@ import { SmartadminDatatableModule } from './smartadmin/ui/datatable/smartadmin-
 import { MaskedInput } from './smartadmin/forms/input/masked-input.directive'
 //SmartAdmin end
 import { AccountService } from './services/account.service';
+import { MiscService } from './services/misc.service';
 import { PopUpService } from "./services/popup.service";
-
 import { AppRoutingModule, RoutedComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
+//LandingSection
+import { LandingPageInfoCardComponent } from './+landing-page/landing-page-info-card/landing-page-info-card.component';
+import { TermsModalComponent } from './+landing-page/terms-modal/terms-modal.component';
+import { TrainerRegisterFormComponent } from './+landing-page/register-trainer/trainer-register-form/trainer-register-form.component';
+import { TraineeRegisterFormComponent } from './+landing-page/register-trainee/trainee-register-form/trainee-register-form.component';
+//TraineeSection
 import { TraineeMainCardComponent } from './+trainee/trainee-main-card/trainee-main-card.component';
 import { TraineeTrainerComponent } from './+trainee/trainee-main-card/trainee-trainer/trainee-trainer.component';
 import { TraineeInfoModalComponent } from './+trainee/modals/trainee-info-modal/trainee-info-modal.component';
@@ -43,6 +49,7 @@ import { TraineeProfileImageModalComponent } from './+trainee/modals/trainee-pro
 import { TraineeProgressImagesComponent } from './+trainee/trainee-tabs/trainee-progress-images/trainee-progress-images.component';
 import { TraineeProgramsComponent } from './+trainee/trainee-tabs/trainee-programs/trainee-programs.component';
 import { TraineeMeasurementsComponent } from './+trainee/trainee-tabs/trainee-measurements/trainee-measurements.component';
+//TrainerSection
 import { ExerciseVideoModalComponent } from './+trainer/+modals/exercise-video-modal/exercise-video-modal.component';
 import { AddTrainingComponent } from './+trainer/training-program/training-program-new/add-training/add-training.component';
 import { SaveTrainingProgramComponent } from './+trainer/training-program/training-program-new/save-training-program/save-training-program.component';
@@ -53,6 +60,12 @@ import { TrainingProgramCalendarComponent } from './+trainer/training-program/tr
     MaskedInput,
     AppComponent,
     RoutedComponents,
+    //LandingPage
+    LandingPageInfoCardComponent,
+    TermsModalComponent,
+    TrainerRegisterFormComponent,
+    TraineeRegisterFormComponent,
+    //Trainee
     TraineeMainCardComponent,
     TraineeTrainerComponent,
     TraineeInfoModalComponent,
@@ -60,10 +73,11 @@ import { TrainingProgramCalendarComponent } from './+trainer/training-program/tr
     TraineeProgressImagesComponent,
     TraineeProgramsComponent,
     TraineeMeasurementsComponent,
+    //Trainer
     ExerciseVideoModalComponent,
     AddTrainingComponent,
     TrainingProgramCalendarComponent,
-    SaveTrainingProgramComponent
+    SaveTrainingProgramComponent,
   ],
   imports: [
     SmartadminLayoutModule,
@@ -105,6 +119,7 @@ import { TrainingProgramCalendarComponent } from './+trainer/training-program/tr
     SoundService,
     {provide: "apiRoot", useValue: "http://localhost:55322/"},
     AccountService,
+    MiscService,
     PopUpService
   ],
   bootstrap: [AppComponent]
