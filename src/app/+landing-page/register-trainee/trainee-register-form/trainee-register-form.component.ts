@@ -1,3 +1,4 @@
+import { Zipcodes } from './../../../models/zipcodes';
 import { I18nService } from './../../../smartadmin/i18n/i18n.service';
 import { languages } from './../../../smartadmin/i18n/languages.model';
 import { AccountService } from './../../../services/account.service';
@@ -19,7 +20,8 @@ export class TraineeRegisterFormComponent implements OnInit {
   resolved: boolean = true;
   public countries: Array<any>;
   public currentCountry: string;
-
+  zipcodes : Zipcodes[] = [];
+  
   constructor(
     private accountService: AccountService,
     public miscService: MiscService,
@@ -38,10 +40,11 @@ export class TraineeRegisterFormComponent implements OnInit {
       kennitala: new FormControl('', [<any>Validators.required, this.validateKennitalaControl.bind(this), <any>Validators.maxLength(10), <any>Validators.minLength(10)]),
       gender: new FormControl('', <any>Validators.required),
       terms: new FormControl('', <any>Validators.required),
-      country: new FormControl('', <any>Validators.required),
+      country: new FormControl('Iceland', <any>Validators.required),
       height: new FormControl('', [<any>Validators.required, <any>Validators.maxLength(3), <any>Validators.minLength(2)]),
       jobDifficulty: new FormControl('', <any>Validators.required),
       TRID: new FormControl('', <any>Validators.required),
+      zipcodes_ZIP: new FormControl('', [<any>Validators.required, this.nonNegative.bind(this) ]),
       foodPref: new FormControl(''),
       injury: new FormControl(''),
       allergy: new FormControl(''),
@@ -55,9 +58,15 @@ export class TraineeRegisterFormComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       this.registerTraineeForm.patchValue({TRID: +params['id']})
     });
+    this.miscService.getZipcodes()
+      .then(z => this.zipcodes = z);
   }
 
-  
+  nonNegative(control: FormControl): any  {
+    if(this.registerTraineeForm) {
+      return control.value < 0 ? { notValid: true} : null;
+    }
+  }
   
   validatePasswordConfirmation(control: FormControl): any {
     if(this.registerTraineeForm) {
@@ -70,6 +79,15 @@ export class TraineeRegisterFormComponent implements OnInit {
     }
   }
 
+  initialZipcode: any = -1;
+  place: string = "Place";
+  zipCodeChange(zip){
+    for(let x = 0; x < this.zipcodes.length; x++){
+      if(this.zipcodes[x].ZIP == zip){
+        this.place = this.zipcodes[x].place;
+      }
+    }
+  }
 
   submit(registerTraineeForm){
     this.submitted = true;

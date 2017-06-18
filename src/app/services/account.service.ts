@@ -101,7 +101,8 @@ export class AccountService {
     let body =  "Name=" + model.name + "&email=" + model.email + "&kennitala=" + model.kennitala 
              + "&gender=" + model.gender + "&address=" + model.address + "&height=" + model.height
              + "&jobDifficulty=" + model.jobDifficulty + "&trainer_TRID=" + model.TRID + "&foodPref=" 
-             + model.foodPref + "&injury=" + model.injury + "&allergy=" + model.allergy;
+             + model.foodPref + "&injury=" + model.injury + "&allergy=" + model.allergy + "&zipcodes_ZIP="
+              + model.zipcodes_ZIP + "&phone=" + model.phone;
     return body;
   }
 
