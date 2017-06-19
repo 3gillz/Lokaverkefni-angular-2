@@ -31,6 +31,7 @@ import { SoundService } from "./smartadmin/sound/sound.service";
 import { SmartadminDatatableModule } from './smartadmin/ui/datatable/smartadmin-datatable.module';
 import { MaskedInput } from './smartadmin/forms/input/masked-input.directive'
 //SmartAdmin end
+import { ImageCropperComponent } from 'ng2-img-cropper';
 import { AccountService } from './services/account.service';
 import { MiscService } from './services/misc.service';
 import { PopUpService } from "./services/popup.service";
@@ -58,6 +59,7 @@ import { TrainingProgramCalendarComponent } from './+trainer/training-program/tr
 
 @NgModule({
   declarations: [
+    ImageCropperComponent,
     MaskedInput,
     AppComponent,
     RoutedComponents,

@@ -1,14 +1,13 @@
-.select-file{
-    width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 3em !important;
+.image-modal-body{
+    align-content: center;
+    padding: 0 .75rem .5rem
+}
+.cropped-img{
+    width: 200px;
+    height: auto;
+    margin-top: 21px;
 }
 .btn-file {
-    position: relative;
-    overflow: hidden;
-}
-.btn-file input[type=file] {
     position: absolute;
     top: 0;
     right: 0;
