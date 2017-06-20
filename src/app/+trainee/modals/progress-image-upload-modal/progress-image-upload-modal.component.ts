@@ -1,5 +1,9 @@
+import { PopUpService } from './../../../services/popup.service';
+import { TraineeService } from './../../trainee.service';
+import { I18nService } from './../../../smartadmin/i18n/i18n.service';
 import { Component, OnInit, ViewChild, EventEmitter, Output } from '@angular/core';
 import {ImageCropperComponent, CropperSettings, Bounds} from 'ng2-img-cropper';
+import {DomSanitizer} from '@angular/platform-browser';
 declare var $ : any;
 
 @Component({
@@ -24,7 +28,11 @@ export class ProgressImageUploadModalComponent implements OnInit {
    
   @ViewChild('cropper', undefined) cropper:ImageCropperComponent;
    
-  constructor() { 
+  constructor(
+    private sanitizer:DomSanitizer,
+    private traineeService: TraineeService,
+    private popUpService: PopUpService
+  ) { 
     this.cropperSettings = new CropperSettings();
     this.cropperSettings.width = 200;
     this.cropperSettings.height = 300;
@@ -40,15 +48,28 @@ export class ProgressImageUploadModalComponent implements OnInit {
     this.cropperSettings.cropperDrawSettings.strokeWidth = 2;
     this.data = {};
   }
-  
-  testImagePath: any;
 
-  test(){
-    var str = $('.cropped-img').attr('src');
-    var base64 = str.replace(/^data:image\/\w+;base64,/, "");
-    console.log("length: " + base64.length)
-    console.log(base64.length % 4 == 0 ? true : false)
-    //this.testImagePath = str;
+  saveProgressImage(){
+    let src = $('.cropped-img').attr('src');
+    if(!src){
+      this.popUpService.errorMessage("No image chosen...");
+      return;
+    }
+    var base64 = src.replace(/^data:image\/[a-z]+;base64,/, "");
+    this.traineeService.saveProgressImage(base64)
+      .then((data) => {
+          if (data) {
+            this.traineeService.getProgressImages()
+              .then(data => {
+                this.traineeService.prepImagesForGallery(data);
+              });
+            this.closeModal();
+            this.popUpService.successMessage("Image added", "Just now");
+          }
+          if(!data){
+            this.popUpService.errorMessage("Sorry something went wrong");
+          }
+        })
   }
 
   cropped(bounds:Bounds) {
@@ -61,10 +82,9 @@ export class ProgressImageUploadModalComponent implements OnInit {
     var file:File = $event.target.files[0];
     var myReader:FileReader = new FileReader();
     var that = this;
-    myReader.onloadend = function (loadEvent:any) {
+    myReader.onloadend = (loadEvent:any) => {
         image.src = loadEvent.target.result;
         that.cropper.setImage(image);
-
     };
 
     myReader.readAsDataURL(file);
