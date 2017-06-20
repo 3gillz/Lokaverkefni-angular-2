@@ -16,7 +16,7 @@ export class TraineeProgressImagesComponent implements OnInit {
   ngOnInit() {
     this.traineeService.getProgressImages()
       .then(data => {
-        this.traineeService.prepImagesForGallery(data);
+        this.traineeService.pushImagesToGallery(data);
       })
   }
 

@@ -25,6 +25,7 @@ export class ProgressImageUploadModalComponent implements OnInit {
   cropperSettings:CropperSettings;
   croppedWidth:number;
   croppedHeight:number;
+  resolved: boolean = true;
    
   @ViewChild('cropper', undefined) cropper:ImageCropperComponent;
    
@@ -55,19 +56,19 @@ export class ProgressImageUploadModalComponent implements OnInit {
       this.popUpService.errorMessage("No image chosen...");
       return;
     }
+    this.resolved = false;
     var base64 = src.replace(/^data:image\/[a-z]+;base64,/, "");
     this.traineeService.saveProgressImage(base64)
       .then((data) => {
           if (data) {
-            this.traineeService.getProgressImages()
-              .then(data => {
-                this.traineeService.prepImagesForGallery(data);
-              });
+            this.traineeService.addResponseDTOToPictureArray(data);
             this.closeModal();
             this.popUpService.successMessage("Image added", "Just now");
+            this.resolved = true;
           }
           if(!data){
             this.popUpService.errorMessage("Sorry something went wrong");
+            this.resolved = true;            
           }
         })
   }
