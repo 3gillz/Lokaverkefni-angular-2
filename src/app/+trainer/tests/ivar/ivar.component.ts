@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Observable } from "rxjs/Rx";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import { Zipcodes } from './ivar';
+
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PopUpService } from "../../../services/popup.service";
@@ -19,8 +19,8 @@ import { PopUpService } from "../../../services/popup.service";
 
 export class IvarComponent implements OnInit {
 
-    public customerForm: FormGroup;
-    zipcodes : Zipcodes[] = [];
+    public measureMMForm: FormGroup;
+    public measureCMForm: FormGroup;
 
   constructor(
     @Inject("apiRoot") private apiRoot,
@@ -28,53 +28,73 @@ export class IvarComponent implements OnInit {
     private http: Http,
     private popUpService: PopUpService,
   ) { 
-        this.customerForm = new FormGroup({
-      name: new FormControl('', <any>Validators.required),
-      email: new FormControl('', <any>Validators.required),
-      kennitala: new FormControl('', <any>Validators.required),
-      phone: new FormControl('', <any>Validators.required),
-      gender: new FormControl('', <any>Validators.required),
-      jobDifficulty: new FormControl('', <any>Validators.required),
-      height: new FormControl('', <any>Validators.required),
-      foodPref: new FormControl('', <any>Validators),
-      injury: new FormControl('', <any>Validators),
-      allergy: new FormControl('', <any>Validators),
-      address: new FormControl('', <any>Validators.required),
-      zipcodes_ZIP: new FormControl('', <any>Validators.required),
-      profileImagePath: new FormControl('', <any>Validators),
-      country: new FormControl('', <any>Validators)
+        this.measureCMForm = new FormGroup({
+      customer_CID: new FormControl('', <any>Validators),
+      butt: new FormControl('', <any>Validators),
+      waist: new FormControl('', <any>Validators),
+      hip: new FormControl('', <any>Validators),
+      thigh: new FormControl('', <any>Validators),
+      armLoose: new FormControl('', <any>Validators),
+      armFlexed: new FormControl('', <any>Validators),
+      shoulders: new FormControl('', <any>Validators),
+      performedByTrainer: new FormControl('', <any>Validators)
+    });
+
+
+        this.measureMMForm = new FormGroup({
+      customer_CID: new FormControl('', <any>Validators),
+      chest: new FormControl('', <any>Validators),
+      abdominal: new FormControl('', <any>Validators),
+      thigh: new FormControl('', <any>Validators),
+      tricep: new FormControl('', <any>Validators),
+      subscapular: new FormControl('', <any>Validators),
+      suprailiac: new FormControl('', <any>Validators),
+      axilliary: new FormControl('', <any>Validators),
+      kg: new FormControl('', <any>Validators)
     });
   }
 
   ngOnInit() {
-    this.getZipcodes()
-    .then(z => this.zipcodes = z);
   }
 
-    submitCustomer(customerForm){
-      console.log(customerForm.valid);
-      console.log(customerForm.value);
-    if(customerForm.valid){
-      this.addNewCustomer(customerForm.value)
+    submitMeasureMM(measureMMForm){
+      console.log(measureMMForm.valid);
+      console.log(measureMMForm.value);
+    if(measureMMForm.valid){
+      this.addNewMeasureMM(measureMMForm.value)
       .then((resolve)=> {
         if(resolve === true){
-          this.customerForm.reset();
+          this.measureMMForm.reset();
         }
       });
     }
     else{this.popUpService.errorMessage();}
   }
 
-    addNewCustomer(customerForm): Promise<boolean>{
+      submitMeasureCM(measureCMForm){
+      console.log(measureCMForm.valid);
+      console.log(measureCMForm.value);
+    if(measureCMForm.valid){
+      this.addNewMeasureMM(measureCMForm.value)
+      .then((resolve)=> {
+        if(resolve === true){
+          this.measureCMForm.reset();
+        }
+      });
+    }
+    else{this.popUpService.errorMessage();}
+  }
+
+    addNewMeasureMM(measureMMForm): Promise<boolean>{
     let optionalBody = '';
-    for (let x = 1; x < Object.keys(customerForm).length; x++) {
-      let value = (<any>Object).values(customerForm)[x];
+    for (let x = 1; x < Object.keys(measureMMForm).length; x++) {
+      let value = (<any>Object).values(measureMMForm)[x];
       if (value !== null && value !== "") {
-        optionalBody += `&${Object.keys(customerForm)[x]}=${(<any>Object).values(customerForm)[x]}`;
+        optionalBody += `&${Object.keys(measureMMForm)[x]}=${(<any>Object).values(measureMMForm)[x]}`;
       }
     }
-    let body = `name=${customerForm.name}` + optionalBody;
-    let url = this.apiRoot + "api/Customer/AddCustomer";
+    let body = `name=${measureMMForm.name}` + optionalBody;
+    let url = this.apiRoot + "api/Customer/AddCustome";
     let token = localStorage.getItem('access_token');
     let headers = new Headers({ 'Authorization': "Bearer " + token, 'Content-Type': 'application/x-www-form-urlencoded' });
     let requestOptions = new RequestOptions({ headers: headers });
@@ -88,16 +108,6 @@ export class IvarComponent implements OnInit {
     });
     }
 
-    getZipcodes(): Promise<Zipcodes[]>{
-    let url = this.apiRoot + "api/Zipcodes/GetAll";
-    let token = localStorage.getItem('access_token');
-    let headers = new Headers({ 'Authorization': "Bearer " + token, 'Content-Type': 'application/x-www-form-urlencoded' });
-    let requestOptions = new RequestOptions({ headers: headers });
-    return this.http.get(url, requestOptions)
-        .toPromise()
-        .then(response => response.json() as Zipcodes[])
-        .catch(this.handleError)
-      }
         private handleError(error: any) {
     // In a real world app, we might use a remote logging infrastructure
     // We'd also dig deeper into the error to get a better message

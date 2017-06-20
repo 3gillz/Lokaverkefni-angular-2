@@ -1,122 +1,108 @@
-<form [formGroup]="customerForm"  novalidate="novalidate" class="smart-form" (submit)="submitCustomer(customerForm)">
+<form [formGroup]="measureMMForm"  novalidate="novalidate" class="smart-form" >
 
+    <h2>{{'Fitumælingar' | i18n}}</h2>
   <fieldset>
     <div class="row">
-      <section class="col col-6">
-        <label class="input"> <i class="icon-prepend fa fa-user"></i>
-          <input type="text" formControlName="name" placeholder="Full name">
-        </label>
-      </section>
-
-      <section class="col col-6">
-        <label class="input"> <i class="icon-prepend fa fa-envelope-o"></i>
-          <input type="email" formControlName="email" placeholder="E-mail">
-        </label>
-      </section>
-    </div>
-
-    <div class="row">
       <section class="col col-3">
-        <label class="input"> <i class="icon-prepend fa fa-user"></i>
-          <input type="" formControlName="kennitala" placeholder="Kennitala">
+        <label class="input"> <i class="icon-prepend fa fa-compress"></i>
+          <input type="number" formControlName="chest" placeholder="Chest">
         </label>
       </section>
 
       <section class="col col-3">
-        <label class="input"> <i class="icon-prepend fa fa-phone"></i>
-          <input type="tel" formControlName="phone" placeholder="Phone">
+        <label class="input"> <i class="icon-prepend fa fa-compress"></i>
+          <input type="number" formControlName="abdominal" placeholder="Abdominal">
         </label>
       </section>
 
-<section class="col col-3">
-        <label class="select">
-          <select formControlName="gender">
-            <option value="" selected="" disabled="">{{'Gender' | i18n}}</option>
-            <option value="1">{{'Male' | i18n}}</option>
-            <option value="2">{{'Female' | i18n}}</option>
-            <option value="3">{{'Shemale' | i18n}}</option>
-            <option value="4">{{'Helicopter' | i18n}}</option>
-
-          </select> <i></i> </label>
+      <section class="col col-3">
+        <label class="input"> <i class="icon-prepend fa fa-compress"></i>
+          <input type="number" formControlName="thigh" placeholder="Thigh">
+        </label>
       </section>
 
-<section class="col col-3">
-        <label class="select">
-          <select formControlName="jobDifficulty">
-            <option value="" selected="" disabled="">{{'Job difficulty' | i18n}}</option>
-            <option value="0" >{{'Light' | i18n}}</option>
-            <option value="1">{{'Medium' | i18n}}</option>
-            <option value="2">{{'Hard' | i18n}}</option>
+      <section class="col col-3">
+        <label class="input"> <i class="icon-prepend fa fa-compress"></i>
+          <input type="number" formControlName="tricep" placeholder="Tricep">
+        </label>
+      </section>
 
+      <section class="col col-3">
+        <label class="input"> <i class="icon-prepend fa fa-compress"></i>
+          <input type="number" formControlName="subscapular" placeholder="Subscapular">
+        </label>
+      </section>
 
-          </select> <i></i> </label>
+      <section class="col col-3">
+        <label class="input"> <i class="icon-prepend fa fa-compress"></i>
+          <input type="number" formControlName="suprailiac" placeholder="Suprailiac">
+        </label>
+      </section>
+
+      <section class="col col-3">
+        <label class="input"> <i class="icon-prepend fa fa-compress"></i>
+          <input type="number" formControlName="axilliary" placeholder="Axilliary">
+        </label>
+      </section>
+
+      <section class="col col-3">
+        <label class="input"> <i class="icon-prepend fa fa-tachometer"></i>
+          <input type="number" formControlName="kg" placeholder="{{'Kg' | i18n}}">
+        </label>
       </section>
     </div>
   </fieldset>
+</form>
 
-    <fieldset>
+<form [formGroup]="measureCMForm"  novalidate="novalidate" class="smart-form" (submit)="submitMeasureCM(measureCMForm)" (submit)="submitMeasureMM(measureMMForm)">
+      <h2>{{'Ummálsmælingar' | i18n}}</h2>
+  <fieldset>
     <div class="row">
       <section class="col col-3">
         <label class="input"> <i class="icon-prepend fa fa-expand"></i>
-          <input type="number" formControlName="height" placeholder="Height" >
+          <input type="number" formControlName="butt" placeholder="{{'Butt' | i18n}}">
         </label>
       </section>
 
       <section class="col col-3">
-        <label class="input"> <i class="icon-prepend fa fa-delicious"></i>
-          <input type="" formControlName="foodPref" placeholder="Foodpref">
+        <label class="input"> <i class="icon-prepend fa fa-expand"></i>
+          <input type="number" formControlName="waist" placeholder="{{'Waist' | i18n}}">
         </label>
       </section>
 
       <section class="col col-3">
-        <label class="input"> <i class="icon-prepend fa fa-hospital-o"></i>
-          <input type="" formControlName="injury" placeholder="Injury">
+        <label class="input"> <i class="icon-prepend fa fa-expand"></i>
+          <input type="number" formControlName="hip" placeholder="{{'Hip' | i18n}}">
         </label>
       </section>
 
       <section class="col col-3">
-        <label class="input"> <i class="icon-prepend fa fa-heartbeat"></i>
-          <input type="" formControlName="allergy" placeholder="Allergy">
+        <label class="input"> <i class="icon-prepend fa fa-expand"></i>
+          <input type="number" formControlName="thigh" placeholder="{{'Thigh' | i18n}}">
         </label>
       </section>
+
+      <section class="col col-3">
+        <label class="input"> <i class="icon-prepend fa fa-expand"></i>
+          <input type="number" formControlName="armLoose" placeholder="{{'Arm loose' | i18n}}">
+        </label>
+      </section>
+
+      <section class="col col-3">
+        <label class="input"> <i class="icon-prepend fa fa-expand"></i>
+          <input type="number" formControlName="armFlexed" placeholder="{{'Arm flexed' | i18n}}">
+        </label>
+      </section>
+
+      <section class="col col-3">
+        <label class="input"> <i class="icon-prepend fa fa-expand"></i>
+          <input type="number" formControlName="shoulders" placeholder="{{'Shoulders' | i18n}}">
+        </label>
+      </section>
+
     </div>
   </fieldset>
-
-  <fieldset>
-    <div class="row">
-      <section class="col col-2">
-        <label class="select">
-          <select formControlName="zipcodes_ZIP">
-            <option value="" selected="" disabled="">{{'Zipcode' | i18n}}</option>
-            <option *ngFor="let zipcode of zipcodes" >{{zipcode.ZIP}}</option>
-          
-          </select> <i></i> </label>
-      </section>
-
-      <section class="col col-4">
-        <label class="input" > <i class="icon-prepend fa fa-home"></i>
-          <input type="text" name="place" id="place" value="">
-          
-        </label>
-      </section>
-
-    <section class="col col-6">
-      <label for="address" class="input"> <i class="icon-prepend fa fa-home"></i>
-        <input type="text" formControlName="address" id="address" placeholder="Address">
-      </label>
-    </section>
-
-    <section class="col col-6">
-      <label for="address" class="input"> <i class="icon-prepend fa fa-picture-o"></i>
-        <input type="text" formControlName="profileImagePath" placeholder="profileImage">
-      </label>
-    </section>
-    </div>
-  </fieldset>
-
 
   <footer>
-    <label>{{zipcodes.place}}</label>
     <button type="submit" class="btn btn-primary">{{'Create' | i18n}}</button>
   </footer>
-</form>
