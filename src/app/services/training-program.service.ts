@@ -199,6 +199,22 @@ export class TrainingProgramService {
     });
   }
 
+  getTraineesTrainingProgram(){
+    let url = this.apiRoot + "api/TrainingProgramDate/GetCurrentTrainingProgram";
+    let token = localStorage.getItem('access_token');
+    let headers = new Headers({ 'Authorization': "Bearer " + token, 'Content-Type': 'application/x-www-form-urlencoded' });
+    let requestOptions = new RequestOptions({ headers: headers });
+    return new Promise((resolve) => {
+      this.http.get(url, requestOptions)
+        .map(res => res.json())
+        .subscribe(
+          data => {
+            this.getTrainingsInProgram(data.TPID);
+            resolve(data.name);
+          })
+    });
+  }
+
   getTrainingsInProgram(TPID: number){
     let url = this.apiRoot + "api/Training/Get/"+ TPID;
     let token = localStorage.getItem('access_token');

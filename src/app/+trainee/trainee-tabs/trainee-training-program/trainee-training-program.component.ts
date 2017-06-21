@@ -3,6 +3,7 @@ import { ExerciseService } from './../../../services/exercise.service';
 import { TrainingProgramService } from './../../../services/training-program.service';
 import { TraineeService } from './../../trainee.service';
 import { I18nService } from '../../../smartadmin/i18n/i18n.service';
+import * as moment from 'moment';
 declare var $: any;
 
 @Component({
@@ -15,7 +16,8 @@ export class TraineeTrainingProgramComponent implements OnInit {
   private calendar: any;
   private language: any;
   rendered: boolean
-  
+  programName: string;
+
   constructor(
     private i18nService: I18nService,
     private trainingProgramService: TrainingProgramService,
@@ -36,8 +38,12 @@ export class TraineeTrainingProgramComponent implements OnInit {
   }
 
   ngOnInit(){
-
+    this.trainingProgramService.getTraineesTrainingProgram()
+      .then(name => {
+        this.programName = name as string 
+      });
   }
+
   render() {
 
     this.$calendarRef = $('#calendar', this.el.nativeElement);
@@ -52,6 +58,7 @@ export class TraineeTrainingProgramComponent implements OnInit {
         eventLimit: false,
         defaultView: 'basicDay',
         displayEventTime: false,
+        aspectRatio: 2.5,
         columnFormat: {
           week: 'dddd',
           day: 'dddd'
