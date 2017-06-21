@@ -50,7 +50,8 @@ import { TraineeInfoModalComponent } from './+trainee/modals/trainee-info-modal/
 import { TraineeProfileImageModalComponent } from './+trainee/modals/trainee-profile-image-modal/trainee-profile-image-modal.component';
 import { ProgressImageUploadModalComponent } from './+trainee/modals/progress-image-upload-modal/progress-image-upload-modal.component';
 import { TraineeProgressImagesComponent } from './+trainee/trainee-tabs/trainee-progress-images/trainee-progress-images.component';
-import { TraineeProgramsComponent } from './+trainee/trainee-tabs/trainee-programs/trainee-programs.component';
+import { TraineeTrainingProgramComponent } from './+trainee/trainee-tabs/trainee-training-program/trainee-training-program.component';
+import { TraineeFoodProgramComponent } from './+trainee/trainee-tabs/trainee-food-program/trainee-food-program.component';
 import { TraineeMeasurementsComponent } from './+trainee/trainee-tabs/trainee-measurements/trainee-measurements.component';
 //TrainerSection
 import { ExerciseVideoModalComponent } from './+trainer/+modals/exercise-video-modal/exercise-video-modal.component';
@@ -76,7 +77,8 @@ import { TrainingProgramCalendarComponent } from './+trainer/training-program/tr
     TraineeProfileImageModalComponent,
     ProgressImageUploadModalComponent,
     TraineeProgressImagesComponent,
-    TraineeProgramsComponent,
+    TraineeFoodProgramComponent,
+    TraineeTrainingProgramComponent,
     TraineeMeasurementsComponent,
     //Trainer
     ExerciseVideoModalComponent,
