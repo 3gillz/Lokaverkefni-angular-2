@@ -1,3 +1,5 @@
+import { environment } from './../../environments/environment';
+import { GalleryImage } from './../models/galleryImage';
 import { Injectable, Inject } from '@angular/core';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from "rxjs/Rx";
@@ -12,8 +14,12 @@ export class TraineeService {
     private popUpService: PopUpService
   ) {
     this.user = JSON.parse(localStorage.getItem('user'));
+    if(environment.production){
+      this.production = true;
+    }
   }
 
+  production: boolean;
   user: any;
 
   submitNewInfo(basicInfoForm: any, isValid: boolean) {
@@ -66,6 +72,57 @@ export class TraineeService {
         }
         )
     }
+  }
+
+  saveProgressImage(base64Image){
+    let url = this.apiRoot  + "api/ProgressImage/Add";
+    let token = localStorage.getItem('access_token');
+    let headers = new Headers({'Authorization': "Bearer " + token, 'Content-type': 'application/x-www-form-urlencoded'});
+    let requestOptions = new RequestOptions({ headers: headers});
+    let body = `=${base64Image}`;
+    return new Promise((resolve) => {
+      this.http.post(url, body, requestOptions)
+        .map(res => res.json())
+        .subscribe(data =>{
+          resolve(data);
+        })
+    
+    });
+  }
+
+  getProgressImages(){
+    let url = this.apiRoot + "api/ProgressImage/GetAllByCID";
+    let token = localStorage.getItem('access_token');
+    let headers = new Headers({ 'Authorization': "Bearer " + token, 'Content-Type': 'application/x-www-form-urlencoded' });
+    let requestOptions = new RequestOptions({ headers: headers });
+    return new Promise((resolve) => {
+      this.http.get(url, requestOptions)
+        .map(res => res.json())
+        .subscribe(data =>{
+          resolve(data);
+        })
+    
+    });
+  }
+  
+  public pictures = [];
+  pushImagesToGallery(data){
+    this.pictures = [];
+    for(let x = 0; x < data.length; x++){
+      let image = new GalleryImage(
+        data[x].date,
+        'data:image/png;base64,' + data[x].image
+      );
+      this.pictures.push(image);
+    }
+  }
+
+  addResponseDTOToPictureArray(image){
+      image = new GalleryImage(
+        image.date,
+        'data:image/png;base64,' + image.image
+      );
+      this.pictures.push(image);
   }
 
 }

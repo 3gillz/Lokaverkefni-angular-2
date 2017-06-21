@@ -31,6 +31,7 @@ import { SoundService } from "./smartadmin/sound/sound.service";
 import { SmartadminDatatableModule } from './smartadmin/ui/datatable/smartadmin-datatable.module';
 import { MaskedInput } from './smartadmin/forms/input/masked-input.directive'
 //SmartAdmin end
+import { ImageCropperComponent } from 'ng2-img-cropper';
 import { AccountService } from './services/account.service';
 import { MiscService } from './services/misc.service';
 import { PopUpService } from "./services/popup.service";
@@ -46,6 +47,7 @@ import { TraineeMainCardComponent } from './+trainee/trainee-main-card/trainee-m
 import { TraineeTrainerComponent } from './+trainee/trainee-main-card/trainee-trainer/trainee-trainer.component';
 import { TraineeInfoModalComponent } from './+trainee/modals/trainee-info-modal/trainee-info-modal.component';
 import { TraineeProfileImageModalComponent } from './+trainee/modals/trainee-profile-image-modal/trainee-profile-image-modal.component';
+import { ProgressImageUploadModalComponent } from './+trainee/modals/progress-image-upload-modal/progress-image-upload-modal.component';
 import { TraineeProgressImagesComponent } from './+trainee/trainee-tabs/trainee-progress-images/trainee-progress-images.component';
 import { TraineeProgramsComponent } from './+trainee/trainee-tabs/trainee-programs/trainee-programs.component';
 import { TraineeMeasurementsComponent } from './+trainee/trainee-tabs/trainee-measurements/trainee-measurements.component';
@@ -57,6 +59,7 @@ import { TrainingProgramCalendarComponent } from './+trainer/training-program/tr
 
 @NgModule({
   declarations: [
+    ImageCropperComponent,
     MaskedInput,
     AppComponent,
     RoutedComponents,
@@ -70,6 +73,7 @@ import { TrainingProgramCalendarComponent } from './+trainer/training-program/tr
     TraineeTrainerComponent,
     TraineeInfoModalComponent,
     TraineeProfileImageModalComponent,
+    ProgressImageUploadModalComponent,
     TraineeProgressImagesComponent,
     TraineeProgramsComponent,
     TraineeMeasurementsComponent,
