@@ -1,7 +1,7 @@
-import { ExerciseService } from './../../exercise.service';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { TrainerService } from '../../trainer.service';
+import { ExerciseService } from '../../../services/exercise.service';
 
 @Component({
   selector: 'app-exercise-edit',

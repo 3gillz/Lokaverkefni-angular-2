@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, Input, OnDestroy } from '@angular/core';
-import { TrainingProgramService } from '../training-program.service';
+import { TrainingProgramService } from '../../../services/training-program.service';
 import { I18nService } from './../../../smartadmin/i18n/i18n.service';
 declare var $: any;
 

@@ -1,5 +1,5 @@
-import { ExerciseService } from './../../exercise.service';
 import { Component, OnInit } from '@angular/core';
+import { ExerciseService } from '../../../services/exercise.service';
 
 @Component({
   selector: 'app-exercise-new',

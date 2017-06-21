@@ -1,6 +1,6 @@
 import { PopUpService } from './../../../services/popup.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { TrainingProgramService } from '../training-program.service';
+import { TrainingProgramService } from '../../../services/training-program.service';
 
 @Component({
   selector: 'app-training-program-new',

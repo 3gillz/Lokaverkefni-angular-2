@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { PopUpService } from "../services/popup.service";
+import { PopUpService } from "./popup.service";
 import { Router } from '@angular/router';
 
 @Injectable()

@@ -1,4 +1,4 @@
-import { TrainingProgramService } from './../training-program.service';
+import { TrainingProgramService } from '../../../services/training-program.service';
 import { TrainerService } from './../../trainer.service';
 import { Component, OnInit, HostListener } from '@angular/core';
 import { Observable } from "rxjs/Rx";

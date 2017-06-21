@@ -1,9 +1,9 @@
-import { ExerciseService } from './../../../exercise.service';
+import { ExerciseService } from '../../../../services/exercise.service';
 import { CalendarTraining } from './../../../../models/training';
 import { I18nService } from './../../../../smartadmin/i18n/i18n.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { TrainingProgramService } from '../../training-program.service';
+import { TrainingProgramService } from '../../../../services/training-program.service';
 
 @Component({
   selector: 'app-add-training',

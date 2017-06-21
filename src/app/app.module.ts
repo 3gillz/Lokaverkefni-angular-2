@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 //SmartAdmin start
 import {
   ModalModule, ButtonsModule, TooltipModule, BsDropdownModule, ProgressbarModule, AlertModule, TabsModule,
@@ -33,6 +32,8 @@ import { MaskedInput } from './smartadmin/forms/input/masked-input.directive'
 //SmartAdmin end
 import { ImageCropperComponent } from 'ng2-img-cropper';
 import { AccountService } from './services/account.service';
+import { TrainingProgramService } from './services/training-program.service';
+import { ExerciseService } from './services/exercise.service';
 import { MiscService } from './services/misc.service';
 import { PopUpService } from "./services/popup.service";
 import { AppRoutingModule, RoutedComponents } from './app-routing.module';
@@ -123,6 +124,8 @@ import { TrainingProgramCalendarComponent } from './+trainer/training-program/tr
     SoundService,
     {provide: "apiRoot", useValue: "http://localhost:55322/"},
     AccountService,
+    TrainingProgramService,
+    ExerciseService,
     MiscService,
     PopUpService
   ],

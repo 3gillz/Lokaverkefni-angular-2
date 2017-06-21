@@ -4,9 +4,9 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subject, Subscription } from "rxjs/Rx";
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { CalendarTraining, TrainingDTO } from './../../models/training';
-import { TrainingProgram } from './../../models/trainingProgram';
-import { PopUpService } from './../../services/popup.service';
+import { CalendarTraining, TrainingDTO } from '../models/training';
+import { TrainingProgram } from '../models/trainingProgram';
+import { PopUpService } from './popup.service';
 
 @Injectable()
 export class TrainingProgramService {

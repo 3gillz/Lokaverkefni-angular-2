@@ -4,7 +4,7 @@ import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from "rxjs/Rx";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import { ExerciseService } from '../../exercise.service';
+import { ExerciseService } from '../../../services/exercise.service';
 
 @Component({
   selector: 'app-exercise-list',
