@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit, Inject, HostListener, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
@@ -19,6 +20,7 @@ export class ExerciseListComponent implements OnInit {
   constructor(
     @Inject("apiRoot") private apiRoot,
     private http: Http,
+    private router: Router,
     private sanitizer: DomSanitizer,
     private exerciseService: ExerciseService
   ) { 
@@ -27,14 +29,16 @@ export class ExerciseListComponent implements OnInit {
   @ViewChild('videoModal') videoModal;
   @HostListener('document:click', ['$event'])
   documentClick(event) {
-    if(event.target.id === "video"){
+    let id = event.target.id;
+    if(id === "video"){
       let code = event.target.value.split('=');
       this.videoUrl = this.sanitizeUrl(code[1]);
       this.videoModal.show();
       this.videoPlaying = true;
     }
-    else if(event.target.id === "edit"){
-      this.exerciseService.getExerciseForEdit(event.target.value);
+    else if(id === "edit"){
+      this.exerciseService.getExerciseByEID(event.target.value);
+      this.router.navigate([ 'trainer/exercise/edit/' + event.target.value ]);
     }
   }
   closeVideoModal(){

@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 export class ExerciseService {
 
   public exerciseForm: FormGroup;
-  public editExercise: any;
+  public currentExercise: any;
 
   constructor(
     @Inject("apiRoot") private apiRoot,
@@ -59,7 +59,7 @@ export class ExerciseService {
         })
     });
   }
-  getExerciseForEdit(id: number){
+  getExerciseByEID(id: number){
     let url = this.apiRoot + "api/Exercise/" + id;
     let token = localStorage.getItem('access_token');
     let headers = new Headers({ 'Authorization': "Bearer " + token, 'Content-Type': 'application/x-www-form-urlencoded' });
@@ -67,12 +67,13 @@ export class ExerciseService {
     this.http.get(url, requestOptions)
       .map(res => res.json())
       .subscribe((data) => {
-        this.editExercise = data;
-        this.router.navigate([ 'trainer/exercise/edit/' + id ]);
+        console.log(data);
+        this.currentExercise = data;
       })
   }
+
   updateExercise(exerciseForm: any){
-    let body = `eid=${this.editExercise.EID}&name=${exerciseForm.name}&link=${exerciseForm.link}&type=${exerciseForm.type}&description=${exerciseForm.description}`;    
+    let body = `eid=${this.currentExercise.EID}&name=${exerciseForm.name}&link=${exerciseForm.link}&type=${exerciseForm.type}&description=${exerciseForm.description}`;    
     let url = this.apiRoot + "api/Exercise/UpdateWithTRID";
     let token = localStorage.getItem('access_token');
     let headers = new Headers({ 'Authorization': "Bearer " + token, 'Content-Type': 'application/x-www-form-urlencoded' });

@@ -19,7 +19,7 @@ export class ExerciseEditComponent implements OnInit {
   ) 
   {
     this.exerciseForm = exerciseService.exerciseForm;
-    this.exercise = exerciseService.editExercise;
+    this.exercise = exerciseService.currentExercise;
   }
 
   ngOnInit() {
