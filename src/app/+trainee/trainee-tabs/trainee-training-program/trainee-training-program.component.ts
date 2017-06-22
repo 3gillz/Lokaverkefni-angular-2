@@ -40,7 +40,11 @@ export class TraineeTrainingProgramComponent implements OnInit {
   ngOnInit(){
     this.trainingProgramService.getTraineesTrainingProgram()
       .then(name => {
-        this.programName = name as string 
+        if(name){
+          this.programName = name as string 
+        }else{
+          this.programName = this.i18nService.getTranslation("Not registered in a program");
+        }
       });
   }
 
@@ -62,9 +66,6 @@ export class TraineeTrainingProgramComponent implements OnInit {
         columnFormat: {
           week: 'dddd',
           day: 'dddd'
-        },
-        header: {
-          center: 'prev, next'
         },
         eventClick: (event) => {
             this.exerciseService.getExerciseByEID(event.exercise_EID);
@@ -117,7 +118,8 @@ export class TraineeTrainingProgramComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.calendar.fullCalendar('destroy')
+    this.calendar.fullCalendar('destroy');
+    this.trainingProgramService.trainingEvents = [];
   }
   
   refetchEvents(){

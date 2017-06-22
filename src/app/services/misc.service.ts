@@ -47,6 +47,20 @@ export class MiscService {
        let dangerousVideoUrl = 'https://www.youtube.com/embed/' + youTubeCode + "?autoplay=1";
       return this.sanitizer.bypassSecurityTrustResourceUrl(dangerousVideoUrl);
   }
+  
+  getTrainerCard(TRID: number){
+    let url = this.apiRoot + "api/Trainer/card/" + TRID;
+    let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    let requestOptions = new RequestOptions({ headers: headers });
+    return new Promise((resolve) => {
+      this.http.get(url, requestOptions)
+        .map(res => res.json())
+        .subscribe((data) => {
+          resolve(data)
+        })
+    });
+  }
+
 
   getZipcodes(): Promise<Zipcodes[]>{
     let url = this.apiRoot + "api/Zipcodes/GetAll";
