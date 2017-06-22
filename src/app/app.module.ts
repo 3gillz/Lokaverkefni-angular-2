@@ -33,6 +33,7 @@ import { MaskedInput } from './smartadmin/forms/input/masked-input.directive'
 import { ImageCropperComponent } from 'ng2-img-cropper';
 import { AccountService } from './services/account.service';
 import { TrainingProgramService } from './services/training-program.service';
+import { FoodProgramService } from './services/food-program.service';
 import { ExerciseService } from './services/exercise.service';
 import { MiscService } from './services/misc.service';
 import { PopUpService } from "./services/popup.service";
@@ -59,6 +60,9 @@ import { AddTrainingComponent } from './+trainer/training-program/training-progr
 import { SaveTrainingProgramComponent } from './+trainer/training-program/training-program-new/save-training-program/save-training-program.component';
 import { TrainingProgramCalendarComponent } from './+trainer/training-program/training-program-calendar/training-program-calendar.component';
 import { ExerciseDetailModalComponent } from './+trainee/modals/exercise-detail-modal/exercise-detail-modal.component';
+import { FoodProgramCalendarComponent } from './+trainer/food-program/food-program-calendar/food-program-calendar.component';
+import { AddPortionComponent } from './+trainer/food-program/food-program-new/add-portion/add-portion.component';
+import { SaveFoodProgramComponent } from './+trainer/food-program/food-program-new/save-food-program/save-food-program.component';
 
 @NgModule({
   declarations: [
@@ -87,6 +91,9 @@ import { ExerciseDetailModalComponent } from './+trainee/modals/exercise-detail-
     TrainingProgramCalendarComponent,
     SaveTrainingProgramComponent,
     ExerciseDetailModalComponent,
+    FoodProgramCalendarComponent,
+    AddPortionComponent,
+    SaveFoodProgramComponent,
   ],
   imports: [
     SmartadminLayoutModule,
@@ -129,6 +136,7 @@ import { ExerciseDetailModalComponent } from './+trainee/modals/exercise-detail-
     {provide: "apiRoot", useValue: "http://localhost:55322/"},
     AccountService,
     TrainingProgramService,
+    FoodProgramService,
     ExerciseService,
     MiscService,
     PopUpService

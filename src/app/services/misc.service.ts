@@ -61,6 +61,19 @@ export class MiscService {
     });
   }
 
+  getFoodItems(){
+    let url = this.apiRoot + "api/FoodItem/GetAll";
+    let token = localStorage.getItem('access_token');
+    let headers = new Headers({ 'Authorization': "Bearer " + token, 'Content-Type': 'application/x-www-form-urlencoded' });
+    let requestOptions = new RequestOptions({ headers: headers });
+    return new Promise((resolve) => {
+      this.http.get(url, requestOptions)
+        .map(res => res.json())
+        .subscribe((data) => {
+          resolve(data)
+        })
+    });
+  }
 
   getZipcodes(): Promise<Zipcodes[]>{
     let url = this.apiRoot + "api/Zipcodes/GetAll";
