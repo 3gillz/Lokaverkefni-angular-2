@@ -232,6 +232,7 @@ export class TrainingProgramService {
   }
 
   prepTrainingsForCalendar(trainings){
+    this.trainingEvents = [];
     for(let x = 0; x < trainings.length; x++){
       let training = new CalendarTraining(
         this.generateId(),

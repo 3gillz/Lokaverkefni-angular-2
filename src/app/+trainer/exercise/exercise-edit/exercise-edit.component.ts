@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Exercise } from './../../../models/exercise';
+import { Component, OnInit, Input } from '@angular/core';
 import { Location } from '@angular/common';
 import { TrainerService } from '../../trainer.service';
 import { ExerciseService } from '../../../services/exercise.service';
@@ -11,7 +12,7 @@ import { ExerciseService } from '../../../services/exercise.service';
 export class ExerciseEditComponent implements OnInit {
 
   public exerciseForm: any;
-  public exercise: any;
+  public exercise: Exercise;
 
   constructor(
     private exerciseService: ExerciseService,
@@ -19,10 +20,10 @@ export class ExerciseEditComponent implements OnInit {
   ) 
   {
     this.exerciseForm = exerciseService.exerciseForm;
-    this.exercise = exerciseService.currentExercise;
   }
 
   ngOnInit() {
+    this.exercise = this.exerciseService.currentExercise;
     if(!this.exercise){
       this.goBack();
     }

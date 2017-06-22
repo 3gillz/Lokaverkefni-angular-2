@@ -1,6 +1,7 @@
+import { MiscService } from './../../../services/misc.service';
 import { Router } from '@angular/router';
 import { Component, OnInit, Inject, HostListener, ViewChild } from '@angular/core';
-import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
+import { SafeUrl } from '@angular/platform-browser';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from "rxjs/Rx";
 import 'rxjs/add/operator/map';
@@ -21,8 +22,8 @@ export class ExerciseListComponent implements OnInit {
     @Inject("apiRoot") private apiRoot,
     private http: Http,
     private router: Router,
-    private sanitizer: DomSanitizer,
-    private exerciseService: ExerciseService
+    private exerciseService: ExerciseService,
+    private miscService: MiscService
   ) { 
   };
 
@@ -32,13 +33,15 @@ export class ExerciseListComponent implements OnInit {
     let id = event.target.id;
     if(id === "video"){
       let code = event.target.value.split('=');
-      this.videoUrl = this.sanitizeUrl(code[1]);
+      this.videoUrl = this.miscService.sanitizeYouTubeUrl(code[1]);
       this.videoModal.show();
       this.videoPlaying = true;
     }
     else if(id === "edit"){
-      this.exerciseService.getExerciseByEID(event.target.value);
-      this.router.navigate([ 'trainer/exercise/edit/' + event.target.value ]);
+      this.exerciseService.getExerciseByEID(event.target.value)
+      .then(data =>{
+        this.router.navigate([ 'trainer/exercise/edit/' + event.target.value ]);
+      });
     }
   }
   closeVideoModal(){
@@ -47,10 +50,7 @@ export class ExerciseListComponent implements OnInit {
       this.videoPlaying = false;
     }, 500);
   }
-  sanitizeUrl(youTubeCode: string) : SafeResourceUrl {
-       let dangerousVideoUrl = 'https://www.youtube.com/embed/' + youTubeCode + "?autoplay=1";
-      return this.sanitizer.bypassSecurityTrustResourceUrl(dangerousVideoUrl);
-  }
+
   ngOnInit() {
   }
 

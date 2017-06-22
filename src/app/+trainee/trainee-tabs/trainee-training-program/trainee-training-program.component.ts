@@ -68,8 +68,7 @@ export class TraineeTrainingProgramComponent implements OnInit {
         },
         eventClick: (event) => {
             this.exerciseService.getExerciseByEID(event.exercise_EID);
-            $('#exmodal').click();
-            console.log(event.exercise_EID);
+            $('#exerciseModal-button').click();
         },
         eventOrder: "id",
         slotEventOverlap: false,

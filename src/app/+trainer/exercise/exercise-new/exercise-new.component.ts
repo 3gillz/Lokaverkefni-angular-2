@@ -9,6 +9,7 @@ import { ExerciseService } from '../../../services/exercise.service';
 export class ExerciseNewComponent implements OnInit {
 
   public exerciseForm: any;
+  submitted: boolean;
   constructor(
     private exerciseService: ExerciseService
   ) 
@@ -21,11 +22,13 @@ export class ExerciseNewComponent implements OnInit {
   }
 
   submitExercise(exerciseForm){
+    this.submitted = true;
     if(exerciseForm.valid){
       this.exerciseService.addNewExercise(exerciseForm.value)
       .then((resolve)=> {
         if(resolve === true){
           this.exerciseForm.reset();
+          this.submitted = false;
         }
       });
     }

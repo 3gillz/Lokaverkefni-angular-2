@@ -1,3 +1,5 @@
+import { MiscService } from './misc.service';
+import { Exercise } from './../models/exercise';
 import { Injectable, Inject } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -8,13 +10,14 @@ import { Router } from '@angular/router';
 export class ExerciseService {
 
   public exerciseForm: FormGroup;
-  public currentExercise: any;
+  public currentExercise: Exercise;
 
   constructor(
     @Inject("apiRoot") private apiRoot,
     private popUpService: PopUpService,
     private http: Http,
-    private router: Router
+    private router: Router,
+    private miscService: MiscService
   ) {
     this.exerciseForm = new FormGroup({
       name: new FormControl('', <any>Validators.required),
@@ -64,12 +67,14 @@ export class ExerciseService {
     let token = localStorage.getItem('access_token');
     let headers = new Headers({ 'Authorization': "Bearer " + token, 'Content-Type': 'application/x-www-form-urlencoded' });
     let requestOptions = new RequestOptions({ headers: headers });
-    this.http.get(url, requestOptions)
-      .map(res => res.json())
-      .subscribe((data) => {
-        console.log(data);
-        this.currentExercise = data;
-      })
+    return new Promise((resolve) => {
+      this.http.get(url, requestOptions)
+        .map(res => res.json())
+        .subscribe((data) => {
+          this.currentExercise = data as Exercise;
+          resolve(data);
+        })
+    });
   }
 
   updateExercise(exerciseForm: any){
