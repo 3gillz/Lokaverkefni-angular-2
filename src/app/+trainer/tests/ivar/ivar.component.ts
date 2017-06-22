@@ -21,6 +21,7 @@ export class IvarComponent implements OnInit {
 
     public measureMMForm: FormGroup;
     public measureCMForm: FormGroup;
+    public goalForm: FormGroup;
 
   constructor(
     @Inject("apiRoot") private apiRoot,
@@ -52,9 +53,27 @@ export class IvarComponent implements OnInit {
       axilliary: new FormControl('', <any>Validators),
       kg: new FormControl('', <any>Validators)
     });
+
+        this.goalForm = new FormGroup({
+      customer_CID: new FormControl('', <any>Validators),
+      kg: new FormControl('', <any>Validators),
+      percentage: new FormControl('', <any>Validators),
+      description: new FormControl('', <any>Validators),
+      diameter: new FormControl('', <any>Validators),
+      startDate: new FormControl('', <any>Validators),
+      dueDate: new FormControl('', <any>Validators) 
+
+    });
   }
 
   ngOnInit() {
+  }
+
+  clear()
+  {
+    this.measureCMForm.reset();
+    this.measureMMForm.reset();
+    this.goalForm.reset();
   }
 
     submitMeasureMM(measureMMForm){
@@ -75,10 +94,24 @@ export class IvarComponent implements OnInit {
       console.log(measureCMForm.valid);
       console.log(measureCMForm.value);
     if(measureCMForm.valid){
-      this.addNewMeasureMM(measureCMForm.value)
+      this.addNewMeasureCM(measureCMForm.value)
       .then((resolve)=> {
         if(resolve === true){
           this.measureCMForm.reset();
+        }
+      });
+    }
+    else{this.popUpService.errorMessage();}
+  }
+
+      submitGoal(goalForm){
+      console.log(goalForm.valid);
+      console.log(goalForm.value);
+    if(goalForm.valid){
+      this.addNewMeasureCM(goalForm.value)
+      .then((resolve)=> {
+        if(resolve === true){
+          this.goalForm.reset();
         }
       });
     }
@@ -93,8 +126,8 @@ export class IvarComponent implements OnInit {
         optionalBody += `&${Object.keys(measureMMForm)[x]}=${(<any>Object).values(measureMMForm)[x]}`;
       }
     }
-    let body = `name=${measureMMForm.name}` + optionalBody;
-    let url = this.apiRoot + "api/Customer/AddCustome";
+    let body = `${measureMMForm}` + optionalBody;
+    let url = this.apiRoot + "api/MeasurmentMM/Add";
     let token = localStorage.getItem('access_token');
     let headers = new Headers({ 'Authorization': "Bearer " + token, 'Content-Type': 'application/x-www-form-urlencoded' });
     let requestOptions = new RequestOptions({ headers: headers });
@@ -103,10 +136,57 @@ export class IvarComponent implements OnInit {
         .map(res => res.json())
         .subscribe((data) => {
           resolve(data);
-          data === true ? this.popUpService.updateInfoSuccess("Customer added") : this.popUpService.errorMessage();
+          data === true ? this.popUpService.updateInfoSuccess("Measurement added") : this.popUpService.errorMessage();
         })
     });
+  }
+  
+      addNewMeasureCM(measureCMForm): Promise<boolean>{
+    let optionalBody = '';
+    for (let x = 1; x < Object.keys(measureCMForm).length; x++) {
+      let value = (<any>Object).values(measureCMForm)[x];
+      if (value !== null && value !== "") {
+        optionalBody += `&${Object.keys(measureCMForm)[x]}=${(<any>Object).values(measureCMForm)[x]}`;
+      }
     }
+    let body = `${measureCMForm}` + optionalBody;
+    let url = this.apiRoot + "api/MeasurmentCM/Add";
+    let token = localStorage.getItem('access_token');
+    let headers = new Headers({ 'Authorization': "Bearer " + token, 'Content-Type': 'application/x-www-form-urlencoded' });
+    let requestOptions = new RequestOptions({ headers: headers });
+    return new Promise((resolve) => {
+      this.http.post(url, body, requestOptions)
+        .map(res => res.json())
+        .subscribe((data) => {
+          resolve(data);
+          data === true ? this.popUpService.updateInfoSuccess("Measurement added") : this.popUpService.errorMessage();
+        })
+    });
+  }
+  
+
+      addNewGoal(goalForm): Promise<boolean>{
+    let optionalBody = '';
+    for (let x = 1; x < Object.keys(goalForm).length; x++) {
+      let value = (<any>Object).values(goalForm)[x];
+      if (value !== null && value !== "") {
+        optionalBody += `&${Object.keys(goalForm)[x]}=${(<any>Object).values(goalForm)[x]}`;
+      }
+    }
+    let body = `${goalForm}` + optionalBody;
+    let url = this.apiRoot + "api/MeasurmentMM/Add";
+    let token = localStorage.getItem('access_token');
+    let headers = new Headers({ 'Authorization': "Bearer " + token, 'Content-Type': 'application/x-www-form-urlencoded' });
+    let requestOptions = new RequestOptions({ headers: headers });
+    return new Promise((resolve) => {
+      this.http.post(url, body, requestOptions)
+        .map(res => res.json())
+        .subscribe((data) => {
+          resolve(data);
+          data === true ? this.popUpService.updateInfoSuccess("Measurement added") : this.popUpService.errorMessage();
+        })
+    });
+  }
 
         private handleError(error: any) {
     // In a real world app, we might use a remote logging infrastructure
