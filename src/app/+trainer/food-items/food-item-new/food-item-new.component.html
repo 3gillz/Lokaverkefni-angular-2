@@ -1,3 +1,145 @@
-<p>
-  food-item-new works!
-</p>
+<div id="content">
+  <div class="row">
+    <h1 class="page-title txt-color-blueDark">
+      <i class="fa-fw fa fa-trophy"></i>{{'Food item' | i18n }}
+      <span>> {{'New food item' | i18n}}</span>
+    </h1>
+  </div>
+  <sa-widget [editbutton]="false" [custombutton]="false">
+    <header>
+    </header>
+    <div>
+      <div class="widget-body no-padding">
+        <form [formGroup]="foodItemForm" novalidate="novalidate" class="smart-form" (submit)="submitFoodItem(foodItemForm)">
+          <fieldset>
+            <div class="row">
+              <section class="col col-6">
+                <label class="label">{{'Name' | i18n}}</label>
+                <label class="input">
+                <i class="icon-append fa fa-pencil"></i>
+                <input type="text" formControlName="name" autocomplete="off" spellcheck="false"/>
+              </label>
+                <small [hidden]="foodItemForm.controls.name.valid">
+                Name is required.
+              </small>
+              </section>
+              <section class="col col-6">
+                <label class="label">{{'Category' | i18n}}</label>
+                <label class="input">
+                <i class="icon-append fa fa-pencil"></i>
+                <input type="text" formControlName="category" autocomplete="off" spellcheck="false"/>
+              </label>
+                <small [hidden]="foodItemForm.controls.category.valid">
+                Category is required.
+              </small>
+              </section>
+              <section class="col col-4">
+                <label class="label">{{'Kcal' | i18n}}</label>
+                <label class="input">
+                <i class="icon-append fa fa-pencil"></i>
+                <input type="number" formControlName="kcal" autocomplete="off" spellcheck="false"/>
+              </label>
+                <small [hidden]="foodItemForm.controls.kcal.valid">
+                Kcal value is required.
+              </small>
+              </section>
+              <section class="col col-4">
+                <label class="label">{{'Fat' | i18n}}</label>
+                <label class="input">
+                <i class="icon-append fa fa-pencil"></i>
+                <input type="number" formControlName="fat" autocomplete="off" spellcheck="false"/>
+              </label>
+                <small [hidden]="foodItemForm.controls.kcal.valid">
+                Fat value is required.
+              </small>
+              </section>
+              <section class="col col-4">
+                <label class="label">{{'Saturated Fat' | i18n}}</label>
+                <label class="input">
+                <i class="icon-append fa fa-pencil"></i>
+                <input type="number" formControlName="saturatedFat" autocomplete="off" spellcheck="false"/>
+              </label>
+                <small [hidden]="foodItemForm.controls.saturatedFat.valid">
+                Saturated fat value is required.
+              </small>
+              </section>
+                <section class="col col-4">
+                <label class="label">{{'Unsaturated Fat' | i18n}}</label>
+                <label class="input">
+                <i class="icon-append fa fa-pencil"></i>
+                <input type="number" formControlName="unsaturatedFat" autocomplete="off" spellcheck="false"/>
+              </label>
+                <small [hidden]="foodItemForm.controls.unsaturatedFat.valid">
+                Unsaturated fat value is required.
+              </small>
+              </section>
+              <section class="col col-4">
+                <label class="label">{{'Colestrol' | i18n}}</label>
+                <label class="input">
+                <i class="icon-append fa fa-pencil"></i>
+                <input type="number" formControlName="colestrol" autocomplete="off" spellcheck="false"/>
+              </label>
+                <small [hidden]="foodItemForm.controls.colestrol.valid">
+                Colestrol value is required.
+              </small>
+              </section>
+              <section class="col col-4">
+                <label class="label">{{'Carbohydrate' | i18n}}</label>
+                <label class="input">
+                <i class="icon-append fa fa-pencil"></i>
+                <input type="number" formControlName="carbs" autocomplete="off" spellcheck="false"/>
+              </label>
+                <small [hidden]="foodItemForm.controls.carbs.valid">
+                Carbohydrate value is required.
+              </small>
+              </section>
+              <section class="col col-4">
+                <label class="label">{{'Added sugar' | i18n}}</label>
+                <label class="input">
+                <i class="icon-append fa fa-pencil"></i>
+                <input type="number" formControlName="addedSugar" autocomplete="off" spellcheck="false"/>
+              </label>
+                <small [hidden]="foodItemForm.controls.addedSugar.valid">
+                Added sugar value is required.
+              </small>
+              </section>
+              <section class="col col-4">
+                <label class="label">{{'Fiber' | i18n}}</label>
+                <label class="input">
+                <i class="icon-append fa fa-pencil"></i>
+                <input type="number" formControlName="fiber" autocomplete="off" spellcheck="false"/>
+              </label>
+                <small [hidden]="foodItemForm.controls.fiber.valid">
+                Fiber value is required.
+              </small>
+              </section>
+              <section class="col col-4">
+                <label class="label">{{'Water' | i18n}}</label>
+                <label class="input">
+                <i class="icon-append fa fa-pencil"></i>
+                <input type="number" formControlName="water" autocomplete="off" spellcheck="false"/>
+              </label>
+                <small [hidden]="foodItemForm.controls.water.valid">
+                Water value is required.
+              </small>
+              </section>
+              <section class="col col-4">
+                <label class="label">{{'Protein' | i18n}}</label>
+                <label class="input">
+                <i class="icon-append fa fa-pencil"></i>
+                <input type="number" formControlName="protein" autocomplete="off" spellcheck="false"/>
+              </label>
+                <small [hidden]="foodItemForm.controls.protein.valid">
+                Protein value is required.
+              </small>
+              </section>
+            </div>
+          </fieldset>
+          <footer>
+            <button type="submit" class="btn btn-primary" [disabled]="!foodItemForm.valid">{{'Create' | i18n}}</button>
+          </footer>
+        </form>
+      </div>
+    </div>
+  </sa-widget>
+</div>
