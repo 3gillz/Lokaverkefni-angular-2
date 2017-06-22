@@ -39,25 +39,5 @@
 <button id="exerciseModal-button" class="btn btn-info hide" (click)="exerciseModal.show()" >Show</button>
 <div bsModal #exerciseModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
  aria-labelledby="myLargeModalLabel" aria-hidden="true">
- 
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content" *ngIf="exerciseService.currentExercise">
-      <div class="modal-header">
-        {{exerciseService.currentExercise.name}}
-        <button type="button" class="close" (click)="exerciseModal.hide()" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        {{exerciseService.currentExercise.description}}
-        <!--<iframe width="560" height="315" [src]="videoUrl" frameborder="0" allowfullscreen></iframe>-->
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" (click)="exerciseModal.hide()">
-            {{'Close' | i18n}}
-        </button>
-      </div>
-    </div>
- 
-  </div>
+  <app-exercise-detail-modal (close)="exerciseModal.hide()"></app-exercise-detail-modal>
 </div>

@@ -58,6 +58,7 @@ import { ExerciseVideoModalComponent } from './+trainer/+modals/exercise-video-m
 import { AddTrainingComponent } from './+trainer/training-program/training-program-new/add-training/add-training.component';
 import { SaveTrainingProgramComponent } from './+trainer/training-program/training-program-new/save-training-program/save-training-program.component';
 import { TrainingProgramCalendarComponent } from './+trainer/training-program/training-program-calendar/training-program-calendar.component';
+import { ExerciseDetailModalComponent } from './+trainee/modals/exercise-detail-modal/exercise-detail-modal.component';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { TrainingProgramCalendarComponent } from './+trainer/training-program/tr
     AddTrainingComponent,
     TrainingProgramCalendarComponent,
     SaveTrainingProgramComponent,
+    ExerciseDetailModalComponent,
   ],
   imports: [
     SmartadminLayoutModule,
