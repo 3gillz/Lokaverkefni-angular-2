@@ -16,7 +16,6 @@ import { PopUpService } from "../../../services/popup.service";
 })
 
 
-
 export class IvarComponent implements OnInit {
 
     public measureMMForm: FormGroup;
@@ -108,7 +107,7 @@ export class IvarComponent implements OnInit {
       console.log(goalForm.valid);
       console.log(goalForm.value);
     if(goalForm.valid){
-      this.addNewMeasureCM(goalForm.value)
+      this.addNewGoal(goalForm.value)
       .then((resolve)=> {
         if(resolve === true){
           this.goalForm.reset();
@@ -174,7 +173,7 @@ export class IvarComponent implements OnInit {
       }
     }
     let body = `${goalForm}` + optionalBody;
-    let url = this.apiRoot + "api/MeasurmentMM/Add";
+    let url = this.apiRoot + "api/Goals/Add";
     let token = localStorage.getItem('access_token');
     let headers = new Headers({ 'Authorization': "Bearer " + token, 'Content-Type': 'application/x-www-form-urlencoded' });
     let requestOptions = new RequestOptions({ headers: headers });
@@ -183,7 +182,7 @@ export class IvarComponent implements OnInit {
         .map(res => res.json())
         .subscribe((data) => {
           resolve(data);
-          data === true ? this.popUpService.updateInfoSuccess("Measurement added") : this.popUpService.errorMessage();
+          data === true ? this.popUpService.updateInfoSuccess("Goal added") : this.popUpService.errorMessage();
         })
     });
   }

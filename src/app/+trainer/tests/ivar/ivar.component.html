@@ -7,7 +7,7 @@
 <div bsModal #fourPointModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
  aria-labelledby="myLargeModalLabel" aria-hidden="true">
   
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-md">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" (click)="fourPointModal.hide(); clear();" aria-label="Close">
@@ -67,9 +67,10 @@
 <div bsModal #sevenPointModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
  aria-labelledby="myLargeModalLabel" aria-hidden="true">
   
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-md">
     <div class="modal-content">
       <div class="modal-header">
+        {{'7 point measure' | i18n}}
         <button type="button" class="close" (click)="sevenPointModal.hide(); clear();" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -144,9 +145,10 @@
 <div bsModal #girthModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
  aria-labelledby="myLargeModalLabel" aria-hidden="true">
   
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-md">
     <div class="modal-content">
       <div class="modal-header">
+        {{'Girth measure' | i18n}}
         <button type="button" class="close" (click)="girthModal.hide(); clear();" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -220,6 +222,7 @@
   <div class="modal-dialog modal-md">
     <div class="modal-content">
       <div class="modal-header">
+        {{'Goal' | i18n}}
         <button type="button" class="close" (click)="goalModal.hide(); clear();" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
