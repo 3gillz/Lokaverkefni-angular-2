@@ -8,6 +8,7 @@ import 'rxjs/add/operator/catch';
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PopUpService } from "../../../services/popup.service";
+declare var $:any;
 
 @Component({
   selector: 'app-ivar',
@@ -59,8 +60,8 @@ export class IvarComponent implements OnInit {
       percentage: new FormControl('', <any>Validators),
       description: new FormControl('', <any>Validators),
       diameter: new FormControl('', <any>Validators),
-      startDate: new FormControl('', <any>Validators),
-      dueDate: new FormControl('', <any>Validators) 
+      startDate: new FormControl(),
+      dueDate: new FormControl() 
 
     });
   }
@@ -86,7 +87,7 @@ export class IvarComponent implements OnInit {
         }
       });
     }
-    else{this.popUpService.errorMessage();}
+    //else{this.popUpService.errorMessage();}
   }
 
       submitMeasureCM(measureCMForm){
@@ -100,14 +101,16 @@ export class IvarComponent implements OnInit {
         }
       });
     }
-    else{this.popUpService.errorMessage();}
+    //else{this.popUpService.errorMessage();}
   }
 
       submitGoal(goalForm){
+      let due = $('#dueDate').val();
+      let start = $('#startDate').val();
       console.log(goalForm.valid);
       console.log(goalForm.value);
-    if(goalForm.valid){
-      this.addNewGoal(goalForm.value)
+    if(goalForm.valid && due !== "" && start !== ""){
+      this.addNewGoal(goalForm.value, due, start)
       .then((resolve)=> {
         if(resolve === true){
           this.goalForm.reset();
@@ -135,7 +138,7 @@ export class IvarComponent implements OnInit {
         .map(res => res.json())
         .subscribe((data) => {
           resolve(data);
-          data === true ? this.popUpService.infoMessage("Customer added", "Just now") : this.popUpService.errorMessage("Sorry, something went wrong");
+          data === true ? this.popUpService.infoMessage("Measurement added", "Just now") : this.popUpService.errorMessage("Sorry, something went wrong");
         })
     });
   }
@@ -158,13 +161,13 @@ export class IvarComponent implements OnInit {
         .map(res => res.json())
         .subscribe((data) => {
           resolve(data);
-          data === true ? this.popUpService.updateInfoSuccess("Measurement added") : this.popUpService.errorMessage();
+         data === true ? this.popUpService.infoMessage("Measurement added", "Just now") : this.popUpService.errorMessage("Sorry, something went wrong");
         })
     });
   }
   
 
-      addNewGoal(goalForm): Promise<boolean>{
+      addNewGoal(goalForm, due, start): Promise<boolean>{
     let optionalBody = '';
     for (let x = 1; x < Object.keys(goalForm).length; x++) {
       let value = (<any>Object).values(goalForm)[x];
@@ -172,7 +175,7 @@ export class IvarComponent implements OnInit {
         optionalBody += `&${Object.keys(goalForm)[x]}=${(<any>Object).values(goalForm)[x]}`;
       }
     }
-    let body = `${goalForm}` + optionalBody;
+    let body = `${goalForm}`+ "&dueDate=" + due + "&startDate="+ start+ optionalBody;
     let url = this.apiRoot + "api/Goals/Add";
     let token = localStorage.getItem('access_token');
     let headers = new Headers({ 'Authorization': "Bearer " + token, 'Content-Type': 'application/x-www-form-urlencoded' });
@@ -182,7 +185,7 @@ export class IvarComponent implements OnInit {
         .map(res => res.json())
         .subscribe((data) => {
           resolve(data);
-          data === true ? this.popUpService.updateInfoSuccess("Goal added") : this.popUpService.errorMessage();
+          data === true ? this.popUpService.infoMessage("Goal added", "Just now") : this.popUpService.errorMessage("Sorry, something went wrong");
         })
     });
   }
