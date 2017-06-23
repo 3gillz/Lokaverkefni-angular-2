@@ -1,3 +1,24 @@
-<p>
-  food-program-new works!
-</p>
+<div id="content">
+  <div class="row">
+    <span class="col-xs-6">
+      <h1 class="page-title txt-color-blueDark">
+      <i class="fa-fw fa fa fa-calendar"></i>{{'Food programs' | i18n }}
+      <span>> {{'Create' | i18n}}</span>
+      </h1>
+    </span>
+  </div>
+  <sa-widgets-grid>
+    <div class="row">
+      <article class="col-sm-12 col-md-12 col-lg-3">
+
+        <app-add-portion></app-add-portion>
+
+        <app-save-food-program></app-save-food-program>
+
+      </article>
+      <article class="col-sm-12 col-md-12 col-lg-9">
+          <app-food-program-calendar [creationMode]="true" ></app-food-program-calendar>
+      </article>
+    </div>
+  </sa-widgets-grid>
+</div>

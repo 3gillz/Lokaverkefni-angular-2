@@ -1,0 +1,43 @@
+<sa-widget color="blueDark" id="wid-id-calendar" 
+              [sortable]="false" 
+              [colorbutton]="false"
+              [editbutton]="false"
+              [togglebutton]="false"
+              [deletebutton]="false"
+              >
+  <header>
+    <span class="widget-icon"> <i class="fa fa-calendar"></i> </span>
+
+    <h2>{{ 'Training program' | i18n }} > {{programName}}</h2>
+
+    <div class="widget-toolbar">
+      <div class="btn-group" *ngIf="period === 'Day'">
+        <a (click)="prev()" class="btn btn-default btn-xs"><i
+          class="fa fa-chevron-left"></i></a>
+        <a (click)="next()" class="btn btn-default btn-xs"><i
+          class="fa fa-chevron-right"></i>
+        </a>
+      </div>
+      <div class="btn-group" dropdown>
+        <button id="single-button" type="button" class="btn btn-xs btn-default" dropdownToggle>
+          {{period | i18n }} <span class="caret"></span>
+        </button>
+        <ul *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="single-button">
+          <li role="menuitem"><a class="dropdown-item" *ngFor="let select of viewSelect" (click)="changeView(select)">{{ select.name | i18n }}</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+  
+  <div>
+    <div class="widget-body no-padding">
+      <div id="calendar"></div>
+    </div>
+  </div>
+</sa-widget>               
+
+<button id="exerciseModal-button" class="btn btn-info hide" (click)="exerciseModal.show()" >Show</button>
+<div bsModal #exerciseModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+ aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <app-exercise-detail-modal (close)="exerciseModal.hide()"></app-exercise-detail-modal>
+</div>

@@ -1,14 +1,14 @@
 import { Component, OnInit, ElementRef, Input, OnDestroy } from '@angular/core';
-import { TrainingProgramService } from '../../../services/training-program.service';
+import { FoodProgramService } from './../../../services/food-program.service';
 import { I18nService } from './../../../smartadmin/i18n/i18n.service';
 declare var $: any;
 
 @Component({
-  selector: 'app-training-program-calendar',
-  templateUrl: './training-program-calendar.component.html',
-  styleUrls: ['./training-program-calendar.component.css']
+  selector: 'app-food-program-calendar',
+  templateUrl: './food-program-calendar.component.html',
+  styleUrls: ['./food-program-calendar.component.css']
 })
-export class TrainingProgramCalendarComponent implements OnInit {
+export class FoodProgramCalendarComponent implements OnInit {
 
   @Input() creationMode: boolean;
   private $calendarRef: any;
@@ -20,7 +20,7 @@ export class TrainingProgramCalendarComponent implements OnInit {
   constructor(
     private i18nService: I18nService,
     private el: ElementRef, 
-    private trainingProgramService: TrainingProgramService
+    private foodProgramService: FoodProgramService
     ) {
     System.import('script-loader!smartadmin-plugins/bower_components/fullcalendar/dist/fullcalendar.min.js').then(()=>{
       this.render()
@@ -28,7 +28,7 @@ export class TrainingProgramCalendarComponent implements OnInit {
     this.i18nService.calendarLang.subscribe((calendarLang) => {
       this.language = calendarLang;
     });
-    this.trainingProgramService.eventAdded.subscribe((eventAdded) => {
+    this.foodProgramService.eventAdded.subscribe((eventAdded) => {
       if(this.rendered){
         this.refetchEvents()
       }
@@ -60,26 +60,15 @@ export class TrainingProgramCalendarComponent implements OnInit {
         eventOrder: "id",
         slotEventOverlap: false,
         events: (start, end, timezone, callback) => {
-          callback(this.trainingProgramService.trainingEvents)
+          callback(this.foodProgramService.foodPortionEvents)
         },
         eventRender: (event, element) => {
           this.creationMode ? element.find('.fc-content').append( this.closeButton ) : null;
           this.creationMode ? element.find(".closeon").click(() => {
-              $('#calendar').fullCalendar('removeEvents', [event._id]); //Eyða frá calendarView
-              this.trainingProgramService.removeEvent(event); //Eyðafrá trainingEvents Lista
+              $('#calendar').fullCalendar('removeEvents', [event._id]);
+              this.foodProgramService.removeEvent(event);
             }) : null;
-          if (event.reps != null) {
-            element.find('.fc-title').append("<br/>" + event.reps + " reps");
-          }
-          if (event.sets != null) {
-            element.find('.fc-title').append("<br/>" + event.sets + " sets");
-          }
-          if (event.duration != null) {
-            element.find('.fc-title').append("<br/>" + event.duration + " min");
-          }
-          if (event.rest != null) {
-            element.find('.fc-title').append("<br/>rest " + event.rest + " min");
-          }
+          element.find('.fc-title').append("<br/>" + event.grams + " " + this.i18nService.getTranslation("grams") );
           if (event.allDay == false) {
             element.find('.fc-title').append("<br/>Time: " + event.start.format('HH:mm'));
           }

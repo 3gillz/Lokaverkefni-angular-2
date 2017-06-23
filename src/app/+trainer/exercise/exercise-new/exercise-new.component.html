@@ -19,7 +19,7 @@
                 <i class="icon-append fa fa-pencil"></i>
                 <input type="text" formControlName="name" autocomplete="off" spellcheck="false"/>
               </label>
-                <small [hidden]="exerciseForm.controls.name.valid">
+                <small *ngIf="!exerciseForm.controls.name.valid && submitted">
                 Name is required.
               </small>
               </section>
@@ -29,7 +29,7 @@
                 <i class="icon-append fa fa-globe"></i>
                 <input type="url" formControlName="link" autocomplete="off" spellcheck="false" pattern="https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)"/>
               </label>
-                <small [hidden]="exerciseForm.controls.link.valid">
+                <small *ngIf="!exerciseForm.controls.link.valid && submitted">
                 Valid Url is required.
               </small>
               </section>
@@ -40,7 +40,7 @@
               <i class="icon-append fa fa-odnoklassniki"></i>
               <input type="text" formControlName="type" autocomplete="off" spellcheck="false"/>
             </label>
-              <small [hidden]="exerciseForm.controls.type.valid">
+              <small *ngIf="!exerciseForm.controls.type.valid && submitted">
                 Type is required.
               </small>
             </section>
@@ -50,13 +50,13 @@
               <i class="icon-append fa fa-comment"></i>
               <textarea rows="4" formControlName="description" autocomplete="off" spellcheck="false"></textarea>
             </label>
-              <small [hidden]="exerciseForm.controls.description.valid">
+              <small *ngIf="!exerciseForm.controls.description.valid && submitted">
                 Description is required.
               </small>
             </section>
           </fieldset>
           <footer>
-            <button type="submit" class="btn btn-primary" [disabled]="!exerciseForm.valid">{{'Create' | i18n}}</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!exerciseForm.valid && submitted">{{'Create' | i18n}}</button>
           </footer>
         </form>
       </div>

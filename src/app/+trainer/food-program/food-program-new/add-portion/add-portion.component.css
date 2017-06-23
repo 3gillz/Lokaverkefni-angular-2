@@ -1,0 +1,35 @@
+.my-select{
+    width: 100%;
+    padding: 9.5px;
+    border: none;
+    background-color: white;
+    -webkit-box-shadow: 0.8px 2px 5px -2px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0.8px 2px 5px -2px rgba(0,0,0,0.75);
+    box-shadow: 0.8px 2px 5px -2px rgba(0,0,0,0.75);
+    scroll-snap-type: mandatory;
+}
+.weekDays-selector input {
+  display: none!important;
+}
+.weekDays-selector input[type=checkbox] + label {
+  display: inline-block;
+  border-radius: 6px;
+  background: #dddddd;
+  height: 40px;
+  width: 100%;
+  line-height: 40px;
+  text-align: center;
+  cursor: pointer;
+}
+.weekDays-selector input[type=checkbox]:checked + label {
+  background: #2AD705;
+  color: #ffffff;
+}
+.weekDays-selector  .weekdays{
+    display: inline-block;
+    *display: inline; /* For IE7 */
+    width: 14.2857%;
+}
+small{
+  color: red;
+}

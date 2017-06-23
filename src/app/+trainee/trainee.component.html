@@ -14,18 +14,24 @@
               <div class="padding-10">
                 <ul class="nav nav-tabs tabs-pull-right">
                   <li class="active">
-                    <a href="#programs" data-toggle="tab">{{'My programs' | i18n}}</a>
+                    <a href="#training-program" data-toggle="tab">{{'Training program' | i18n}}</a>
                   </li>
                   <li>
-                    <a href="#measurements" data-toggle="tab">{{'My measurements' | i18n}}</a>
+                    <a href="#food-program" data-toggle="tab">{{'Food program' | i18n}}</a>
+                  </li>
+                  <li>
+                    <a href="#measurements" data-toggle="tab">{{'Measurements' | i18n}}</a>
                   </li>
                   <li>
                     <a href="#images" data-toggle="tab">{{'Progress images' | i18n}}</a>
                   </li>
                 </ul>
                 <div class="tab-content padding-top-10">
-                  <div class="tab-pane fade in active" id="programs">
-                    <app-trainee-programs></app-trainee-programs>
+                  <div class="tab-pane fade in active" id="training-program">
+                    <app-trainee-training-program></app-trainee-training-program>
+                  </div>
+                  <div class="tab-pane fade" id="food-program">
+                    <app-trainee-food-program></app-trainee-food-program>
                   </div>
                   <div class="tab-pane fade" id="measurements">
                     <app-trainee-measurements></app-trainee-measurements>

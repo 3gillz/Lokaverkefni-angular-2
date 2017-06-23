@@ -1,26 +1,28 @@
-import { Component, OnInit, ElementRef, Input, OnDestroy } from '@angular/core';
-import { TrainingProgramService } from '../../../services/training-program.service';
-import { I18nService } from './../../../smartadmin/i18n/i18n.service';
+import { Component, OnInit, ElementRef, OnDestroy } from '@angular/core';
+import { ExerciseService } from './../../../services/exercise.service';
+import { TrainingProgramService } from './../../../services/training-program.service';
+import { TraineeService } from './../../trainee.service';
+import { I18nService } from '../../../smartadmin/i18n/i18n.service';
+import * as moment from 'moment';
 declare var $: any;
 
 @Component({
-  selector: 'app-training-program-calendar',
-  templateUrl: './training-program-calendar.component.html',
-  styleUrls: ['./training-program-calendar.component.css']
+  selector: 'app-trainee-training-program',
+  templateUrl: './trainee-training-program.component.html',
+  styleUrls: ['./trainee-training-program.component.css']
 })
-export class TrainingProgramCalendarComponent implements OnInit {
-
-  @Input() creationMode: boolean;
+export class TraineeTrainingProgramComponent implements OnInit {
   private $calendarRef: any;
   private calendar: any;
   private language: any;
-  rendered: boolean;
-  closeButton: string = "<button style='background-color:rgba(0,0,0,0)' class='btn btn-xs btn-custom pull-right'><i class='closeon fa fa-close'></i></button>"
+  rendered: boolean
+  programName: string;
 
   constructor(
     private i18nService: I18nService,
-    private el: ElementRef, 
-    private trainingProgramService: TrainingProgramService
+    private trainingProgramService: TrainingProgramService,
+    private exerciseService: ExerciseService,
+    private el: ElementRef,
     ) {
     System.import('script-loader!smartadmin-plugins/bower_components/fullcalendar/dist/fullcalendar.min.js').then(()=>{
       this.render()
@@ -36,14 +38,21 @@ export class TrainingProgramCalendarComponent implements OnInit {
   }
 
   ngOnInit(){
-    
+    this.trainingProgramService.getTraineesTrainingProgram()
+      .then(name => {
+        if(name){
+          this.programName = name as string 
+        }else{
+          this.programName = this.i18nService.getTranslation("Not registered in a program");
+        }
+      });
   }
+
   render() {
 
     this.$calendarRef = $('#calendar', this.el.nativeElement);
     this.calendar = this.$calendarRef.fullCalendar({
         lang: this.language,
-        header:false,
         editable: false,
         draggable: false,
         selectable: false,
@@ -51,11 +60,16 @@ export class TrainingProgramCalendarComponent implements OnInit {
         disableResizing: false,
         droppable: false,
         eventLimit: false,
-        defaultView: 'basicWeek',
+        defaultView: 'basicDay',
         displayEventTime: false,
+        aspectRatio: 2.5,
         columnFormat: {
           week: 'dddd',
           day: 'dddd'
+        },
+        eventClick: (event) => {
+            this.exerciseService.getExerciseByEID(event.exercise_EID);
+            $('#exerciseModal-button').click();
         },
         eventOrder: "id",
         slotEventOverlap: false,
@@ -63,11 +77,6 @@ export class TrainingProgramCalendarComponent implements OnInit {
           callback(this.trainingProgramService.trainingEvents)
         },
         eventRender: (event, element) => {
-          this.creationMode ? element.find('.fc-content').append( this.closeButton ) : null;
-          this.creationMode ? element.find(".closeon").click(() => {
-              $('#calendar').fullCalendar('removeEvents', [event._id]); //Eyða frá calendarView
-              this.trainingProgramService.removeEvent(event); //Eyðafrá trainingEvents Lista
-            }) : null;
           if (event.reps != null) {
             element.find('.fc-title').append("<br/>" + event.reps + " reps");
           }
@@ -86,15 +95,34 @@ export class TrainingProgramCalendarComponent implements OnInit {
         }
       }
     );
-    this.rendered = true;
+    $('.fc-toolbar').hide();
+    this.rendered = true
+  }
+
+  public period = 'Day'
+  viewSelect =[
+    {name: "Week", value:"basicWeek"},
+    {name: "Day", value:"basicDay"}
+  ]
+  changeView(select) {
+    this.calendar.fullCalendar('changeView', select.value);
+    this.period = select.name
+  }
+
+  next() {
+    $('.fc-next-button', this.el.nativeElement).click();
+  }
+
+  prev() {
+    $('.fc-prev-button', this.el.nativeElement).click();
   }
 
   ngOnDestroy() {
-    this.calendar.fullCalendar('destroy')
+    this.calendar.fullCalendar('destroy');
+    this.trainingProgramService.trainingEvents = [];
   }
-
+  
   refetchEvents(){
       this.calendar.fullCalendar( 'refetchEvents' );
   }
-
 }
