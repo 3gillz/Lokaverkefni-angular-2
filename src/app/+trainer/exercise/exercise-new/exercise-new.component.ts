@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TrainerService } from '../../trainer.service';
+import { ExerciseService } from '../../../services/exercise.service';
 
 @Component({
   selector: 'app-exercise-new',
@@ -9,11 +9,12 @@ import { TrainerService } from '../../trainer.service';
 export class ExerciseNewComponent implements OnInit {
 
   public exerciseForm: any;
+  submitted: boolean;
   constructor(
-    private trainerService: TrainerService
+    private exerciseService: ExerciseService
   ) 
   {
-    this.exerciseForm = trainerService.exerciseForm;
+    this.exerciseForm = exerciseService.exerciseForm;
   }
 
   ngOnInit() {
@@ -21,11 +22,13 @@ export class ExerciseNewComponent implements OnInit {
   }
 
   submitExercise(exerciseForm){
+    this.submitted = true;
     if(exerciseForm.valid){
-      this.trainerService.addNewExercise(exerciseForm.value)
+      this.exerciseService.addNewExercise(exerciseForm.value)
       .then((resolve)=> {
         if(resolve === true){
           this.exerciseForm.reset();
+          this.submitted = false;
         }
       });
     }

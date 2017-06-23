@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   template: `
@@ -7,11 +7,6 @@ import { Component, OnInit } from '@angular/core';
     </div>
   `
 })
-export class LandingPageComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class LandingPageComponent {
+  
 }

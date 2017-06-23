@@ -114,7 +114,7 @@ export class IvarComponent implements OnInit {
         }
       });
     }
-    else{this.popUpService.errorMessage();}
+    else{this.popUpService.errorMessage("Sorry, something went wrong");}
   }
 
     addNewMeasureMM(measureMMForm): Promise<boolean>{
@@ -135,7 +135,7 @@ export class IvarComponent implements OnInit {
         .map(res => res.json())
         .subscribe((data) => {
           resolve(data);
-          data === true ? this.popUpService.updateInfoSuccess("Measurement added") : this.popUpService.errorMessage();
+          data === true ? this.popUpService.infoMessage("Customer added", "Just now") : this.popUpService.errorMessage("Sorry, something went wrong");
         })
     });
   }

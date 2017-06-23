@@ -1,3 +1,4 @@
+import { MiscService } from './../../../services/misc.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TraineeTrainerComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private miscService: MiscService
+  ) { }
 
+  trainer: any;
   ngOnInit() {
+    let TRID = JSON.parse(localStorage.getItem('user')).trainer_TRID;
+    this.miscService.getTrainerCard(TRID)
+      .then( data => {
+        this.trainer = data;
+    });
   }
 
 }

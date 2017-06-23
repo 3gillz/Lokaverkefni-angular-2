@@ -3,7 +3,7 @@ import {Observable, Subject, Subscription} from "rxjs/Rx";
 import {config} from '../smartadmin.config';
 import {languages} from './languages.model';
 import {JsonApiService} from "../json-api.service";
-
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 
 @Injectable()
@@ -12,12 +12,12 @@ export class I18nService {
   public state;
   public data:{};
   public currentLanguage:any;
-
+  public calendarLang: BehaviorSubject<string> = new BehaviorSubject<string>("is");
 
   constructor(private jsonApiService:JsonApiService, private ref:ApplicationRef) {
     this.state = new Subject();
 
-    this.initLanguage(config.defaultLocale || 'us');
+    this.initLanguage(config.defaultLocale || 'is');
     this.fetch(this.currentLanguage.key)
   }
 
@@ -44,10 +44,18 @@ export class I18nService {
 
   setLanguage(language){
     this.currentLanguage = language;
+    this.setCalendarlanguage(language.key)
     this.fetch(language.key)
   }
 
-
+  setCalendarlanguage(key){
+    if(key == "is"){
+      this.calendarLang.next("is")
+    }else{
+      this.calendarLang.next("en")
+    }
+  }
+  
   subscribe(sub:any, err:any) {
     return this.state.subscribe(sub, err)
   }

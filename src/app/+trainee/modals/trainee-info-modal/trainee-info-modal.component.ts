@@ -35,8 +35,8 @@ export class TraineeInfoModalComponent implements OnInit {
   closeModal(){
     this.close.emit();
   }
-  submit(model: any, isValid: boolean) {
-    this.traineeService.submitNewInfo(model, isValid);
+  submit(basicInfoForm: any, isValid: boolean) {
+    this.traineeService.submitNewInfo(basicInfoForm, isValid);
   }
 
 }

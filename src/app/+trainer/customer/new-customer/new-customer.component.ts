@@ -27,7 +27,7 @@ export class NewCustomerComponent implements OnInit {
     private popUpService: PopUpService,
     private trainerService: TrainerService
   ) { 
-        this.customerForm = new FormGroup({
+    this.customerForm = new FormGroup({
       name: new FormControl('', <any>Validators.required),
       email: new FormControl('', <any>Validators.required),
       kennitala: new FormControl('', <any>Validators.required),
@@ -50,9 +50,7 @@ export class NewCustomerComponent implements OnInit {
     .then(z => this.zipcodes = z);
   }
 
-      submitCustomer(customerForm){
-      console.log(customerForm.valid);
-      console.log(customerForm.value);
+  submitCustomer(customerForm){
     if(customerForm.valid){
       this.trainerService.addNewCustomer(customerForm.value)
       .then((resolve)=> {
@@ -61,10 +59,10 @@ export class NewCustomerComponent implements OnInit {
         }
       });
     }
-    else{this.popUpService.errorMessage();}
+    else{this.popUpService.errorMessage("Sorry, something went wrong");}
   }
 
-      getZipcodes(): Promise<Zipcodes[]>{
+  getZipcodes(): Promise<Zipcodes[]>{
     let url = this.apiRoot + "api/Zipcodes/GetAll";
     let token = localStorage.getItem('access_token');
     let headers = new Headers({ 'Authorization': "Bearer " + token, 'Content-Type': 'application/x-www-form-urlencoded' });
@@ -73,8 +71,9 @@ export class NewCustomerComponent implements OnInit {
         .toPromise()
         .then(response => response.json() as Zipcodes[])
         .catch(this.handleError)
-      }
-              private handleError(error: any) {
+  }
+
+  private handleError(error: any) {
     // In a real world app, we might use a remote logging infrastructure
     // We'd also dig deeper into the error to get a better message
     let errMsg = (error.message) ? error.message :

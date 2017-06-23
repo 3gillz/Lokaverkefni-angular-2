@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Exercise } from './../../../models/exercise';
+import { Component, OnInit, Input } from '@angular/core';
 import { Location } from '@angular/common';
 import { TrainerService } from '../../trainer.service';
+import { ExerciseService } from '../../../services/exercise.service';
 
 @Component({
   selector: 'app-exercise-edit',
@@ -10,18 +12,18 @@ import { TrainerService } from '../../trainer.service';
 export class ExerciseEditComponent implements OnInit {
 
   public exerciseForm: any;
-  public exercise: any;
+  public exercise: Exercise;
 
   constructor(
-    private trainerService: TrainerService,
+    private exerciseService: ExerciseService,
     private location: Location
   ) 
   {
-    this.exerciseForm = trainerService.exerciseForm;
-    this.exercise = trainerService.editExercise;
+    this.exerciseForm = exerciseService.exerciseForm;
   }
 
   ngOnInit() {
+    this.exercise = this.exerciseService.currentExercise;
     if(!this.exercise){
       this.goBack();
     }
@@ -32,6 +34,6 @@ export class ExerciseEditComponent implements OnInit {
   }
 
   updateExercise(exerciseForm){
-    this.trainerService.updateExercise(exerciseForm.value)
+    this.exerciseService.updateExercise(exerciseForm.value)
   }
 }

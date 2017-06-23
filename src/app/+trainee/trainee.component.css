@@ -11,3 +11,6 @@ sa-logout{
     margin-top: 2px;
     right: 10px;
 }
+.tab-content{
+    min-height: 350px;
+}

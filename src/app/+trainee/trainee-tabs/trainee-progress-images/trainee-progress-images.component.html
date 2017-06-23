@@ -1,12 +1,15 @@
 <div id="content">
   <div class="row">
-    <div class="row">
-      <div class="page-title text-align-center">
-        <a (click)="(null)" class="btn btn-default">{{'Upload new image' | i18n}}</a>
-      </div>
+    <div class="page-title text-align-center">
+      <a (click)="progressImageModal.show()" class="btn btn-xs btn-info">{{'Upload new image' | i18n}}</a>
     </div>
   </div>
   <div class="row">
-      <sa-gallery class="col-sm-12" [pictures]="pictures" (deleteReques)="onDelete(picture)" (editReques)="onEdit(picture)"></sa-gallery>
+      <sa-gallery class="col-sm-12" [pictures]="traineeService.pictures" (deleteReques)="onDelete(picture)" (editReques)="onEdit(picture)"></sa-gallery>
   </div>
+</div>
+<!-- progressImageModal -->
+<div bsModal #progressImageModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+  aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <app-progress-image-upload-modal (close)="progressImageModal.hide()"></app-progress-image-upload-modal>
 </div>

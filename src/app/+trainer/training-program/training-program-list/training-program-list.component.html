@@ -1,3 +1,36 @@
-<p>
-  training-program-list works!
-</p>
+<div id="content">
+  <div class="row">
+    <h1 class="page-title txt-color-blueDark">
+    <i class="fa-fw fa fa-file-text-o"></i>{{'Training programs' | i18n }}
+    <span>> {{'List' | i18n}}</span>
+    </h1>
+  </div>
+  <sa-widgets-grid>
+    <div class="row">
+      <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <sa-widget class="well">
+          <div>
+            <div class="widget-body no-padding" data-sparkline-container="">
+
+              <sa-datatable [options]="options"
+                         [detailsFormat]="detailsFormat"
+                         tableClass="display projects-table table table-striped table-bordered table-hover"
+                         width="100%">
+                <thead>
+                <tr>
+                  <th></th>
+                  <th>{{'Name' | i18n}}</th>
+                  <th><i
+                    class="fa fa-fw fa-tachometer text-muted hidden-md hidden-sm hidden-xs"></i>
+                    {{'Difficulty' | i18n}}
+                  </th>
+                </tr>
+                </thead>
+              </sa-datatable>
+            </div>
+          </div>
+        </sa-widget>
+      </article>
+    </div>
+  </sa-widgets-grid>
+</div>

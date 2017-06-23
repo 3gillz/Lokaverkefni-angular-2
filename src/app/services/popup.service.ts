@@ -10,9 +10,9 @@ export class PopUpService {
         private i18nService: I18nService
     ){}
 
-  updateInfoSuccess(title) {
+  successMessage(title: string, content: string) {
     let titleText: string = this.i18nService.getTranslation(title);
-    let contentText: string = this.i18nService.getTranslation("Just now");    
+    let contentText: string = this.i18nService.getTranslation(content);    
     this.notificationService.smallBox({
       title: titleText,
       content: "<i class='fa fa-clock-o'></i> <i>"+contentText+"...</i>",
@@ -21,8 +21,8 @@ export class PopUpService {
       timeout: 4000
     });
   }
-  errorMessage() {
-    let titleText: string = this.i18nService.getTranslation("Sorry something went wrong");      
+  errorMessage(title) {
+    let titleText: string = this.i18nService.getTranslation(title);      
     this.notificationService.smallBox({
       title: titleText,
       color: "#C46A69",
@@ -30,5 +30,37 @@ export class PopUpService {
       timeout: 4000
     });
   }
+  
+  infoMessage(title: string, content: string) {
+    let titleText: string = this.i18nService.getTranslation(title);      
+    let contentText: string = this.i18nService.getTranslation(content);          
+    this.notificationService.smallBox({
+      title: titleText,
+      content: contentText,
+      color: "#C79121",
+      timeout: 4000
+    });
+  }
+  
+  promtWithButtons(title: string, content: string, buttons: string[]): Promise<string> {
+    let titleText: string = this.i18nService.getTranslation(title);      
+    let contentText: string = this.i18nService.getTranslation(content);
+    let buttonOptions: string;
+    for(let x = 0; x < buttons.length; x++){
+      let btn: string = this.i18nService.getTranslation(buttons[x]);
+      buttonOptions += `[${btn}]`;
+    }
+    return new Promise((resolve) => {
+      this.notificationService.smartMessageBox({
+        title: titleText,
+        content: contentText,
+        buttons: buttonOptions
+      }, (ButtonPress) => {
+         resolve(ButtonPress);
+      });
+    });
+  }
+
+
   
 }

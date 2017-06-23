@@ -1,0 +1,29 @@
+<div class="modal-dialog modal-md">
+  <div class="modal-content" *ngIf="exerciseService.currentExercise">
+    <div class="modal-header">
+      {{exerciseService.currentExercise.name}}
+      <button type="button" class="close" (click)="closeModal()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      {{exerciseService.currentExercise.description}}
+      <br />      
+      <br />
+      <div class="video" *ngIf="playVideo">
+        <iframe width="560" height="315" [src]="videoUrl" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button *ngIf="!playVideo" (click)="showVideo(exerciseService.currentExercise.link)" class="btn btn-info">
+        {{'Watch video' | i18n}}
+      </button>
+      <button type="button" class="btn btn-default" *ngIf="loading" disabled>
+        {{'Loading...' | i18n}}
+      </button>
+      <button type="button" class="btn btn-default" *ngIf="!loading" (click)="closeModal()">
+        {{'Close' | i18n}}
+      </button>
+    </div>
+  </div>
+</div>

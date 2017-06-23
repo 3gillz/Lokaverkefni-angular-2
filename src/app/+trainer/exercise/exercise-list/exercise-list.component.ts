@@ -1,10 +1,12 @@
+import { MiscService } from './../../../services/misc.service';
+import { Router } from '@angular/router';
 import { Component, OnInit, Inject, HostListener, ViewChild } from '@angular/core';
-import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
+import { SafeUrl } from '@angular/platform-browser';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from "rxjs/Rx";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import { TrainerService } from '../../trainer.service';
+import { ExerciseService } from '../../../services/exercise.service';
 
 @Component({
   selector: 'app-exercise-list',
@@ -19,22 +21,27 @@ export class ExerciseListComponent implements OnInit {
   constructor(
     @Inject("apiRoot") private apiRoot,
     private http: Http,
-    private sanitizer: DomSanitizer,
-    private trainerService: TrainerService
+    private router: Router,
+    private exerciseService: ExerciseService,
+    private miscService: MiscService
   ) { 
   };
 
   @ViewChild('videoModal') videoModal;
   @HostListener('document:click', ['$event'])
   documentClick(event) {
-    if(event.target.id === "video"){
+    let id = event.target.id;
+    if(id === "video"){
       let code = event.target.value.split('=');
-      this.videoUrl = this.sanitizeUrl(code[1]);
+      this.videoUrl = this.miscService.sanitizeYouTubeUrl(code[1]);
       this.videoModal.show();
       this.videoPlaying = true;
     }
-    else if(event.target.id === "edit"){
-      this.trainerService.getExerciseForEdit(event.target.value);
+    else if(id === "edit"){
+      this.exerciseService.getExerciseByEID(event.target.value)
+      .then(data =>{
+        this.router.navigate([ 'trainer/exercise/edit/' + event.target.value ]);
+      });
     }
   }
   closeVideoModal(){
@@ -43,24 +50,16 @@ export class ExerciseListComponent implements OnInit {
       this.videoPlaying = false;
     }, 500);
   }
-  sanitizeUrl(youTubeCode: string) : SafeResourceUrl {
-       let dangerousVideoUrl = 'https://www.youtube.com/embed/' + youTubeCode + "?autoplay=1";
-      return this.sanitizer.bypassSecurityTrustResourceUrl(dangerousVideoUrl);
-  }
+
   ngOnInit() {
   }
 
-  public getAllCustomers = this.apiRoot + "api/Exercise/GetAllByTrid";
-  token = localStorage.getItem('access_token');
-  headers = new Headers({ 'Authorization': "Bearer " + this.token, 'Content-Type': 'application/x-www-form-urlencoded' });
-  requestOptions = new RequestOptions({ headers: this.headers });
   options = {
     dom: "Bfrtip",
     ajax: (data, callback, settings) => {
-      this.http.get(this.getAllCustomers, this.requestOptions)
-        .map(this.extractData)
+      this.exerciseService.getExercises()
         .catch(this.handleError)
-        .subscribe((data) => {
+        .then((data) => {
           callback({
             aaData: data
           })
@@ -114,12 +113,5 @@ export class ExerciseListComponent implements OnInit {
     console.error(errMsg); // log to console instead
     return Observable.throw(errMsg);
   }
-  private extractData(res: Response) {
-    let body = res.json();
-    if (body) {
-      return body.data || body
-    } else {
-      return {}
-    }
-  }
+  
 }

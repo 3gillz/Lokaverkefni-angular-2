@@ -1,0 +1,64 @@
+<sa-widget [editbutton]="false" [colorbutton]="false" [togglebutton]="false" [fullscreenbutton]="false"
+  [deletebutton]="false" [sortable]="false">
+  <header>
+    <h2>{{ 'Add training' | i18n }} </h2>
+  </header>
+  <div>
+    <div class="widget-body">
+      <form [formGroup]="addTrainingForm">
+        <fieldset>
+          <div class="form-group">
+            <label>{{ 'Exercise' | i18n }}</label>
+            <select class="my-select" #exercise (change)="exerciseChange($event.target.value)">
+              <option *ngFor="let exercise of exerciseList; let i = index" [value]="i">
+                {{ exercise.name }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group col-xs-6">
+            <label>{{ 'Reps' | i18n }}</label>
+            <input min="0" class="form-control" formControlName="reps" id="reps" type="number" />
+          </div>
+          <div class="form-group col-xs-6">
+            <label>{{ 'Sets' | i18n }}</label>
+            <input min="0" class="form-control" formControlName="sets" id="sets" type="number" />
+          </div>
+          <div class="form-group col-xs-6">
+            <label>{{ 'Duration' | i18n }}</label>
+            <input min="0" class="form-control" formControlName="duration" id="duration" type="number" />
+          </div>
+          <div class="form-group col-xs-6">
+            <label>{{ 'Rest' | i18n }}</label>
+            <input min="0" class="form-control" formControlName="rest" id="restBetweenMin" type="number" />
+            <p class="note">{{ 'Rest between in minutes' | i18n }}</p>
+          </div>
+          <div class="form-group">
+            <p class="note">{{ 'Select Training Color' | i18n }}:</p>
+            <div class="btn-group btn-group-sm btn-group-justified btn-select-tick">
+              <label *ngFor="let colorClassName of colorClassNames" [saToggleActive]="colorClassName == activeColorClass" class="btn {{colorClassName.bg}}"
+                (click)="setColorClass(colorClassName)">
+                <i class="fa fa-check {{colorClassName.txt}}"></i>
+              </label>
+            </div>
+          </div>
+          <div class="weekDays-selector">
+            <p class="note">{{ 'Select Day(s) (mandatory)' | i18n }}:</p>
+            <span *ngFor="let dow of dowCheckbox" class="weekdays">
+              <input formControlName="dow" type="checkbox" [id]="dow.id" class="weekday" [(ngModel)]="dow.checked" [value]="dow.value" (change)="updateDowCheckbox(dow.value,$event)" />
+              <label [for]="dow.id">{{dow.name | i18n}}</label>
+            </span>
+          </div>
+        </fieldset>
+        <div class="form-actions">
+          <div class="row">
+            <div class="col-md-12">
+              <button class="btn btn-success" type="button" id="add-event" (click)="checkTrainingEvent(exercise.value, addTrainingForm.value)">
+                <i class="fa fa-plus"></i> <span>{{ 'Add Training' | i18n }} </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</sa-widget>

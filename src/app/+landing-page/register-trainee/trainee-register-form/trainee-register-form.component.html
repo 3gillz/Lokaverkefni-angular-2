@@ -1,0 +1,178 @@
+<form [formGroup]="registerTraineeForm" (ngSubmit)="submit(registerTraineeForm)" class="smart-form client-form">
+  <fieldset>
+    <section>
+      <label class="input"> <i class="icon-append fa fa-envelope"></i>
+        <input type="email" formControlName="email" placeholder="{{'Email' | i18n}}" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" spellcheck="false" autocomplete="off">
+      </label>
+      <small *ngIf="submitted && !registerTraineeForm.controls.email.valid">
+        {{'A valid email is required' | i18n}}
+      </small>
+    </section>
+    <section>
+      <label class="input"> <i class="icon-append fa fa-lock"></i>
+        <input type="password" formControlName="password" placeholder="{{'Pick password' | i18n}}"  pattern="((?=.*\d)(?=.*[A-Z])(?=.*\W).{6,24})">
+        <b class="tooltip tooltip-bottom-right">{{ miscService.passwordConditions | i18n}}</b>
+      </label>
+      <small *ngIf="submitted && !registerTraineeForm.controls.password.valid">
+        {{ miscService.passwordConditions | i18n}}
+      </small>
+    </section>
+    <section>
+      <label class="input"> <i class="icon-append fa fa-lock"></i>
+        <input type="password" formControlName="confirmPassword" placeholder="{{'Confirm password' | i18n}}" autocomplete="off">
+      </label>
+      <small *ngIf="submitted && !registerTraineeForm.controls.confirmPassword.valid">
+        {{'Password do not match' | i18n}}
+      </small>
+    </section>
+  </fieldset>
+  <fieldset>
+    <section>
+    <label class="input"> <i class="icon-append fa fa-user"></i>
+        <input type="text" formControlName="name" placeholder="{{'Full name' | i18n}}" spellcheck="false"
+        pattern="{{miscService.namePattern}}"
+        >
+      </label>
+      <small *ngIf="submitted && !registerTraineeForm.controls.name.valid">
+        {{'Name not valid' | i18n}}
+      </small>
+    </section>
+    <div class="row">
+      <section class="col col-6">
+        <label class="input"> <i class="icon-append fa fa-home"></i>
+          <input type="text" formControlName="address" placeholder="{{'Address' | i18n}}">
+        </label>
+        <small *ngIf="submitted && !registerTraineeForm.controls.address.valid">
+          {{'Please enter address' | i18n}}
+        </small>
+      </section>
+      <section class="col col-6">
+        <label class="input" ><i class="icon-append fa fa-globe"></i>
+          <input class="readonly" type="text" value="{{ currentCountry | i18n }}" readonly>
+        </label>
+      </section>
+    </div>
+    <div class="row">
+      <section class="col col-6">
+        <label class="select">
+          <select formControlName="zipcodes_ZIP" #zip (change)="zipCodeChange(zip.value)" [(ngModel)]="initialZipcode">
+            <option disabled value="-1">{{'Zipcode' | i18n}}</option>
+            <option *ngFor="let zipcode of zipcodes" [value]="zipcode.ZIP">{{zipcode.ZIP}}</option>
+          </select> <i></i> 
+        </label>
+        <small *ngIf="submitted && !registerTraineeForm.controls.zipcodes_ZIP.valid">
+          {{'Please select Zipcode' | i18n}}
+        </small>
+      </section>
+      <section class="col col-6">
+        <label class="input" ><i class="icon-append fa fa-location-arrow"></i>
+          <input class="readonly" type="text" value="{{ place | i18n }}" readonly>
+        </label>
+      </section>
+    </div>
+    <div class="row">
+      <section class="col col-6">
+        <label class="input"> <i class="icon-append fa fa-phone"></i>
+          <input type="tel" formControlName="phone" placeholder="{{'Phone' | i18n}}" pattern="\d*" maxlength="7">
+        </label>
+        <small *ngIf="submitted && !registerTraineeForm.controls.phone.valid">
+          {{'Phone number not valid' | i18n}}
+        </small>
+      </section>
+      <section class="col col-6">      
+        <label class="input"><i class="icon-append fa fa-expand"></i>
+          <input type="text" formControlName="height" placeholder="{{'Height' | i18n}}" pattern="\d*" maxlength="3">
+          <b class="tooltip tooltip-bottom-right">{{'Height in centimeters' | i18n}}</b>
+        </label>
+        <small *ngIf="submitted && !registerTraineeForm.controls.height.valid">
+          {{'Please enter height' | i18n}}
+        </small>
+      </section>
+    </div>
+    <div class="row">
+      <section class="col col-6">      
+        <label class="input"><i class="icon-append fa fa-columns"></i>
+          <input type="text" formControlName="kennitala" placeholder="Kennitala" maxlength="10">
+        </label>
+        <small *ngIf="submitted && !registerTraineeForm.controls.kennitala.valid">
+         {{'Kennitala not valid' | i18n}}
+        </small>
+      </section>
+      <section class="col col-6">
+        <label class="select">
+          <select formControlName="gender">
+            <option selected disabled>{{'Gender' | i18n}}</option>
+            <option value="1">{{'Male' | i18n}}</option>
+            <option value="2">{{'Female' | i18n}}</option>
+          </select> <i></i> 
+        </label>
+        <small *ngIf="submitted && !registerTraineeForm.controls.gender.valid">
+          {{'Please select gender' | i18n}}
+        </small>
+      </section>
+    </div>
+    <div class="row">
+      <section class="col col-6">
+        <label class="select">
+            <select class="form-control" formControlName="jobDifficulty">
+              <option selected disabled>{{'Job difficulty' | i18n}}</option>
+              <option value="0">{{'Light' | i18n}}</option>
+              <option value="1">{{'Medium' | i18n}}</option>
+              <option value="2">{{'Hard' | i18n}}</option>
+            </select> <i></i> 
+        </label>
+        <small *ngIf="submitted && !registerTraineeForm.controls.jobDifficulty.valid">
+          {{'Please select job difficulty' | i18n}}
+        </small>
+      </section>
+      <section class="col col-6">
+        <label class="input"> <i class="icon-append fa fa-delicious"></i>
+          <input type="text" formControlName="foodPref" placeholder="{{'Food pref' | i18n}}">
+          <b class="tooltip tooltip-bottom-right">{{'Leave empty if none' | i18n}}</b>
+        </label>
+      </section>
+    </div>
+    <div class="row">
+      <section class="col col-6">
+        <label class="input"> <i class="icon-append fa fa-hospital-o"></i>
+          <input type="text" formControlName="injury" placeholder="{{'Injury' | i18n}}">
+          <b class="tooltip tooltip-bottom-right">{{'Leave empty if none' | i18n}}</b>          
+        </label>
+      </section>
+      <section class="col col-6">
+        <label class="input"> <i class="icon-append fa fa-heartbeat"></i>
+          <input type="text" formControlName="allergy" placeholder="{{'Allergy' | i18n}}">
+          <b class="tooltip tooltip-bottom-right">{{'Leave empty if none' | i18n}}</b>          
+        </label>
+      </section>
+    </div>
+    <section>
+      <label class="checkbox">
+        <input type="checkbox" formControlName="terms" id="terms">
+        <i></i>{{'I agree with the' | i18n}} <a href="#" data-toggle="modal" data-target="#termsModal"> {{'Terms and Conditions' | i18n}}</a>
+      </label>
+      <small *ngIf="submitted && !registerTraineeForm.controls.terms.valid">
+        {{'You must agree to the terms of use' | i18n}}
+      </small>
+    </section>
+  </fieldset>
+  <footer>
+     <button type="submit" class="btn btn-primary" [disabled]="!resolved">
+       <i *ngIf="!resolved" class="fa fa-spinner fa-spin"></i> {{'Register' | i18n}}
+    </button>
+  </footer>
+</form>
+
+<!--
+     <section class="col col-6">
+       <label class="select">
+          <select formControlName="country" [(ngModel)]="currentCountry" >
+            <option *ngFor="let country of countries" value="{{country.alt}}">
+              {{country.alt | i18n}}
+            </option>
+          </select><i></i>
+        </label>
+        <small *ngIf="submitted && !registerTraineeForm.controls.country.valid">
+          {{'Country is required' | i18n}}
+        </small>
+      </section>-->

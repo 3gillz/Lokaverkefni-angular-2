@@ -23,12 +23,12 @@ import {
           --><div  
              [@slideToggle]="item.state"
            class="superbox-list" (click)="activate(item)">
-              <img [src]="item.src" [alt]="item.alt" [title]="item.title" class="superbox-img"/>
+              <img [src]="item.image" [title]="item.date" class="superbox-img"/>
              </div><!--
           --><div class="superbox-show" [class.active]="item.active" [@viewportToggle]="item.state">
-              <img src="{{item.img}}" *ngIf="item.active" [@fadeToggle]="item.state" class="superbox-current-img">
+              <img src="{{item.image}}" *ngIf="item.active" [@fadeToggle]="item.state" class="superbox-current-img">
               <div id="imgInfoBox" class="superbox-imageinfo inline-block">
-                <h1>{{item.title}}</h1><span>
+                <h1>{{item.date | date: 'dd.MMM yyyy' }}</h1><span>
                 <p><em>{{item.img}}</em></p>
                 <p class="superbox-img-description">{{item.alt}}</p>
                 <p>
