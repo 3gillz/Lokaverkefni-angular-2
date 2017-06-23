@@ -1,0 +1,33 @@
+.card {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #e1e8ed;
+    padding: 10px 10px 20px 10px;
+}
+.banner {
+    background-image: url("http://andersonfamilyfitness.com/images/header/weights.jpg");
+    background-position: 0 50%;
+    background-size: 100% auto;
+    border-bottom: 1px solid #e1e8ed;
+    border-radius: 4px 4px 0 0;
+    height: 95px;
+    width: 100%;
+    display: block !important;
+}
+.avatar {
+    margin: -30px 5px 0 8px;
+    border: 2px solid #fff;
+    border-radius: 7px;
+    box-sizing: border-box;
+    color: #fff;
+    height: 95px;
+    width: auto;
+    float: left;
+}
+.info {
+    margin: 5px 0 0;
+}
+.name {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 21px;
+}

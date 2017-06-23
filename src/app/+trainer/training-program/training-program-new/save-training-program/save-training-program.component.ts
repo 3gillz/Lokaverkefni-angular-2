@@ -1,5 +1,5 @@
 import { PopUpService } from './../../../../services/popup.service';
-import { TrainingProgramService } from './../../training-program.service';
+import { TrainingProgramService } from '../../../../services/training-program.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
