@@ -1,122 +1,285 @@
-<form [formGroup]="customerForm"  novalidate="novalidate" class="smart-form" (submit)="submitCustomer(customerForm)">
+<button class="btn btn-info" (click)="fourPointModal.show()">{{'Add 4 point measure' | i18n}}</button>
+<button class="btn btn-info" (click)="sevenPointModal.show()">{{'Add 7 point measure' | i18n}}</button>
+<button class="btn btn-info" (click)="girthModal.show()">{{'Add girth measure' | i18n}}</button>
+<button class="btn btn-info" (click)="goalModal.show()">{{'Add goal' | i18n}}</button>
 
-  <fieldset>
-    <div class="row">
-      <section class="col col-6">
-        <label class="input"> <i class="icon-prepend fa fa-user"></i>
-          <input type="text" formControlName="name" placeholder="Full name">
+
+<div bsModal #fourPointModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+ aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" (click)="fourPointModal.hide(); clear();" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+  <form [formGroup]="measureMMForm"  novalidate="novalidate" class="smart-form">
+
+        <section class="col col-4">
+        <label class="input"> <i class="icon-prepend fa fa-compress"></i>
+          <input type="number" formControlName="tricep" placeholder="{{'Tricep' | i18n}}">
         </label>
-      </section>
-
-      <section class="col col-6">
-        <label class="input"> <i class="icon-prepend fa fa-envelope-o"></i>
-          <input type="email" formControlName="email" placeholder="E-mail">
-        </label>
-      </section>
-    </div>
-
-    <div class="row">
-      <section class="col col-3">
-        <label class="input"> <i class="icon-prepend fa fa-user"></i>
-          <input type="" formControlName="kennitala" placeholder="Kennitala">
-        </label>
-      </section>
-
-      <section class="col col-3">
-        <label class="input"> <i class="icon-prepend fa fa-phone"></i>
-          <input type="tel" formControlName="phone" placeholder="Phone">
-        </label>
-      </section>
-
-<section class="col col-3">
-        <label class="select">
-          <select formControlName="gender">
-            <option value="" selected="" disabled="">{{'Gender' | i18n}}</option>
-            <option value="1">{{'Male' | i18n}}</option>
-            <option value="2">{{'Female' | i18n}}</option>
-            <option value="3">{{'Shemale' | i18n}}</option>
-            <option value="4">{{'Helicopter' | i18n}}</option>
-
-          </select> <i></i> </label>
-      </section>
-
-<section class="col col-3">
-        <label class="select">
-          <select formControlName="jobDifficulty">
-            <option value="" selected="" disabled="">{{'Job difficulty' | i18n}}</option>
-            <option value="0" >{{'Light' | i18n}}</option>
-            <option value="1">{{'Medium' | i18n}}</option>
-            <option value="2">{{'Hard' | i18n}}</option>
-
-
-          </select> <i></i> </label>
-      </section>
-    </div>
-  </fieldset>
-
-    <fieldset>
-    <div class="row">
-      <section class="col col-3">
-        <label class="input"> <i class="icon-prepend fa fa-expand"></i>
-          <input type="number" formControlName="height" placeholder="Height" >
-        </label>
-      </section>
-
-      <section class="col col-3">
-        <label class="input"> <i class="icon-prepend fa fa-delicious"></i>
-          <input type="" formControlName="foodPref" placeholder="Foodpref">
-        </label>
-      </section>
-
-      <section class="col col-3">
-        <label class="input"> <i class="icon-prepend fa fa-hospital-o"></i>
-          <input type="" formControlName="injury" placeholder="Injury">
-        </label>
-      </section>
-
-      <section class="col col-3">
-        <label class="input"> <i class="icon-prepend fa fa-heartbeat"></i>
-          <input type="" formControlName="allergy" placeholder="Allergy">
-        </label>
-      </section>
-    </div>
-  </fieldset>
-
-  <fieldset>
-    <div class="row">
-      <section class="col col-2">
-        <label class="select">
-          <select formControlName="zipcodes_ZIP">
-            <option value="" selected="" disabled="">{{'Zipcode' | i18n}}</option>
-            <option *ngFor="let zipcode of zipcodes" >{{zipcode.ZIP}}</option>
-          
-          </select> <i></i> </label>
       </section>
 
       <section class="col col-4">
-        <label class="input" > <i class="icon-prepend fa fa-home"></i>
-          <input type="text" name="place" id="place" value="">
-          
+        <label class="input"> <i class="icon-prepend fa fa-compress"></i>
+          <input type="number" formControlName="suprailiac" placeholder="{{'Suprailiac' | i18n}}">
         </label>
       </section>
 
-    <section class="col col-6">
-      <label for="address" class="input"> <i class="icon-prepend fa fa-home"></i>
-        <input type="text" formControlName="address" id="address" placeholder="Address">
-      </label>
-    </section>
+      <section class="col col-4">
+        <label class="input"> <i class="icon-prepend fa fa-compress"></i>
+          <input type="number" formControlName="abdominal" placeholder="{{'Abdominal' | i18n}}">
+        </label>
+      </section>
 
-    <section class="col col-6">
-      <label for="address" class="input"> <i class="icon-prepend fa fa-picture-o"></i>
-        <input type="text" formControlName="profileImagePath" placeholder="profileImage">
-      </label>
-    </section>
-    </div>
-  </fieldset>
+      <section class="col col-4">
+        <label class="input"> <i class="icon-prepend fa fa-compress"></i>
+          <input type="number" formControlName="thigh" placeholder="{{'Thigh' | i18n}}">
+        </label>
+      </section>
+
+      <section class="col col-4">
+        <label class="input"> <i class="icon-prepend fa fa-tachometer"></i>
+          <input type="number" formControlName="kg" placeholder="{{'Kg' | i18n}}">
+        </label>
+      </section>
+      </form>
+ 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="fourPointModal.hide(); clear();">
+            {{'Cancel' | i18n}}
+          </button>
+        <button  type="button" class="btn btn-primary" (click)="submitMeasureMM(measureMMForm)">
+            {{'Save' | i18n}}
+        </button>
+      </div>
+    </div>
+ 
+  </div>
+</div>
 
 
-  <footer>
-    <label>{{zipcodes.place}}</label>
-    <button type="submit" class="btn btn-primary">{{'Create' | i18n}}</button>
-  </footer>
-</form>
+<div bsModal #sevenPointModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+ aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        {{'7 point measure' | i18n}}
+        <button type="button" class="close" (click)="sevenPointModal.hide(); clear();" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+  <form [formGroup]="measureMMForm"  novalidate="novalidate" class="smart-form">
+
+      <section class="col col-4">
+        <label class="input"> <i class="icon-prepend fa fa-compress"></i>
+          <input type="number" formControlName="chest" placeholder="{{'Chest' | i18n}}">
+        </label>
+      </section>
+
+      <section class="col col-4">
+        <label class="input"> <i class="icon-prepend fa fa-compress"></i>
+          <input type="number" formControlName="abdominal" placeholder="{{'Abdominal' | i18n}}">
+        </label>
+      </section>
+
+      <section class="col col-4">
+        <label class="input"> <i class="icon-prepend fa fa-compress"></i>
+          <input type="number" formControlName="thigh" placeholder="{{'Thigh' | i18n}}">
+        </label>
+      </section>
+
+      <section class="col col-4">
+        <label class="input"> <i class="icon-prepend fa fa-compress"></i>
+          <input type="number" formControlName="tricep" placeholder="{{'Tricep' | i18n}}">
+        </label>
+      </section>
+
+      <section class="col col-4">
+        <label class="input"> <i class="icon-prepend fa fa-compress"></i>
+          <input type="number" formControlName="subscapular" placeholder="{{'Subscapular' | i18n}}">
+        </label>
+      </section>
+
+      <section class="col col-4">
+        <label class="input"> <i class="icon-prepend fa fa-compress"></i>
+          <input type="number" formControlName="suprailiac" placeholder="{{'Suprailiac' | i18n}}">
+        </label>
+      </section>
+
+      <section class="col col-4">
+        <label class="input"> <i class="icon-prepend fa fa-compress"></i>
+          <input type="number" formControlName="axilliary" placeholder="{{'Axilliary' | i18n}}">
+        </label>
+      </section>
+
+      <section class="col col-4">
+        <label class="input"> <i class="icon-prepend fa fa-tachometer"></i>
+          <input type="number" formControlName="kg" placeholder="{{'Kg' | i18n}}">
+        </label>
+      </section>
+    </form>
+ 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="sevenPointModal.hide(); clear();">
+            {{'Cancel' | i18n}}
+          </button>
+        <button  type="button" class="btn btn-primary" (click)="submitMeasureMM(measureMMForm)">
+            {{'Save' | i18n}}
+        </button>
+      </div>
+    </div>
+ 
+  </div>
+</div>
+
+<div bsModal #girthModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+ aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        {{'Girth measure' | i18n}}
+        <button type="button" class="close" (click)="girthModal.hide(); clear();" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+  <form [formGroup]="measureCMForm"  novalidate="novalidate" class="smart-form">
+
+      <section class="col col-4">
+        <label class="input"> <i class="icon-prepend fa fa-expand"></i>
+          <input type="number" formControlName="butt" placeholder="{{'Butt' | i18n}}">
+        </label>
+      </section>
+
+      <section class="col col-4">
+        <label class="input"> <i class="icon-prepend fa fa-expand"></i>
+          <input type="number" formControlName="waist" placeholder="{{'Waist' | i18n}}">
+        </label>
+      </section>
+
+      <section class="col col-4">
+        <label class="input"> <i class="icon-prepend fa fa-expand"></i>
+          <input type="number" formControlName="hip" placeholder="{{'Hip' | i18n}}">
+        </label>
+      </section>
+
+      <section class="col col-4">
+        <label class="input"> <i class="icon-prepend fa fa-expand"></i>
+          <input type="number" formControlName="thigh" placeholder="{{'Thigh' | i18n}}">
+        </label>
+      </section>
+
+      <section class="col col-4">
+        <label class="input"> <i class="icon-prepend fa fa-expand"></i>
+          <input type="number" formControlName="armLoose" placeholder="{{'Arm loose' | i18n}}">
+        </label>
+      </section>
+
+      <section class="col col-4">
+        <label class="input"> <i class="icon-prepend fa fa-expand"></i>
+          <input type="number" formControlName="armFlexed" placeholder="{{'Arm flexed' | i18n}}">
+        </label>
+      </section>
+
+      <section class="col col-4">
+        <label class="input"> <i class="icon-prepend fa fa-expand"></i>
+          <input type="number" formControlName="shoulders" placeholder="{{'Shoulders' | i18n}}">
+        </label>
+      </section>
+
+    </form>
+ 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="girthModal.hide(); clear();">
+            {{'Cancel' | i18n}}
+          </button>
+        <button  type="button" class="btn btn-primary" (click)="submitMeasureCM(measureCMForm)">
+            {{'Save' | i18n}}
+        </button>
+      </div>
+    </div>
+ 
+  </div>
+</div>
+
+
+<div bsModal #goalModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+ aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        {{'Goal' | i18n}}
+        <button type="button" class="close" (click)="goalModal.hide(); clear();" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+  <form [formGroup]="goalForm"  novalidate="novalidate" class="smart-form">
+
+     <div class="row">
+        <section class="col col-4">
+        <label class="input"> <i class="icon-prepend fa fa-tachometer"></i>
+          <input type="number" formControlName="kg" placeholder="{{'Kg' | i18n}}">
+        </label>
+      </section>
+
+      <section class="col col-4">
+        <label class="input"> <i class="icon-prepend fa fa-percent"></i>
+          <input type="number" formControlName="percentage" placeholder="{{'Percentage' | i18n}}">
+        </label>
+      </section>
+
+      <section class="col col-4">
+        <label class="input"> <i class="icon-prepend fa fa-compress"></i>
+          <input type="number" formControlName="diameter" placeholder="{{'Diameter' | i18n}}">
+        </label>
+      </section>
+
+      <section class="col col-6">
+        <label class="input"> <i class="icon-append fa fa-calendar"></i>
+          <input type="text" id="startDate" formControlName="startDate" placeholder="{{'Start date' | i18n}}" saUiDatepicker date-format="dd/mm/yy">
+        </label>
+      </section>
+
+      <section class="col col-6">
+        <label class="input"> <i class="icon-append fa fa-calendar"></i>
+          <input type="text" id="dueDate" formControlName="dueDate" placeholder="{{'Due date' | i18n}}" saUiDatepicker date-format="dd/mm/yy">
+        </label>
+      </section>
+     </div>
+
+      <section>
+        <label class="input"> <i class="icon-append fa fa-comment"></i>
+          <textarea rows="4" cols="77" formControlName="description" placeholder="{{'Description' | i18n}}"></textarea>
+        </label>
+      </section>
+      </form>
+ 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="goalModal.hide(); clear();">
+            {{'Cancel' | i18n}}
+          </button>
+        <button  type="button" class="btn btn-primary" (click)="submitGoal(goalForm)">
+            {{'Save' | i18n}}
+        </button>
+      </div>
+    </div>
+ 
+  </div>
+</div>
