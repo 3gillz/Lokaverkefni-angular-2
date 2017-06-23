@@ -59,6 +59,7 @@ export class AddPortionComponent implements OnInit {
   }
 
   checkFoodPortionEvent(index: number, addPortionForm) {
+    console.log(addPortionForm)
     this.submitted = true;
     if(this.dow.length == 0){
       this.noDays = true;

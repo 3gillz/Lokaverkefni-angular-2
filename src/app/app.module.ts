@@ -28,7 +28,7 @@ import { LayoutService } from './smartadmin/layout/layout.service';
 import { UserService } from './smartadmin/user/user.service';
 import { SoundService } from "./smartadmin/sound/sound.service";
 import { SmartadminDatatableModule } from './smartadmin/ui/datatable/smartadmin-datatable.module';
-import { MaskedInput } from './smartadmin/forms/input/masked-input.directive'
+import { SmartadminInputModule } from './smartadmin/forms/input/smartadmin-input.module';
 //SmartAdmin end
 import { ImageCropperComponent } from 'ng2-img-cropper';
 import { AccountService } from './services/account.service';
@@ -67,7 +67,6 @@ import { SaveFoodProgramComponent } from './+trainer/food-program/food-program-n
 @NgModule({
   declarations: [
     ImageCropperComponent,
-    MaskedInput,
     AppComponent,
     RoutedComponents,
     //LandingPage
@@ -96,6 +95,7 @@ import { SaveFoodProgramComponent } from './+trainer/food-program/food-program-n
     SaveFoodProgramComponent,
   ],
   imports: [
+    SmartadminInputModule,
     SmartadminLayoutModule,
     SmartadminDatatableModule,
     I18nModule,
