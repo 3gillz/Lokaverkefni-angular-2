@@ -28,7 +28,7 @@ export class SaveFoodProgramComponent implements OnInit {
       this.popUpService.promtWithButtons("Save program?", "Programs cannot be edited once saved.", ["Edit More", "Save"])
         .then((data) => {
           if (data == "Save" || data == "Vista") {
-            console.log("vista hér")
+            console.log(this.foodProgramService.foodPortionEvents)
           }
         })
     }

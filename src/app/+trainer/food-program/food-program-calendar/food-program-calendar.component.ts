@@ -68,7 +68,7 @@ export class FoodProgramCalendarComponent implements OnInit {
               $('#calendar').fullCalendar('removeEvents', [event._id]);
               this.foodProgramService.removeEvent(event);
             }) : null;
-          element.find('.fc-title').append("<br/>" + event.grams + " grams");
+          element.find('.fc-title').append("<br/>" + event.grams + " " + this.i18nService.getTranslation("grams") );
           if (event.allDay == false) {
             element.find('.fc-title').append("<br/>Time: " + event.start.format('HH:mm'));
           }

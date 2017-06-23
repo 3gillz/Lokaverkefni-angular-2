@@ -1,5 +1,6 @@
+import { I18nService } from './../../../../smartadmin/i18n/i18n.service';
 import { FoodProgramService } from './../../../../services/food-program.service';
-import { CalendarFoodPortion } from './../../../../models/footitem';
+import { CalendarFoodPortion, FoodItem, FoodPortionSum } from './../../../../models/footitem';
 import { MiscService } from './../../../../services/misc.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -16,14 +17,19 @@ export class AddPortionComponent implements OnInit {
   foodItemList: any;
   langSetting: any;
   dow: number[] = [];
-  title: string;
+  selectedItem: FoodItem;
+  foodItemArray: FoodItem [] = [];
   submitted: boolean;
   noDays: boolean;
 
   constructor(
     private miscService: MiscService,
-    private foodProgramService: FoodProgramService
+    private foodProgramService: FoodProgramService,
+    private i18nService: I18nService
   ) { 
+    this.i18nService.calendarLang.subscribe((calendarLang) => {
+      this.langSetting = calendarLang;
+    });
     this.addPortionForm = new FormGroup({
       grams: new FormControl('', <any>Validators.required),
       timeOfDay: new FormControl(''),
@@ -40,7 +46,7 @@ export class AddPortionComponent implements OnInit {
     this.miscService.getFoodItems()
       .then(data =>{
         this.foodItemList = data;
-        this.title = this.foodItemList[0].name;
+        this.selectedItem = this.foodItemList[0];
       })
   }
 
@@ -49,15 +55,15 @@ export class AddPortionComponent implements OnInit {
   }
 
   foodItemChange(index: number){
-    this.title = this.foodItemList[index].name;
+    this.selectedItem = this.foodItemList[index];
   }
 
-  checkTrainingEvent(index: number, addPortionForm) {
+  checkFoodPortionEvent(index: number, addPortionForm) {
     this.submitted = true;
     if(this.dow.length == 0){
       this.noDays = true;
       return;
-    }    
+    } 
     this.noDays = false;       
     if (addPortionForm.grams) {
       this.addFoodPortionEvent(index, addPortionForm);
@@ -71,15 +77,60 @@ export class AddPortionComponent implements OnInit {
     let timeOfDay = null;
     let event = new CalendarFoodPortion(
       this.foodProgramService.generateId(),
-      this.title,
+      this.selectedItem.name,
       this.activeColorClass.bg + ' ' + this.activeColorClass.txt,
       addPortionForm.grams,
       addPortionForm.timeOfDay,
       this.dow
     );
     this.foodProgramService.addEvent(event);
+    //this.addTofoodItemArray(addPortionForm.grams);
     this.addPortionForm.reset();
     this.dow = [];
+  }
+
+  foodItemArrayId: number = 0;
+  addTofoodItemArray(grams: number){
+    let item: FoodItem = this.selectedItem;
+    item.grams = grams;
+    item.FIID = this.foodItemArrayId++;
+    for(let x = 0; x < this.dow.length; x++){
+      this.foodItemArray.push(item);
+    }
+    this.calculateNutritionInProgram();
+  }
+
+
+  calculateNutritionInProgram(){
+    let carbohydrateSum = 0; let colestrolSum = 0;
+    let fatcSum = 0; let fiberSum = 0; let kcalSum = 0;
+    let proteinSum = 0; let saturatedFatSum = 0;
+    let unsaturatedFatSum = 0; let waterSum = 0; let addedSugarSum = 0;
+    for(let x = 0; x < this.foodItemArray.length; x++){
+        let gramCalc = (this.foodItemArray[x].grams / 100);
+        carbohydrateSum += this.foodItemArray[x].carbohydrate * gramCalc;
+        colestrolSum += this.foodItemArray[x].colestrol * gramCalc;
+        fatcSum += this.foodItemArray[x].fat * gramCalc;
+        fiberSum += this.foodItemArray[x].fiber * gramCalc;
+        kcalSum += this.foodItemArray[x].kcal * gramCalc; 
+        proteinSum += this.foodItemArray[x].protein * gramCalc;
+        saturatedFatSum += this.foodItemArray[x].saturatedFat * gramCalc;
+        unsaturatedFatSum += this.foodItemArray[x].unsaturatedFat * gramCalc;
+        waterSum += this.foodItemArray[x].water * gramCalc;
+        addedSugarSum += this.foodItemArray[x].addedSugar * gramCalc;
+    };
+    let nutritionSum = new FoodPortionSum(
+      carbohydrateSum,
+      colestrolSum,
+      fatcSum,
+      fiberSum,
+      kcalSum,
+      proteinSum,
+      saturatedFatSum,
+      unsaturatedFatSum,
+      waterSum,
+      addedSugarSum
+    );
   }
 
   updateDowCheckbox(value, event) {
