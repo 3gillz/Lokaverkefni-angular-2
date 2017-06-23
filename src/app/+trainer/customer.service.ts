@@ -32,4 +32,19 @@ getCustomer(CID: number){
     });
   }
 
+  getCustomerGoal(CID: number){
+        let url = this.apiRoot + "api/Goals/" + CID;
+    console.log(url);
+    let token = localStorage.getItem('access_token');
+    let headers = new Headers({ 'Authorization': "Bearer " + token, 'Content-Type': 'application/x-www-form-urlencoded' });
+    let requestOptions = new RequestOptions({ headers: headers });
+    return new Promise((resolve) => {
+      this.http.get(url, requestOptions)
+        .map(res => res.json())
+        .subscribe((goalData) => {
+          resolve(goalData);
+        })
+    });
+  }
+
 }

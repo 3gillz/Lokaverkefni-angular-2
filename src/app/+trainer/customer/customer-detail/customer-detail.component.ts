@@ -19,6 +19,7 @@ export class CustomerDetailComponent implements OnInit {
     customer : Customer;
     foodProgram : FoodProgram[] = [];
     trainingPrograms : TrainingProgram[] = [];
+    goal : Goals
     goals : Goals[] = [];
     CID : number;
 
@@ -37,6 +38,13 @@ export class CustomerDetailComponent implements OnInit {
         .then((data)=>{
           this.customer = data as Customer;
           console.log(data);
+
+      this.customerService.getCustomerGoal(id)
+        .then((goalData)=> {
+          this.goal = goalData as Goals;
+          console.log(this.goal);
+        }
+        )    
         })
 
       console.log(id)

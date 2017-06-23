@@ -2,7 +2,7 @@
 
 
   <div class="row">
-     <h1 class="page-title txt-color-blueDark">
+    <h1 class="page-title txt-color-blueDark">
       <i class="fa-fw fa fa-trophy"></i>{{'Customers' | i18n }}
       <span>> {{'Customer detail' | i18n}}</span>
     </h1>
@@ -18,30 +18,17 @@
               <div class="row">
                 <div class="col-sm-12">
                   <div id="myCarousel" class="carousel fade profile-carousel">
-                    <div class="air air-bottom-right padding-10">
-                    </div>
-                    <div class="air air-top-left padding-10">
-                      <h4 class="txt-color-white font-md">{{ date | date: 'dd MMM, yyyy' }}</h4>
-                    </div>
-                    <ol class="carousel-indicators">
-                      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                      <li data-target="#myCarousel" data-slide-to="1" class=""></li>
-                      <li data-target="#myCarousel" data-slide-to="2" class=""></li>
-                    </ol>
-                    <div class="carousel-inner">
-                      <!-- Slide 1 -->
-                      <div class="item active">
-                        <img src="assets/img/demo/s1.jpg" alt="demo user">
-                      </div>
-                      <!-- Slide 2 -->
-                      <div class="item">
-                        <img src="assets/img/demo/s2.jpg" alt="demo user">
-                      </div>
-                      <!-- Slide 3 -->
-                      <div class="item">
-                        <img src="assets/img/demo/m3.jpg" alt="demo user">
-                      </div>
-                    </div>
+                    <carousel id="myCarousel" class="carousel fade profile-carousel">
+                      <slide>
+                        <img class="carousel-image" src="assets/img/demo/s1.jpg" alt="demo user">
+                      </slide>
+                      <slide>
+                        <img class="carousel-image" src="assets/img/demo/s2.jpg" alt="demo user">
+                      </slide>
+                      <slide>
+                        <img class="carousel-image" src="assets/img/demo/m3.jpg" alt="demo user">
+                      </slide>
+                    </carousel>
                   </div>
                 </div>
                 <div class="col-sm-12">
@@ -50,15 +37,57 @@
                       <img src='{{customer.profileImagePath}}' alt="user profile image">
 
                       <div class="padding-10">
-                        <h4 class="font-md"><strong>18</strong>
-                          <br>
-                          <small>Days til goal due date</small>
-                        </h4>
+                        <div *ngIf="goal;else nogoal1">
+                          <h4 class="font-md"><strong>{{goal.kg}} kg</strong>
+                            <br>
+                            <small>Target weight</small>
+                          </h4>
+                        </div>
+                        <ng-template #nogoal1>
+                          <h4 class="font-md"><strong>N/A</strong>
+                            <br>
+                            <small>Target weight</small>
+                          </h4>
+                        </ng-template>
                         <br>
-                        <h4 class="font-md"><strong>55%</strong>
-                          <br>
-                          <small>of goal reached</small>
-                        </h4>
+                        <div *ngIf="goal;else nogoal2">
+                          <h4 class="font-md"><strong>{{goal.percentage}} %</strong>
+                            <br>
+                            <small>Target fat %</small>
+                          </h4>
+                        </div>
+                        <ng-template #nogoal2>
+                          <h4 class="font-md"><strong>N/A</strong>
+                            <br>
+                            <small>Target fat %</small>
+                          </h4>
+                        </ng-template>
+                        <br>
+                        <div *ngIf="goal;else nogoal3">
+                          <h4 class="font-md"><strong>{{goal.diameter}} cm</strong>
+                            <br>
+                            <small>Target diameter</small>
+                          </h4>
+                        </div>
+                        <ng-template #nogoal3>
+                          <h4 class="font-md"><strong>N/A</strong>
+                            <br>
+                            <small>Target diameter</small>
+                          </h4>
+                        </ng-template>
+                        <br>
+                        <div *ngIf="goal;else nogoal4">
+                          <h4 class="font-md"><strong>{{goal.dueDate | date: 'dd.MM yyyy'}}</strong>
+                            <br>
+                            <small>Due date</small>
+                          </h4>
+                        </div>
+                        <ng-template #nogoal4>
+                          <h4 class="font-md"><strong>N/A</strong>
+                            <br>
+                            <small>Due date</small>
+                          </h4>
+                        </ng-template>
                       </div>
                     </div>
                     <div class="col-sm-6">
@@ -75,50 +104,49 @@
                             <i class="fa fa-envelope"></i>&#xA0;&#xA0;<a href="{{customer.email}}">{{customer.email}}</a>
                           </p>
                         </li>
-                         <li>
-              <p class="text-muted">
-                <i class="fa fa-home"></i>&#xA0;&#xA0;<span class="txt-color-darken">{{customer.address}}</span>
-              </p>
-            </li>
-            <li>
-              <p class="text-muted">
-                <i class="fa fa-expand"></i>&#xA0;&#xA0;<span class="txt-color-darken">{{customer.height}} cm.</span>
-              </p>
-            </li>
-            <li *ngIf="customer.allergy">
-              <p class="text-muted">
-                <i class="fa fa-heartbeat"></i>&#xA0;&#xA0;<span class="txt-color-darken">{{customer.allergy}}</span>
-              </p>
-            </li>
-            <li *ngIf="customer.injury">
-              <p class="text-muted">
-                <i class="fa fa-ban"></i>&#xA0;&#xA0;<span class="txt-color-darken">{{customer.injury}}</span>
-              </p>
-            </li>
-            <li *ngIf="customer.foodPref">
-              <p class="text-muted">
-                <i class="fa fa-tachometer"></i>&#xA0;&#xA0;<span class="txt-color-darken">{{ injury.foodPref }}</span>
-              </p>
-            </li>
-            <li>
-              <p class="text-muted">
-                <i class="fa fa-pencil"></i>&#xA0;&#xA0;<span class="txt-color-darken"><button class="btn btn-info btn-xs">{{'Edit' | i18n}}</button></span>
-              </p>
-            </li>
+                        <li>
+                          <p class="text-muted">
+                            <i class="fa fa-home"></i>&#xA0;&#xA0;<span class="txt-color-darken">{{customer.address}}</span>
+                          </p>
+                        </li>
+                        <li>
+                          <p class="text-muted">
+                            <i class="fa fa-expand"></i>&#xA0;&#xA0;<span class="txt-color-darken">{{customer.height}} cm.</span>
+                          </p>
+                        </li>
+                        <li *ngIf="customer.allergy">
+                          <p class="text-muted">
+                            <i class="fa fa-heartbeat"></i>&#xA0;&#xA0;<span class="txt-color-darken">{{customer.allergy}}</span>
+                          </p>
+                        </li>
+                        <li *ngIf="customer.injury">
+                          <p class="text-muted">
+                            <i class="fa fa-ban"></i>&#xA0;&#xA0;<span class="txt-color-darken">{{customer.injury}}</span>
+                          </p>
+                        </li>
+                        <li *ngIf="customer.foodPref">
+                          <p class="text-muted">
+                            <i class="fa fa-tachometer"></i>&#xA0;&#xA0;<span class="txt-color-darken">{{ customer.foodPref }}</span>
+                          </p>
+                        </li>
+                        <li>
+                          <p class="text-muted">
+                            <i class="fa fa-pencil"></i>&#xA0;&#xA0;<span class="txt-color-darken"><button class="btn btn-info btn-xs">{{'Edit' | i18n}}</button></span>
+                          </p>
+                        </li>
                       </ul>
                       <br>
 
                       <p class="font-md">
-                        <i>A little about me...</i>
+                        <i>My goals</i>
                       </p>
-
-                      <p>
-                        Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est
-                        eligendi optio
-                        cumque nihil impedit quo minus id quod maxime placeat facere
-                      </p>
+                      <div *ngIf="goal;else nogoal">
+                        <p>
+                          My goal: {{goal.description}}
+                        </p>
+                      </div>
+                      <ng-template #nogoal>No goal set</ng-template>
                       <br>
-                      <a href="" class="btn btn-default btn-xs"><i class="fa fa-envelope-o"></i> Send Message</a>
                       <br>
                       <br>
                     </div>
@@ -164,171 +192,31 @@
                   <div class="padding-10">
                     <ul class="nav nav-tabs tabs-pull-right">
                       <li class="active">
-                        <a href="#a1" data-toggle="tab">Recent Articles</a>
+                        <a href="#training-program" data-toggle="tab">{{'Training program' | i18n}}</a>
                       </li>
                       <li>
-                        <a href="#a2" data-toggle="tab">New Members</a>
+                        <a href="#food-program" data-toggle="tab">{{'Food program' | i18n}}</a>
                       </li>
-                      <li class="pull-left">
-                        <span class="margin-top-10 display-inline"><i class="fa fa-rss text-success"></i> Activity</span>
+                      <li>
+                        <a href="#measurements" data-toggle="tab">{{'Measurements' | i18n}}</a>
+                      </li>
+                      <li>
+                        <a href="#images" data-toggle="tab">{{'Progress images' | i18n}}</a>
                       </li>
                     </ul>
                     <div class="tab-content padding-top-10">
-                      <div class="tab-pane fade in active" id="a1">
-                        <div class="row">
-                          <div class="col-xs-2 col-sm-1">
-                            <time datetime="2014-09-20" class="icon">
-                              <strong>Jan</strong>
-                              <span>10</span>
-                            </time>
-                          </div>
-                          <div class="col-xs-10 col-sm-11">
-                            <h6 class="no-margin"><a href="">Allice in Wonderland</a></h6>
-
-                            <p>
-                              Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi Nam eget dui.
-                              Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero,
-                              sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel.
-                            </p>
-                          </div>
-                          <div class="col-sm-12">
-                            <hr>
-                          </div>
-                          <div class="col-xs-2 col-sm-1">
-                            <time datetime="2014-09-20" class="icon">
-                              <strong>Jan</strong>
-                              <span>10</span>
-                            </time>
-                          </div>
-                          <div class="col-xs-10 col-sm-11">
-                            <h6 class="no-margin"><a href="">World Report</a></h6>
-
-                            <p>
-                              Morning our be dry. Life also third land after first beginning to evening cattle created
-                              let subdue you'll winged don't Face firmament.
-                              You winged you're was Fruit divided signs lights i living cattle yielding over light
-                              life life sea, so deep.
-                              Abundantly given years bring were after. Greater you're meat beast creeping behold he
-                              unto She'd doesn't. Replenish brought kind gathering Meat.
-                            </p>
-                          </div>
-                          <div class="col-sm-12">
-                            <br>
-                          </div>
-                        </div>
+                      <div class="tab-pane fade in active" id="training-program">
+                        Training
                       </div>
-                      <div class="tab-pane fade" id="a2">
-                        <div class="alert alert-info fade in">
-                          <button class="close" data-dismiss="alert">
-                            &#xD7;
-                          </button>
-                          <i class="fa-fw fa fa-info"></i>
-                          <strong>51 new members </strong>joined today!
-                        </div>
-                        <div class="user" title="email@company.com">
-                          <img src="assets/img/avatars/female.png" alt="demo user"><a href="">Jenn Wilson</a>
-
-                          <div class="email">
-                            travis@company.com
-                          </div>
-                        </div>
-                        <div class="user" title="email@company.com">
-                          <img src="assets/img/avatars/male.png" alt="demo user"><a href="">Marshall Hitt</a>
-
-                          <div class="email">
-                            marshall@company.com
-                          </div>
-                        </div>
-                        <div class="user" title="email@company.com">
-                          <img src="assets/img/avatars/male.png" alt="demo user"><a href="">Joe Cadena</a>
-
-                          <div class="email">
-                            joe@company.com
-                          </div>
-                        </div>
-                        <div class="user" title="email@company.com">
-                          <img src="assets/img/avatars/male.png" alt="demo user"><a href="">Mike McBride</a>
-
-                          <div class="email">
-                            mike@company.com
-                          </div>
-                        </div>
-                        <div class="user" title="email@company.com">
-                          <img src="assets/img/avatars/male.png" alt="demo user"><a href="">Travis Wilson</a>
-
-                          <div class="email">
-                            travis@company.com
-                          </div>
-                        </div>
-                        <div class="user" title="email@company.com">
-                          <img src="assets/img/avatars/male.png" alt="demo user"><a href="">Marshall Hitt</a>
-
-                          <div class="email">
-                            marshall@company.com
-                          </div>
-                        </div>
-                        <div class="user" title="Joe Cadena joe@company.com">
-                          <img src="assets/img/avatars/male.png" alt="demo user"><a href="">Joe Cadena</a>
-
-                          <div class="email">
-                            joe@company.com
-                          </div>
-                        </div>
-                        <div class="user" title="email@company.com">
-                          <img src="assets/img/avatars/male.png" alt="demo user"><a href="">Mike McBride</a>
-
-                          <div class="email">
-                            mike@company.com
-                          </div>
-                        </div>
-                        <div class="user" title="email@company.com">
-                          <img src="assets/img/avatars/male.png" alt="demo user"><a href="">Marshall Hitt</a>
-
-                          <div class="email">
-                            marshall@company.com
-                          </div>
-                        </div>
-                        <div class="user" title="email@company.com">
-                          <img src="assets/img/avatars/male.png" alt="demo user"><a href="">Joe Cadena</a>
-
-                          <div class="email">
-                            joe@company.com
-                          </div>
-                        </div>
-                        <div class="user" title="email@company.com">
-                          <img src="assets/img/avatars/male.png" alt="demo user"><a href=""> Mike McBride</a>
-
-                          <div class="email">
-                            mike@company.com
-                          </div>
-                        </div>
-                        <div class="text-center">
-                          <ul class="pagination pagination-sm">
-                            <li class="disabled">
-                              <a href="">Prev</a>
-                            </li>
-                            <li class="active">
-                              <a href="">1</a>
-                            </li>
-                            <li>
-                              <a href="">2</a>
-                            </li>
-                            <li>
-                              <a href="">3</a>
-                            </li>
-                            <li>
-                              <a href="">...</a>
-                            </li>
-                            <li>
-                              <a href="">99</a>
-                            </li>
-                            <li>
-                              <a href="">Next</a>
-                            </li>
-                          </ul>
-                        </div>
+                      <div class="tab-pane fade" id="food-program">
+                        Food
                       </div>
-                      <!-- end tab -->
+                      <div class="tab-pane fade" id="measurements">
+                        Measurement
+                      </div>
+                      <div class="tab-pane fade" id="images">
+                        Images
+                      </div>
                     </div>
                   </div>
                 </div>
