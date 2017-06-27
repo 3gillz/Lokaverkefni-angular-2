@@ -101,7 +101,7 @@
                         </li>
                         <li>
                           <p class="text-muted">
-                            <i class="fa fa-envelope"></i>&#xA0;&#xA0;<a href="{{customer.email}}">{{customer.email}}</a>
+                            <i class="fa fa-envelope"></i>&#xA0;&#xA0;<a href="mailto:{{customer.email}}">{{customer.email}}</a>
                           </p>
                         </li>
                         <li>
@@ -192,12 +192,6 @@
                   <div class="padding-10">
                     <ul class="nav nav-tabs tabs-pull-right">
                       <li class="active">
-                        <a href="#training-program" data-toggle="tab">{{'Training program' | i18n}}</a>
-                      </li>
-                      <li>
-                        <a href="#food-program" data-toggle="tab">{{'Food program' | i18n}}</a>
-                      </li>
-                      <li>
                         <a href="#measurements" data-toggle="tab">{{'Measurements' | i18n}}</a>
                       </li>
                       <li>
@@ -205,17 +199,36 @@
                       </li>
                     </ul>
                     <div class="tab-content padding-top-10">
-                      <div class="tab-pane fade in active" id="training-program">
-                        Training
-                      </div>
-                      <div class="tab-pane fade" id="food-program">
-                        Food
-                      </div>
-                      <div class="tab-pane fade" id="measurements">
-                        Measurement
+                      <div class="tab-pane fade in active " id="measurements">
+                        <sa-datatable [options]="options"
+                         [detailsFormat]="detailsFormat"
+                         tableClass="display projects-table table table-striped table-bordered table-hover"
+                         width="100%">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Date</th>
+                    <th>BMI</th>
+                    <th>LBI</th>
+                    <th>Fat %</th>
+                    <th>Kg</th>
+                  </tr>
+                </thead>
+              </sa-datatable>
                       </div>
                       <div class="tab-pane fade" id="images">
-                        Images
+                        <div id="content">
+  <div class="row">
+    <div class="page-title text-align-center">
+      <a class="btn btn-xs btn-info">{{'Upload new image' | i18n}}</a>
+    </div>
+  </div>
+  <div class="row">
+      <sa-gallery class="col-sm-12" [pictures]="customerService.pictures" (deleteReques)="onDelete(picture)" (editReques)="onEdit(picture)"></sa-gallery>
+  </div>
+</div>
+<!-- progressImageModal -->
+
                       </div>
                     </div>
                   </div>
@@ -230,3 +243,4 @@
   </div>
   <!-- end row -->
 </div>
+
