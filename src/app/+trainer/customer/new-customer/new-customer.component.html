@@ -36,16 +36,22 @@
     </div>
 
     <div class="row">
-      <section class="col col-3">
-        <label class="input"> <i class="icon-prepend fa fa-user"></i>
-          <input type="" formControlName="kennitala" placeholder="Kennitala">
+      <section class="col col-3">      
+        <label class="input"><i class="icon-prepend fa fa-columns"></i>
+          <input type="text" formControlName="kennitala" placeholder="Kennitala" maxlength="10">
         </label>
+        <small *ngIf="submitted && !customerForm.controls.kennitala.valid">
+         {{'Kennitala not valid' | i18n}}
+        </small>
       </section>
 
       <section class="col col-3">
         <label class="input"> <i class="icon-prepend fa fa-phone"></i>
           <input type="tel" formControlName="phone" placeholder="Phone">
         </label>
+        <small *ngIf="submitted && !customerForm.controls.phone.valid">
+          {{'Phone number not valid' | i18n}}
+        </small>
       </section>
 
 <section class="col col-3">
@@ -58,6 +64,9 @@
             <option value="4">{{'Helicopter' | i18n}}</option>
 
           </select> <i></i> </label>
+        <small *ngIf="submitted && !customerForm.controls.gender.valid">
+          {{'Please select gender' | i18n}}
+        </small>
       </section>
 
 <section class="col col-3">
@@ -72,6 +81,27 @@
           </select> <i></i> </label>
       </section>
     </div>
+
+      <div class="row">
+          <section class="col col-6">
+      <label class="input"> <i class="icon-append fa fa-lock"></i>
+        <input type="password" formControlName="password" placeholder="{{'Pick password' | i18n}}"  pattern="((?=.*\d)(?=.*[A-Z])(?=.*\W).{6,24})">
+        <b class="tooltip tooltip-bottom-right">{{ miscService.passwordConditions | i18n}}</b>
+      </label>
+      <small *ngIf="submitted && !customerForm.controls.password.valid">
+        {{ miscService.passwordConditions | i18n}}
+      </small>
+    </section>
+
+    <section class="col col-6">
+      <label class="input"> <i class="icon-append fa fa-lock"></i>
+        <input type="password" formControlName="confirmPassword" placeholder="{{'Confirm password' | i18n}}" autocomplete="off">
+      </label>
+      <small *ngIf="submitted && !customerForm.controls.confirmPassword.valid">
+        {{'Password do not match' | i18n}}
+      </small>
+    </section>
+    </div>
   </fieldset>
 
     <fieldset>
@@ -80,6 +110,9 @@
         <label class="input"> <i class="icon-prepend fa fa-expand"></i>
           <input type="number" formControlName="height" placeholder="Height" >
         </label>
+        <small *ngIf="submitted && !customerForm.controls.height.valid">
+          {{'Please enter height' | i18n}}
+        </small>
       </section>
 
       <section class="col col-3">
@@ -106,31 +139,28 @@
     <div class="row">
       <section class="col col-2">
         <label class="select">
-          <select formControlName="zipcodes_ZIP">
-            <option value="" selected="" disabled="">{{'Zipcode' | i18n}}</option>
-            <option *ngFor="let zipcode of zipcodes" >{{zipcode.ZIP}}</option>
-          
+          <select formControlName="zipcodes_ZIP" #zip (change)="zipCodeChange(zip.value)" [(ngModel)]="initialZipcode">
+            <option value="-1" selected="" disabled="">{{'Zipcode' | i18n}}</option>
+            <option *ngFor="let zipcode of zipcodes" >{{zipcode.ZIP}}</option>         
           </select> <i></i> </label>
+        <small *ngIf="submitted && !customerForm.controls.zipcodes_ZIP.valid">
+          {{'Please select Zipcode' | i18n}}
+        </small>
       </section>
 
       <section class="col col-4">
         <label class="input" > <i class="icon-prepend fa fa-home"></i>
-          <input type="text" name="place" id="place" value="">
+          <input class="readonly" type="text" value="{{ place | i18n }}" readonly>
           
         </label>
       </section>
 
     <section class="col col-6">
       <label for="address" class="input"> <i class="icon-prepend fa fa-home"></i>
-        <input type="text" formControlName="address" id="address" placeholder="Address">
+        <input type="text" formControlName="address" placeholder="Address">
       </label>
     </section>
 
-    <section class="col col-6">
-      <label for="address" class="input"> <i class="icon-prepend fa fa-picture-o"></i>
-        <input type="text" formControlName="profileImagePath" placeholder="profileImage">
-      </label>
-    </section>
     </div>
   </fieldset>
 

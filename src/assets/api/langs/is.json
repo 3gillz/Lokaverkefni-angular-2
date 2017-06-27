@@ -115,5 +115,41 @@
     "Wed":"Mið",
     "Thu":"Fim",
     "Fri":"Fös",
-    "Sat":"Lau"
+    "Sat":"Lau",
+    "Add training":"Bæta við æfingu",
+    "Reps":"Endurtekning",
+    "Sets":"Sett",
+    "Duration":"Lengd",
+    "Rest between in minutes":"Hvíld milli æfinga í mínútum",
+    "Rest":"Hvíld",
+    "Select Training Color":"Veldu lit á æfingu",
+    "Save trainingprogram":"Vista æfingarprógram",
+    "Type":"Gerð",
+    "Made By":"Gert af",
+    "Action":"Aðgerð",
+    "Watch Video":"Sjá á myndband",
+    "Link":"Slóð",
+    "Add food portion":"Bæta við máltíð",
+    "Grams":"Grömm",
+    "Time of day":"Tími dags",
+    "Select time":"Veldu tíma",
+    "Save foodprogram":"Vista matarprógram",
+    "Add 4 point measure":"Bæta við 4 punkta mælingu",
+    "Tricep":"Þríhöfði",
+    "Thigh":"Læri",
+    "Suprailiac":"Ofan mjöðm",
+    "Abdominal":"Hviður",
+    "Add 7 point measure":"Bæta við 7 punkta mælingu",
+    "Chest":"Bringa",
+    "Axillary":"Öxl",
+    "Subscapular":"Herðablað",
+    "Add girth measure":"Bæta við ummáls mælingu",
+    "Add goal":"Bæta við markmiði",
+    "Percentage":"Prósenta",
+    "Start date":"Byrja markmið",
+    "Due date":"Enda markmið"
+    
+
+
+    
 }
