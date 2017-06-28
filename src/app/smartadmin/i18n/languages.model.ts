@@ -10,7 +10,8 @@ export const languages: any = [
     "key": "is",
     "alt": "Iceland",
     "title": "Íslenska"
-  },
+  }
+ /* ,
   {
     "key": "fr",
     "alt": "France",
@@ -55,5 +56,5 @@ export const languages: any = [
     "key": "kr",
     "alt": "Korea",
     "title": "한국어"
-  }
+  }*/
 ];

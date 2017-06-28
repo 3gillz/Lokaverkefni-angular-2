@@ -26,7 +26,7 @@ export class LogoutComponent implements OnInit {
 
                }
   showPopup(){
-    let contentText: string = this.i18nService.getTranslation("You can improve your security further after logging out by closing this opened browser");
+    let contentText: string = this.i18nService.getTranslation("Are you sure you want to log out?");
     let titleText: string = this.i18nService.getTranslation("Logout");
     let yes: string = this.i18nService.getTranslation("Yes");
     let no: string = this.i18nService.getTranslation("No");

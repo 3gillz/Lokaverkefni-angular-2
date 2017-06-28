@@ -28,7 +28,7 @@ export class FoodProgramCalendarComponent implements OnInit {
     this.i18nService.calendarLang.subscribe((calendarLang) => {
       this.language = calendarLang;
     });
-    this.foodProgramService.eventAdded.subscribe((eventAdded) => {
+    this.foodProgramService.foodeventAdded.subscribe((eventAdded) => {
       if(this.rendered){
         this.refetchEvents()
       }

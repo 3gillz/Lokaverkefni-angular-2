@@ -58,7 +58,7 @@ export class CustomerListComponent implements OnInit {
       {"data": "kennitala"},
       {"data": "gender"},
       {"data": "height"}
-    ],  
+    ],
     "order": [[1, 'asc']]
   }
 

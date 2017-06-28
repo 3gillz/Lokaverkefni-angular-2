@@ -12,7 +12,7 @@ export class FoodProgramService {
 
 
   public foodPortionEvents: Array<CalendarFoodPortion> = [];
-  public eventAdded: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public foodeventAdded: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   foodSumArray: FoodPortionSum[] = [];
   nutritionSum : FoodPortionSum;
 
@@ -27,7 +27,7 @@ export class FoodProgramService {
     const dropId = event.id;
     event.id = this.id;
     this.foodPortionEvents.push(event);
-    this.eventAdded.next(true);
+    this.foodeventAdded.next(true);
   }
 
   viewFoodProgram(FPMID: number) {
@@ -74,8 +74,26 @@ export class FoodProgramService {
         )
     });
   }
-  getPortionsInProgram(TPMID: number){
-    let url = this.apiRoot + "api/FoodPortion/Get/"+ TPMID;
+  getTraineesFoodProgram(){
+    let url = this.apiRoot + "api/FoodProgramDate/GetCurrentByCID";
+    let token = localStorage.getItem('access_token');
+    let headers = new Headers({ 'Authorization': "Bearer " + token, 'Content-Type': 'application/x-www-form-urlencoded' });
+    let requestOptions = new RequestOptions({ headers: headers });
+    return new Promise((resolve) => {
+      this.http.get(url, requestOptions)
+        .map(res => res.json())
+        .subscribe(
+          data => {
+            this.getPortionsInProgram(data.FPMID);
+            resolve(data.name);
+          })
+    });
+  }
+
+
+
+  getPortionsInProgram(FPMID: number){
+    let url = this.apiRoot + "api/FoodPortion/Get/"+ FPMID;
     let token = localStorage.getItem('access_token');
     let headers = new Headers({ 'Authorization': "Bearer " + token, 'Content-Type': 'application/x-www-form-urlencoded' });
     let requestOptions = new RequestOptions({ headers: headers });
@@ -83,7 +101,9 @@ export class FoodProgramService {
       this.http.get(url, requestOptions)
         .map(res => res.json())
         .subscribe(
-          data => { 
+          data => {
+            console.log("portions: ")
+            console.log(data)
             this.prepTrainingsForCalendar(data as FoodPortionDTO);
           }
         )
@@ -106,7 +126,9 @@ export class FoodProgramService {
       );
       this.foodPortionEvents.push(portion);
     }
-    this.eventAdded.next(true);
+    console.log("portions events: ")
+    console.log(this.foodPortionEvents)
+    this.foodeventAdded.next(true);
     this.foodProgramLoaded = true;
   }
   getDow(trainings):number[]{

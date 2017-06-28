@@ -68,7 +68,7 @@ export class AccountService {
   }
 
   logout() {
-    localStorage.clear();
+    window.localStorage.clear();
     this.router.navigate(["login/"]);
   }
 
