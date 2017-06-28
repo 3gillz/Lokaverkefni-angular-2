@@ -48,8 +48,8 @@
               </section>
             </fieldset>
             <footer>
-              <button (click)="login(email, password)" class="btn btn-primary">
-                {{ 'Sign in' | i18n }}
+              <button (click)="login(email, password)" class="btn btn-primary" [disabled]="!resolved">
+                <i *ngIf="!resolved" class="fa fa-spinner fa-spin"></i> {{'Sign in' | i18n}}
               </button>
             </footer>
           </form>

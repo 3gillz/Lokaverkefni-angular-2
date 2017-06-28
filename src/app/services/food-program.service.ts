@@ -195,8 +195,6 @@ export class FoodProgramService {
       kcalSum / 7,
     );
     this.nutritionSum = nutritionSum;
-    console.log(nutritionSum);
-    console.log(this.nutritionSum)
   }
 
   createFoodProgram(name){

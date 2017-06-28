@@ -18,13 +18,18 @@ export class AccountService {
     let body = `grant_type=password&username=${email.value}&password=${password.value}`;
     let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
     let options = new RequestOptions({ headers: headers });
+    return new Promise((resolve) => {
     this.http.post(loginUrl, body, options)
       .subscribe(response => {
         localStorage.setItem('access_token', response.json().access_token);
         this.afterLoginResolver(response.json().path);
+        resolve(response);
       }, error => {
-        this.popUpService.errorMessage(error.json().error_description)
+        this.popUpService.errorMessage(error.json().error_description);
+        resolve(error);        
       });
+
+    })
   }
 
   afterLoginResolver(path: string){
@@ -63,7 +68,7 @@ export class AccountService {
   }
 
   logout() {
-    localStorage.clear()
+    localStorage.clear();
     this.router.navigate(["login/"]);
   }
 

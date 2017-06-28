@@ -12,11 +12,14 @@ export class LoginComponent implements OnInit {
     private accountService: AccountService
   ) { }
 
+  resolved: boolean = true;
   ngOnInit() {
   }
   
   login(email, password){
+    this.resolved =false;
     this.accountService.login(email, password)
+      .then(response => this.resolved = true )
   }
 
 }
