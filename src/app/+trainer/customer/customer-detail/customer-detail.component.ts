@@ -1,3 +1,5 @@
+import { PopUpService } from './../../../services/popup.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MeasurementMM } from './../../../models/measurementMM';
 import { FoodProgram } from './../../../models/foodProgram';
 import { TrainingProgram } from './../../../models/trainingProgram';
@@ -10,6 +12,7 @@ import { Observable } from "rxjs/Rx";
 
 import { CustomerService } from './../../customer.service';
 
+declare var $ : any;
 
 @Component({
   selector: 'app-customer-detail',
@@ -25,12 +28,15 @@ export class CustomerDetailComponent implements OnInit {
     goals : Goals[] = [];
     CID : number;
     measurementsMM : MeasurementMM[] = [];
+    goalForm : FormGroup;
 
   constructor(
     private location: Location,
     private route: ActivatedRoute,
-    private customerService : CustomerService
-    ){}
+    private customerService : CustomerService,
+    private popUpService : PopUpService
+    ){
+    }
     date: any;
   ngOnInit() {
     this.date = new Date();
