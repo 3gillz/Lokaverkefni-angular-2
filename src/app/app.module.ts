@@ -63,6 +63,7 @@ import { ExerciseDetailModalComponent } from './+trainee/modals/exercise-detail-
 import { FoodProgramCalendarComponent } from './+trainer/food-program/food-program-calendar/food-program-calendar.component';
 import { AddPortionComponent } from './+trainer/food-program/food-program-new/add-portion/add-portion.component';
 import { SaveFoodProgramComponent } from './+trainer/food-program/food-program-new/save-food-program/save-food-program.component';
+import { NewGoalModalComponent } from './+trainer/+modals/new-goal-modal/new-goal-modal.component';
 
 @NgModule({
   declarations: [
@@ -93,6 +94,7 @@ import { SaveFoodProgramComponent } from './+trainer/food-program/food-program-n
     FoodProgramCalendarComponent,
     AddPortionComponent,
     SaveFoodProgramComponent,
+    NewGoalModalComponent,
   ],
   imports: [
     SmartadminInputModule,

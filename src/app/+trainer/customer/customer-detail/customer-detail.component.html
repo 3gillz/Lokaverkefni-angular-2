@@ -152,35 +152,33 @@
                     </div>
                     <div class="col-sm-3">
                       <h1>
-                        <small>Connections</small>
+                        <small>{{'Action menu' | i18n}}</small>
                       </h1>
-                      <ul class="list-inline friends-list">
-                        <li><img src="assets/img/avatars/1.png" alt="friend-1">
-                        </li>
-                        <li><img src="assets/img/avatars/2.png" alt="friend-2">
-                        </li>
-                        <li><img src="assets/img/avatars/3.png" alt="friend-3">
-                        </li>
-                        <li><img src="assets/img/avatars/4.png" alt="friend-4">
-                        </li>
-                        <li><img src="assets/img/avatars/5.png" alt="friend-5">
-                        </li>
-                        <li><img src="assets/img/avatars/male.png" alt="friend-6">
+                      <ul class="list-inline actions-list">
+                        <li>
+                          <p class="text-muted">
+                            <i class="fa fa-trophy"></i>&#xA0;&#xA0;<span class="txt-color-darken"><button class="btn btn-info btn-actions btn-xs" (click)="goalModal.show()">{{'Add goal' | i18n}}</button>
+                            </span>
+                          </p>
                         </li>
                         <li>
-                          <a href="">413 more</a>
+                          <p class="text-muted">
+                            <i class="fa fa-trophy"></i>&#xA0;&#xA0;<span class="txt-color-darken"><button class="btn btn-info btn-actions btn-xs" (click)="fourPointModal.show()">{{'Add 4 point measure' | i18n}}</button>
+                            </span>
+                          </p>
                         </li>
-                      </ul>
-                      <h1>
-                        <small>Recent visitors</small>
-                      </h1>
-                      <ul class="list-inline friends-list">
-                        <li><img src="assets/img/avatars/male.png" alt="friend-1">
+                        <li>
+                          <p class="text-muted">
+                            <i class="fa fa-trophy"></i>&#xA0;&#xA0;<span class="txt-color-darken"><button class="btn btn-info btn-actions btn-xs" (click)="sevenPointModal.show()">{{'Add 7 point measure' | i18n}}</button>
+                            </span>
+                          </p>
                         </li>
-                        <li><img src="assets/img/avatars/female.png" alt="friend-2">
-                        </li>
-                        <li><img src="assets/img/avatars/female.png" alt="friend-3">
-                        </li>
+                        <li>
+                          <p class="text-muted">
+                            <i class="fa fa-trophy"></i>&#xA0;&#xA0;<span class="txt-color-darken"><button class="btn btn-info btn-actions btn-xs" (click)="girthModal.show()">{{'Add girth measure' | i18n}}</button>
+                            </span>
+                          </p>
+                        </li>                        
                       </ul>
                     </div>
                   </div>
@@ -200,34 +198,31 @@
                     </ul>
                     <div class="tab-content padding-top-10">
                       <div class="tab-pane fade in active " id="measurements">
-                        <sa-datatable [options]="options"
-                         [detailsFormat]="detailsFormat"
-                         tableClass="display projects-table table table-striped table-bordered table-hover"
-                         width="100%">
-                <thead>
-                  <tr>
-                    <th></th>
-                    <th>Date</th>
-                    <th>BMI</th>
-                    <th>LBI</th>
-                    <th>Fat %</th>
-                    <th>Kg</th>
-                  </tr>
-                </thead>
-              </sa-datatable>
+                        <sa-datatable [options]="options" [detailsFormat]="detailsFormat" tableClass="display projects-table table table-striped table-bordered table-hover"
+                          width="100%">
+                          <thead>
+                            <tr>
+                              <th></th>
+                              <th>Date</th>
+                              <th>BMI</th>
+                              <th>LBI</th>
+                              <th>Fat %</th>
+                              <th>Kg</th>
+                            </tr>
+                          </thead>
+                        </sa-datatable>
                       </div>
                       <div class="tab-pane fade" id="images">
                         <div id="content">
-  <div class="row">
-    <div class="page-title text-align-center">
-      <a class="btn btn-xs btn-info">{{'Upload new image' | i18n}}</a>
-    </div>
-  </div>
-  <div class="row">
-      <sa-gallery class="col-sm-12" [pictures]="customerService.pictures" (deleteReques)="onDelete(picture)" (editReques)="onEdit(picture)"></sa-gallery>
-  </div>
-</div>
-<!-- progressImageModal -->
+                          <div class="row">
+                            <div class="page-title text-align-center">
+                              <a class="btn btn-xs btn-info">{{'Upload new image' | i18n}}</a>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <sa-gallery class="col-sm-12" [pictures]="customerService.pictures" (deleteReques)="onDelete(picture)" (editReques)="onEdit(picture)"></sa-gallery>
+                          </div>
+                        </div>
 
                       </div>
                     </div>
@@ -244,3 +239,11 @@
   <!-- end row -->
 </div>
 
+<!--Modals-->
+<!--Goal modal begins-->
+<div bsModal #goalModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+  aria-hidden="true">
+
+  <app-new-goal-modal [CID]="CID" (close)="goalModal.hide()"></app-new-goal-modal>
+</div>
+<!--Goal modal ends-->

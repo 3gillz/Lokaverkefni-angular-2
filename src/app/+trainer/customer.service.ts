@@ -93,5 +93,29 @@ getCustomer(CID: number){
     }
   }
 
+    addNewGoal(goalForm, due, start, cid): Promise<boolean>{
+    let optionalBody = '';
+    for (let x = 0; x < Object.keys(goalForm).length; x++) {
+      let value = (<any>Object).values(goalForm)[x];
+      if (value !== null && value !== "") {
+        optionalBody += `&${Object.keys(goalForm)[x]}=${(<any>Object).values(goalForm)[x]}`;
+      }
+    }
+    let body = `${goalForm}`+ "&dueDate=" + due + "&startDate="+ start + "&customer_CID="+ cid + optionalBody;
+    let url = this.apiRoot + "api/Goals/Add";
+    let token = localStorage.getItem('access_token');
+    let headers = new Headers({ 'Authorization': "Bearer " + token, 'Content-Type': 'application/x-www-form-urlencoded' });
+    let requestOptions = new RequestOptions({ headers: headers });
+    return new Promise((resolve) => {
+      this.http.post(url, body, requestOptions)
+        .map(res => res.json())
+        .subscribe((data) => {
+          resolve(data);
+          data === true ? this.popUpService.successMessage("Goal added", "Just now") : this.popUpService.errorMessage("Sorry, something went wrong");
+        })
+        
+    });
+  }
+
 
 }
