@@ -170,7 +170,7 @@ export class FoodProgramService {
         colestrolSum += this.foodSumArray[x].colestrolSum * gramCalc;
         fatcSum += this.foodSumArray[x].fatSum * gramCalc;
         fiberSum += this.foodSumArray[x].fiberSum * gramCalc;
-        kcalSum += this.foodSumArray[x].kcalSum * gramCalc; 
+        kcalSum += this.foodSumArray[x].kcalSum * gramCalc;
         proteinSum += this.foodSumArray[x].proteinSum * gramCalc;
         saturatedFatSum += this.foodSumArray[x].saturatedFatSum * gramCalc;
         unsaturatedFatSum += this.foodSumArray[x].unsaturatedFatSum * gramCalc;
@@ -191,9 +191,12 @@ export class FoodProgramService {
       unsaturatedFatSum,
       waterSum,
       addedSugarSum,
-      grams
+      grams,
+      kcalSum / 7,
     );
     this.nutritionSum = nutritionSum;
+    console.log(nutritionSum);
+    console.log(this.nutritionSum)
   }
 
   createFoodProgram(name){

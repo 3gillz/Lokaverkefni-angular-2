@@ -23,6 +23,10 @@ export class FoodProgramNewComponent implements OnInit {
   ngOnDestroy() {
     if(this.foodProgramService.foodPortionEvents.length > 0){
       localStorage.setItem('tempFoodProgram', JSON.stringify(this.foodProgramService.foodPortionEvents))
+    }else{
+      if(localStorage.getItem('tempFoodProgram')){
+        localStorage.removeItem('tempFoodProgram');
+      }
     }
 
   }

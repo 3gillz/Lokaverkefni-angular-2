@@ -59,6 +59,7 @@ export class FoodPortionSum {
         public unsaturatedFatSum: number,
         public waterSum: number,
         public addedSugarSum: number,
-        public grams?: number
+        public grams?: number,
+        public kcalAvg?: number
     ) { }
 }

@@ -6,9 +6,17 @@
       <span>> {{'Create' | i18n}}</span>
       </h1>
     </span>
-    <div *ngIf="foodProgramService.nutritionSum">
+<!--    <div *ngIf="foodProgramService.nutritionSum">
       <p>Kcal all week: {{foodProgramService.nutritionSum.kcalSum | number : '1.0-0' }}</p>
-      <p>Weigh: {{foodProgramService.nutritionSum.grams | number : '1.0-0' }}</p>
+      <p>Average per day: {{foodProgramService.nutritionSum.kcalAvg | number : '1.0-0' }}</p>
+    </div>-->
+    <div class="col-xs-4">
+      <table *ngIf="foodProgramService.nutritionSum" class="table">
+        <tr>
+          <th>Kcal all week: {{foodProgramService.nutritionSum.kcalSum | number : '1.0-0' }}</th>
+          <th>Average per day: {{foodProgramService.nutritionSum.kcalAvg | number : '1.0-0' }}</th> 
+        </tr>
+      </table>
     </div>
   </div>
   <sa-widgets-grid>
