@@ -4,6 +4,7 @@ import { CalendarFoodPortion, FoodItem, FoodPortionSum } from './../../../../mod
 import { MiscService } from './../../../../services/misc.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+declare var $ : any;
 
 @Component({
   selector: 'app-add-portion',
@@ -14,11 +15,11 @@ export class AddPortionComponent implements OnInit {
 
   public activeColorClass: any;
   public addPortionForm: FormGroup;
-  foodItemList: any;
+  foodItemList: FoodItem[];
   langSetting: any;
   dow: number[] = [];
   selectedItem: FoodItem;
-  foodItemArray: FoodItem [] = [];
+
   submitted: boolean;
   noDays: boolean;
 
@@ -45,7 +46,7 @@ export class AddPortionComponent implements OnInit {
     this.activeColorClass = this.colorClassNames[0];
     this.miscService.getFoodItems()
       .then(data =>{
-        this.foodItemList = data;
+        this.foodItemList = data as FoodItem[];
         this.selectedItem = this.foodItemList[0];
       })
   }
@@ -59,7 +60,6 @@ export class AddPortionComponent implements OnInit {
   }
 
   checkFoodPortionEvent(index: number, addPortionForm) {
-    console.log(addPortionForm)
     this.submitted = true;
     if(this.dow.length == 0){
       this.noDays = true;
@@ -67,72 +67,34 @@ export class AddPortionComponent implements OnInit {
     } 
     this.noDays = false;       
     if (addPortionForm.grams) {
-      this.addFoodPortionEvent(index, addPortionForm);
+      this.addFoodPortionEvent(index, addPortionForm.grams);
       this.resetDowCheckbox();
       this.submitted = false;
     }
     
   }
 
-  addFoodPortionEvent(index: number, addPortionForm) {
+  addFoodPortionEvent(index: number, grams) {
     let timeOfDay = null;
+    let tod=  $('#time').val();
+    let pid = this.foodProgramService.generateStringId();
     let event = new CalendarFoodPortion(
       this.foodProgramService.generateId(),
+      this.foodItemList[index].FIID,
+      pid,
       this.selectedItem.name,
       this.activeColorClass.bg + ' ' + this.activeColorClass.txt,
-      addPortionForm.grams,
-      addPortionForm.timeOfDay,
+      grams,
+      tod,
+      this.selectedItem.kcal * (grams /100),
       this.dow
     );
     this.foodProgramService.addEvent(event);
-    //this.addTofoodItemArray(addPortionForm.grams);
+    this.foodProgramService.addToFoodSumArray(this.selectedItem, this.dow.length, grams, pid);
     this.addPortionForm.reset();
     this.dow = [];
   }
 
-  foodItemArrayId: number = 0;
-  addTofoodItemArray(grams: number){
-    let item: FoodItem = this.selectedItem;
-    item.grams = grams;
-    item.FIID = this.foodItemArrayId++;
-    for(let x = 0; x < this.dow.length; x++){
-      this.foodItemArray.push(item);
-    }
-    this.calculateNutritionInProgram();
-  }
-
-
-  calculateNutritionInProgram(){
-    let carbohydrateSum = 0; let colestrolSum = 0;
-    let fatcSum = 0; let fiberSum = 0; let kcalSum = 0;
-    let proteinSum = 0; let saturatedFatSum = 0;
-    let unsaturatedFatSum = 0; let waterSum = 0; let addedSugarSum = 0;
-    for(let x = 0; x < this.foodItemArray.length; x++){
-        let gramCalc = (this.foodItemArray[x].grams / 100);
-        carbohydrateSum += this.foodItemArray[x].carbohydrate * gramCalc;
-        colestrolSum += this.foodItemArray[x].colestrol * gramCalc;
-        fatcSum += this.foodItemArray[x].fat * gramCalc;
-        fiberSum += this.foodItemArray[x].fiber * gramCalc;
-        kcalSum += this.foodItemArray[x].kcal * gramCalc; 
-        proteinSum += this.foodItemArray[x].protein * gramCalc;
-        saturatedFatSum += this.foodItemArray[x].saturatedFat * gramCalc;
-        unsaturatedFatSum += this.foodItemArray[x].unsaturatedFat * gramCalc;
-        waterSum += this.foodItemArray[x].water * gramCalc;
-        addedSugarSum += this.foodItemArray[x].addedSugar * gramCalc;
-    };
-    let nutritionSum = new FoodPortionSum(
-      carbohydrateSum,
-      colestrolSum,
-      fatcSum,
-      fiberSum,
-      kcalSum,
-      proteinSum,
-      saturatedFatSum,
-      unsaturatedFatSum,
-      waterSum,
-      addedSugarSum
-    );
-  }
 
   updateDowCheckbox(value, event) {
     if (event.target.checked) {

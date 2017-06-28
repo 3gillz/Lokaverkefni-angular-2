@@ -16,7 +16,7 @@ export class SaveFoodProgramComponent implements OnInit {
 
   ngOnInit() {
   }
-  saveTrainingProgram(name) {
+  saveFoodProgram(name) {
     if (this.foodProgramService.foodPortionEvents.length == 0) {
       this.popUpService.infoMessage("Cannot save food program.", "Food program is empty.");
       return;
@@ -28,7 +28,7 @@ export class SaveFoodProgramComponent implements OnInit {
       this.popUpService.promtWithButtons("Save program?", "Programs cannot be edited once saved.", ["Edit More", "Save"])
         .then((data) => {
           if (data == "Save" || data == "Vista") {
-            console.log(this.foodProgramService.foodPortionEvents)
+            this.foodProgramService.createFoodProgram(name.value);
           }
         })
     }

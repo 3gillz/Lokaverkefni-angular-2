@@ -6,6 +6,10 @@
       <span>> {{'Create' | i18n}}</span>
       </h1>
     </span>
+    <div *ngIf="foodProgramService.nutritionSum">
+      <p>Kcal all week: {{foodProgramService.nutritionSum.kcalSum | number : '1.0-0' }}</p>
+      <p>Weigh: {{foodProgramService.nutritionSum.grams | number : '1.0-0' }}</p>
+    </div>
   </div>
   <sa-widgets-grid>
     <div class="row">

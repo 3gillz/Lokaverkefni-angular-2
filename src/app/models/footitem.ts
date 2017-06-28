@@ -1,10 +1,13 @@
 export class CalendarFoodPortion {
     constructor(
         public id: number,
+        public foodItem_FIID: number,
+        public fid: string,
         public title: string,
         public className: string,
-        public grams: number,
-        public start: Date,
+        public quantity: number,
+        public start: string,
+        public kcal: number,
         public dow?: number[]
     ) { }
 }
@@ -23,11 +26,29 @@ export class FoodItem {
         public water: number,
         public addedSugar: number,
         public suppliment?: boolean,
-        public grams?: number,
+        public quantity?: number,
+    ) { }
+}
+export class FoodPortionDTO {
+    constructor(
+        public FPID: number,
+        public quantity: number,
+        public foodItem_FIID : number,
+        public sunday: boolean,
+        public monday: boolean,
+        public tuesday: boolean,
+        public wednesday: boolean,
+        public thursday: boolean,
+        public friday: boolean,
+        public saturday: boolean,
+        public className: string,
+        public timeOfDay: string
     ) { }
 }
 export class FoodPortionSum {
     constructor(
+        public id: number,
+        public fid: string,
         public carbohydrateSum: number,
         public colestrolSum: number,
         public fatSum: number,
@@ -37,6 +58,7 @@ export class FoodPortionSum {
         public saturatedFatSum: number,
         public unsaturatedFatSum: number,
         public waterSum: number,
-        public addedSugarSum: number
+        public addedSugarSum: number,
+        public grams?: number
     ) { }
 }

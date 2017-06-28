@@ -21,6 +21,7 @@ import { TrainingProgramViewComponent } from './+trainer/training-program/traini
 import { FoodProgramComponent } from './+trainer/food-program/food-program.component';
 import { FoodProgramNewComponent } from './+trainer/food-program/food-program-new/food-program-new.component';
 import { FoodProgramListComponent } from './+trainer/food-program/food-program-list/food-program-list.component';
+import { FoodProgramViewComponent } from './+trainer/food-program/food-program-view/food-program-view.component';
 import { FoodItemsComponent } from './+trainer/food-items/food-items.component';
 import { FoodItemNewComponent } from './+trainer/food-items/food-item-new/food-item-new.component';
 import { FoodItemListComponent } from './+trainer/food-items/food-item-list/food-item-list.component';
@@ -84,7 +85,8 @@ const routes: Routes = [
         children: [
           {path: '', redirectTo: 'list', pathMatch: 'full'},
           {path: 'list', component: FoodProgramListComponent},
-          {path: 'new', component: FoodProgramNewComponent}
+          {path: 'new', component: FoodProgramNewComponent},
+          {path: ':id', component: FoodProgramViewComponent}
         ]
       },
       {path: 'fooditems', component: FoodItemsComponent,
@@ -136,6 +138,7 @@ export const RoutedComponents = [
   ExerciseEditComponent,
   FoodProgramComponent,
   FoodProgramListComponent,
+  FoodProgramViewComponent,
   FoodProgramNewComponent,
   FoodItemsComponent,
   FoodItemListComponent,
