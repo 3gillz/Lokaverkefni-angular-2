@@ -54,7 +54,7 @@ export class IvarComponent implements OnInit {
       kg: new FormControl('', <any>Validators)
     });
 
-        this.goalForm = new FormGroup({
+     this.goalForm = new FormGroup({
       customer_CID: new FormControl('', <any>Validators),
       kg: new FormControl('', <any>Validators),
       percentage: new FormControl('', <any>Validators),
