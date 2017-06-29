@@ -49,6 +49,8 @@ export class CustomerDetailComponent implements OnInit {
           this.customerService.customer  = this.customer;
           console.log("Frá Service" + this.customerService.customer)
           // console.log(data);
+          this.customerService.getCurrentFoodProgram(this.customer.CID);
+          this.customerService.getCurrentTrainingProgram(this.customer.CID);
         })
 
       this.customerService.getCustomerGoal(id)
@@ -62,7 +64,8 @@ export class CustomerDetailComponent implements OnInit {
           this.measurementsMM = measureMMData as MeasurementMM[];
           // console.log(this.measurementsMM);     
         })  
-
+      
+      
       // console.log(id)
       
       this.customerService.getProgressImages(id)

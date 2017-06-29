@@ -1,6 +1,6 @@
 import { MiscService } from './../../services/misc.service';
 import { Component, OnInit, Inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Http, Headers, RequestOptions } from '@angular/http';
 declare var $: any;
 
@@ -18,7 +18,8 @@ export class RegisterTraineeComponent implements OnInit {
     @Inject("apiRoot") private apiRoot,
     private activatedRoute: ActivatedRoute,
     private miscService: MiscService,
-    private http: Http
+    private http: Http,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -27,6 +28,9 @@ export class RegisterTraineeComponent implements OnInit {
         this.miscService.getTrainerCard(+params['id'])
           .then( data => {
             this.trainer = data;
+            if(!this.trainer){
+              this.router.navigate(['/login'])
+            }
           });
     });
   }

@@ -1,3 +1,5 @@
+import { TrainingProgram } from './../models/trainingProgram';
+import { FoodProgram } from './../models/foodProgram';
 import { Goals } from './../models/goals';
 import { Customer } from './../models/customer';
 import { GalleryImage } from './../models/galleryImage';
@@ -14,6 +16,8 @@ import { Router } from '@angular/router';
 @Injectable()
 export class CustomerService {
 
+currentFoodprogram: FoodProgram;
+currentTrainingprogram: TrainingProgram;
 customer : Customer;
 goal : Goals
   constructor
@@ -71,6 +75,76 @@ getCustomer(CID: number){
     });
   }
 
+  getCurrentFoodProgram(CID: number){
+    let url = this.apiRoot + "api/FoodProgramDate/GetCurrentByCID/" + CID;
+    let token = localStorage.getItem('access_token');
+    let headers = new Headers({ 'Authorization': "Bearer " + token, 'Content-Type': 'application/x-www-form-urlencoded' });
+    let requestOptions = new RequestOptions({ headers: headers });
+    return new Promise((resolve) => {
+      this.http.get(url, requestOptions)
+        .map(res => res.json())
+        .subscribe(data =>{
+          this.currentFoodprogram = data as FoodProgram;
+          resolve(data);
+        })
+    });
+  }
+
+  assignNewFoodgprogram(FPMID: number) {
+    let url = this.apiRoot + "api/FoodProgramDate/Add";
+    let body = `foodProgram_FPMID=${FPMID}&customer_CID=${this.customer.CID}`;
+    let token = localStorage.getItem('access_token');
+    let headers = new Headers({ 'Authorization': "Bearer " + token, 'Content-Type': 'application/x-www-form-urlencoded' });
+    let options = new RequestOptions({ headers: headers });
+    return new Promise((resolve) => {
+    this.http.post(url, body, options)
+      .map(res => res.json())
+      .subscribe(response => {
+        this.getCurrentFoodProgram(this.customer.CID);
+        this.popUpService.successMessage("Program assigned", "Just now")
+        resolve(response);
+      }, error => {
+        this.popUpService.errorMessage("Sorry, something went wrong");
+        resolve(error);        
+      });
+
+    })
+  }
+  assignNewTrainingprogram(TPID: number) {
+    let url = this.apiRoot + "api/TrainingProgramDate/Add";
+    let body = `trainingProgram_TPID=${TPID}&customer_CID=${this.customer.CID}`;
+    let token = localStorage.getItem('access_token');
+    let headers = new Headers({ 'Authorization': "Bearer " + token, 'Content-Type': 'application/x-www-form-urlencoded' });
+    let options = new RequestOptions({ headers: headers });
+    return new Promise((resolve) => {
+    this.http.post(url, body, options)
+      .map(res => res.json())
+      .subscribe(response => {
+        this.getCurrentTrainingProgram(this.customer.CID);
+        this.popUpService.successMessage("Program assigned", "Just now")
+        resolve(response);
+      }, error => {
+        this.popUpService.errorMessage("Sorry, something went wrong");
+        resolve(error);        
+      });
+
+    })
+  }
+
+  getCurrentTrainingProgram(CID: number){
+    let url = this.apiRoot + "api/TrainingProgramDate/GetCurrentByCID/" + CID;
+    let token = localStorage.getItem('access_token');
+    let headers = new Headers({ 'Authorization': "Bearer " + token, 'Content-Type': 'application/x-www-form-urlencoded' });
+    let requestOptions = new RequestOptions({ headers: headers });
+    return new Promise((resolve) => {
+      this.http.get(url, requestOptions)
+        .map(res => res.json())
+        .subscribe(data =>{
+          this.currentTrainingprogram = data as TrainingProgram;
+          resolve(data);
+        })
+    });
+  }
   // Get progress images for a user for for Customer detail page 
     getProgressImages(CID: number){
     let url = this.apiRoot + "api/ProgressImage/GetAllByCID/" + CID;

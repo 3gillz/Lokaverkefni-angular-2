@@ -1,3 +1,4 @@
+import { CustomerService } from './../../customer.service';
 import { TrainingProgramService } from './../../../services/training-program.service';
 import { Component, OnInit, Output, EventEmitter, HostListener } from '@angular/core';
 import { Observable } from "rxjs/Rx";
@@ -14,7 +15,8 @@ export class AssignTrainingprogramModalComponent implements OnInit {
   @Output() close: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
-    private trainingProgramService: TrainingProgramService
+    private trainingProgramService: TrainingProgramService,
+    private customerService: CustomerService
   ) { }
 
 
@@ -28,8 +30,12 @@ export class AssignTrainingprogramModalComponent implements OnInit {
   @HostListener('document:click', ['$event'])
   documentClick(event) {
     if(event.target.id === "assignTraining"){
-      //assign to trainee here
-      console.log(event.target.value);
+      this.customerService.assignNewTrainingprogram(event.target.value)
+      .then((data)=>{
+        if(data){
+          this.close.emit();
+        }
+      });
     }
   }
 

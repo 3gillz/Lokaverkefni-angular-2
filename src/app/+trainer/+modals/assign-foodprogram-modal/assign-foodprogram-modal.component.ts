@@ -1,3 +1,4 @@
+import { CustomerService } from './../../customer.service';
 import { FoodProgramService } from './../../../services/food-program.service';
 import { Component, OnInit, Output, EventEmitter, HostListener } from '@angular/core';
 import { Observable } from "rxjs/Rx";
@@ -15,7 +16,8 @@ export class AssignFoodprogramModalComponent implements OnInit {
   @Output() close: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
-    private foodProgramService: FoodProgramService
+    private foodProgramService: FoodProgramService,
+    private customerService: CustomerService
   ) { }
 
   ngOnInit() {
@@ -28,8 +30,12 @@ export class AssignFoodprogramModalComponent implements OnInit {
   @HostListener('document:click', ['$event'])
   documentClick(event) {
     if(event.target.id === "assignfood"){
-      //assign to trainee here
-      console.log(event.target.value);
+      this.customerService.assignNewFoodgprogram(event.target.value)
+      .then((data)=>{
+        if(data){
+          this.close.emit();
+        }
+      });
     }
   }
 

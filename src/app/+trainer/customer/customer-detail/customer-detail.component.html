@@ -166,9 +166,9 @@
                       <p class="font-md">
                         <i>{{'Training program' | i18n}}</i>
                       </p>
-                      <div>
+                      <div  *ngIf="customerService.currentTrainingprogram">
                         <p class="text-muted">
-                          <i class="fa fa-heartbeat"></i>&#xA0;&#xA0;<span class="txt-color-darken">Current training program</span>
+                          <i class="fa fa-heartbeat"></i>&#xA0;&#xA0;<span class="txt-color-darken">{{customerService.currentTrainingprogram.name}}</span>
                         </p>
                         <p class="text-muted">
                           <i class="fa fa-pencil"></i>&#xA0;&#xA0;<span class="txt-color-darken"><button class="btn btn-info btn-actions btn-xs" (click)="assignTrainingprogram.show()">{{'Update' | i18n}}</button>
@@ -180,9 +180,9 @@
                       <p class="font-md">
                         <i>{{'Food program' | i18n}}</i>
                       </p>
-                      <div>
+                      <div *ngIf="customerService.currentFoodprogram">
                         <p class="text-muted">
-                          <i class="fa fa-cutlery"></i>&#xA0;&#xA0;<span class="txt-color-darken">Current food program</span>
+                          <i class="fa fa-cutlery"></i>&#xA0;&#xA0;<span class="txt-color-darken">{{customerService.currentFoodprogram.name}}</span>
                         </p>
                         <p class="text-muted">
                           <i class="fa fa-pencil"></i>&#xA0;&#xA0;<span class="txt-color-darken"><button class="btn btn-info btn-actions btn-xs" (click)="assignFoodprogram.show()">{{'Update' | i18n}}</button>
