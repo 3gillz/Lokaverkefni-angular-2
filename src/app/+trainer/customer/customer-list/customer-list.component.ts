@@ -66,20 +66,16 @@ export class CustomerListComponent implements OnInit {
 
     return `<table cell-padding="5" cell-spacing="0" border="0" class="table table-hover table-condensed">
             <tbody><tr>
-                <td style="width:100px">Project Title:</td>
-                <td>${d.name}</td>
+                <td style="width:100px">Allergies</td>
+                <td>${d.allergy}</td>
             </tr>
             <tr>
-                <td>Deadline:</td>
-                <td>${d.email}</td>
+                <td>Food prefrences</td>
+                <td>${d.foodPref}</td>
             </tr>
             <tr>
-                <td>Extra info:</td>
-                <td>And any further details here (images etc)...</td>
-            </tr>
-            <tr>
-                <td>Comments:</td>
-                <td>${d.kennitala}</td>
+                <td>Injuries</td>
+                <td>${d.injury}</td>
             </tr>
             <tr>
                 <td>Action:</td>

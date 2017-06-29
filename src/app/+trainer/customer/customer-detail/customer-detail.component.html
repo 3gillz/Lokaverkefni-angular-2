@@ -138,7 +138,7 @@
                       <br>
 
                       <p class="font-md">
-                        <i>My goals</i>
+                        <i>{{'My goal' | i18n}}</i>
                       </p>
                       <div *ngIf="customerService.goal;else nogoal">
                         <p class="text-muted">
@@ -147,7 +147,7 @@
                       </div>
                       <ng-template #nogoal>
                         <p class="text-muted">
-                          <i class="fa fa-trophy"></i>&#xA0;&#xA0;<span class="txt-color-darken">No goal set</span>
+                          <i class="fa fa-trophy"></i>&#xA0;&#xA0;<span class="txt-color-darken">{{'No goal set' | i18n}}</span>
                         </p>
                         </ng-template>
                       <p class="text-muted">
@@ -168,7 +168,7 @@
                       </p>
                       <div>
                         <p class="text-muted">
-                          <i class="fa fa-heartbeat"></i>&#xA0;&#xA0;<span class="txt-color-darken">Current training program</span>
+                          <i class="fa fa-heartbeat"></i>&#xA0;&#xA0;<span class="txt-color-darken">{{'Current training program' | i18n}}</span>
                         </p>
                         <p class="text-muted">
                           <i class="fa fa-pencil"></i>&#xA0;&#xA0;<span class="txt-color-darken"><button class="btn btn-info btn-actions btn-xs" (click)="assignTrainingprogram.show()">{{'Update' | i18n}}</button>
@@ -182,7 +182,7 @@
                       </p>
                       <div>
                         <p class="text-muted">
-                          <i class="fa fa-cutlery"></i>&#xA0;&#xA0;<span class="txt-color-darken">Current food program</span>
+                          <i class="fa fa-cutlery"></i>&#xA0;&#xA0;<span class="txt-color-darken">{{'Current food program' | i18n}}</span>
                         </p>
                         <p class="text-muted">
                           <i class="fa fa-pencil"></i>&#xA0;&#xA0;<span class="txt-color-darken"><button class="btn btn-info btn-actions btn-xs" (click)="assignFoodprogram.show()">{{'Update' | i18n}}</button>
@@ -225,11 +225,6 @@
                       </div>
                       <div class="tab-pane fade" id="images">
                         <div id="content">
-                          <div class="row">
-                            <div class="page-title text-align-center">
-                              <a class="btn btn-xs btn-info">{{'Upload new image' | i18n}}</a>
-                            </div>
-                          </div>
                           <div class="row">
                             <sa-gallery class="col-sm-12" [pictures]="customerService.pictures" (deleteReques)="onDelete(picture)" (editReques)="onEdit(picture)"></sa-gallery>
                           </div>

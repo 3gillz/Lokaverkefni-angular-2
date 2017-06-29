@@ -8,7 +8,7 @@
       <form [formGroup]="addPortionForm">
         <fieldset>
           <div class="form-group">
-            <label>{{ 'Portion' | i18n }}</label>
+            <label>{{ 'Food item' | i18n }}</label>
             <select class="my-select" #foodItem (change)="foodItemChange($event.target.value)">
               <option *ngFor="let foodItem of foodItemList; let i = index" [value]="i">
                 {{ foodItem.name }}
