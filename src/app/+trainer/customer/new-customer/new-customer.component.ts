@@ -40,7 +40,7 @@ export class NewCustomerComponent implements OnInit {
       password: new FormControl('', <any>Validators.required),
       confirmPassword: new FormControl('', [<any>Validators.required, this.validatePasswordConfirmation.bind(this)]),
       kennitala: new FormControl('', [<any>Validators.required, this.validateKennitalaControl.bind(this), <any>Validators.maxLength(10), <any>Validators.minLength(10)]),
-      phone: new FormControl('', [<any>Validators.maxLength(7), <any>Validators.minLength(7)]),
+      phone: new FormControl('', [<any>Validators.required, <any>Validators.maxLength(7), <any>Validators.minLength(7)]),
       gender: new FormControl('', <any>Validators.required),
       jobDifficulty: new FormControl('', <any>Validators.required),
       height: new FormControl('', [<any>Validators.required, <any>Validators.maxLength(3), <any>Validators.minLength(2)]),
@@ -49,7 +49,7 @@ export class NewCustomerComponent implements OnInit {
       allergy: new FormControl('', <any>Validators),
       address: new FormControl('', <any>Validators.required),
       TRID: new FormControl(''),
-      zipcodes_ZIP: new FormControl('', <any>Validators.required),
+      zipcodes_ZIP: new FormControl('', [<any>Validators.required, this.nonNegative.bind(this) ]),
       country: new FormControl('', <any>Validators)
     });
   }

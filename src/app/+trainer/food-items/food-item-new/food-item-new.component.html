@@ -19,8 +19,8 @@
                 <i class="icon-append fa fa-pencil"></i>
                 <input type="text" formControlName="name" autocomplete="off" spellcheck="false"/>
               </label>
-                <small [hidden]="foodItemForm.controls.name.valid">
-                Name is required.
+                <small *ngIf="submitted && !foodItemForm.controls.name.valid">
+                {{'Name is required.' | i18n}}
               </small>
               </section>
               <section class="col col-6">
@@ -29,8 +29,8 @@
                 <i class="icon-append fa fa-object-ungroup"></i>
                 <input type="text" formControlName="category" autocomplete="off" spellcheck="false"/>
               </label>
-                <small [hidden]="foodItemForm.controls.category.valid">
-                Category is required.
+                <small *ngIf="submitted && !foodItemForm.controls.category.valid">
+                {{'Category is required.' | i18n}}
               </small>
               </section>
             </div>  
@@ -41,8 +41,8 @@
                 <i class="icon-append fa fa-fire"></i>
                 <input type="number" formControlName="kcal" autocomplete="off" spellcheck="false"/>
               </label>
-                <small [hidden]="foodItemForm.controls.kcal.valid">
-                Kcal value is required.
+                <small *ngIf="submitted && !foodItemForm.controls.kcal.valid">
+                {{'Kcal value is required.' | i18n}}
               </small>
               </section>
               <section class="col col-4">
@@ -51,8 +51,8 @@
                 <i class="icon-append fa fa-flask"></i>
                 <input type="number" formControlName="fat" autocomplete="off" spellcheck="false"/>
               </label>
-                <small [hidden]="foodItemForm.controls.kcal.valid">
-                Fat value is required.
+                <small *ngIf="submitted && !foodItemForm.controls.fat.valid">
+                {{'Fat value is required.' | i18n}}
               </small>
               </section>
               <section class="col col-4">
@@ -61,8 +61,8 @@
                 <i class="icon-append fa fa-flask"></i>
                 <input type="number" formControlName="saturatedFat" autocomplete="off" spellcheck="false"/>
               </label>
-                <small [hidden]="foodItemForm.controls.saturatedFat.valid">
-                Saturated fat value is required.
+                <small *ngIf="submitted && !foodItemForm.controls.saturatedFat.valid">
+                {{'Saturated fat value is required.' | i18n}}
               </small>
               </section>
                 <section class="col col-4">
@@ -71,8 +71,8 @@
                 <i class="icon-append fa fa-flask"></i>
                 <input type="number" formControlName="unsaturatedFat" autocomplete="off" spellcheck="false"/>
               </label>
-                <small [hidden]="foodItemForm.controls.unsaturatedFat.valid">
-                Unsaturated fat value is required.
+                <small *ngIf="submitted && !foodItemForm.controls.unsaturatedFat.valid">
+                {{'Unsaturated fat value is required.' | i18n}}
               </small>
               </section>
               <section class="col col-4">
@@ -81,8 +81,8 @@
                 <i class="icon-append fa fa-heartbeat"></i>
                 <input type="number" formControlName="colestrol" autocomplete="off" spellcheck="false"/>
               </label>
-                <small [hidden]="foodItemForm.controls.colestrol.valid">
-                Colestrol value is required.
+                <small *ngIf="submitted && !foodItemForm.controls.colestrol.valid">
+                {{'Colestrol value is required.' | i18n}}
               </small>
               </section>
               <section class="col col-4">
@@ -91,8 +91,8 @@
                 <i class="icon-append fa fa-plus-square-o"></i>
                 <input type="number" formControlName="carbs" autocomplete="off" spellcheck="false"/>
               </label>
-                <small [hidden]="foodItemForm.controls.carbs.valid">
-                Carbohydrate value is required.
+                <small *ngIf="submitted && !foodItemForm.controls.carbs.valid">
+                {{'Carbohydrate value is required.' | i18n}}
               </small>
               </section>
               <section class="col col-4">
@@ -101,8 +101,8 @@
                 <i class="icon-append fa fa-fire"></i>
                 <input type="number" formControlName="addedSugar" autocomplete="off" spellcheck="false"/>
               </label>
-                <small [hidden]="foodItemForm.controls.addedSugar.valid">
-                Added sugar value is required.
+                <small *ngIf="submitted && !foodItemForm.controls.addedSugar.valid">
+                {{'Added sugar value is required.' | i18n}}
               </small>
               </section>
               <section class="col col-4">
@@ -111,18 +111,18 @@
                 <i class="icon-append fa fa-leaf"></i>
                 <input type="number" formControlName="fiber" autocomplete="off" spellcheck="false"/>
               </label>
-                <small [hidden]="foodItemForm.controls.fiber.valid">
-                Fiber value is required.
+                <small *ngIf="submitted && !foodItemForm.controls.fiber.valid">
+                {{'Fiber value is required.' | i18n}}
               </small>
               </section>
               <section class="col col-4">
                 <label class="label">{{'Water' | i18n}}</label>
                 <label class="input">
-                <i class="icon-append fa fa-eyedropper"></i>
+                <i class="icon-append fa fa-tint"></i>
                 <input type="number" formControlName="water" autocomplete="off" spellcheck="false"/>
               </label>
-                <small [hidden]="foodItemForm.controls.water.valid">
-                Water value is required.
+                <small *ngIf="submitted && !foodItemForm.controls.water.valid">
+                {{'Water value is required.' | i18n}}
               </small>
               </section>
               <section class="col col-4">
@@ -131,14 +131,14 @@
                 <i class="icon-append fa fa-pencil"></i>
                 <input type="number" formControlName="protein" autocomplete="off" spellcheck="false"/>
               </label>
-                <small [hidden]="foodItemForm.controls.protein.valid">
-                Protein value is required.
+                <small *ngIf="submitted && !foodItemForm.controls.protein.valid">
+                {{'Protein value is required.' | i18n}}
               </small>
               </section>
             </div>
           </fieldset>
           <footer>
-            <button type="submit" class="btn btn-primary" [disabled]="!foodItemForm.valid">{{'Create' | i18n}}</button>
+            <button type="submit" class="btn btn-primary">{{'Create' | i18n}}</button>
           </footer>
         </form>
       </div>

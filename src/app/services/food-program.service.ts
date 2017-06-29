@@ -102,8 +102,6 @@ export class FoodProgramService {
         .map(res => res.json())
         .subscribe(
           data => {
-            console.log("portions: ")
-            console.log(data)
             this.prepTrainingsForCalendar(data as FoodPortionDTO);
           }
         )
@@ -126,8 +124,6 @@ export class FoodProgramService {
       );
       this.foodPortionEvents.push(portion);
     }
-    console.log("portions events: ")
-    console.log(this.foodPortionEvents)
     this.foodeventAdded.next(true);
     this.foodProgramLoaded = true;
   }

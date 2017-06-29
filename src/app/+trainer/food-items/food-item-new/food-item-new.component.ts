@@ -10,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class FoodItemNewComponent implements OnInit {
 
 public foodItemForm: any;
+public submitted: boolean = false;
 
   constructor(
     private foodItemService: FoodItemService
@@ -22,6 +23,7 @@ public foodItemForm: any;
   }
 
     submitFoodItem(foodItemForm){
+      this.submitted = true;
     if(foodItemForm.valid){
       this.foodItemService.addNewFoodItem(foodItemForm.value)
       .then((resolve)=> {

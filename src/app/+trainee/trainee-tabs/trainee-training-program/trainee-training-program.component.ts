@@ -13,7 +13,7 @@ declare var $: any;
 })
 export class TraineeTrainingProgramComponent implements OnInit {
   private $calendarRef: any;
-  private calendar: any;
+  private trainingcalendar: any;
   private language: any;
   rendered: boolean
   programName: string;
@@ -50,8 +50,8 @@ export class TraineeTrainingProgramComponent implements OnInit {
 
   render() {
 
-    this.$calendarRef = $('#calendar', this.el.nativeElement);
-    this.calendar = this.$calendarRef.fullCalendar({
+    this.$calendarRef = $('#trainingcalendar', this.el.nativeElement);
+    this.trainingcalendar = this.$calendarRef.fullCalendar({
         lang: this.language,
         editable: false,
         draggable: false,
@@ -105,7 +105,7 @@ export class TraineeTrainingProgramComponent implements OnInit {
     {name: "Day", value:"basicDay"}
   ]
   changeView(select) {
-    this.calendar.fullCalendar('changeView', select.value);
+    this.trainingcalendar.fullCalendar('changeView', select.value);
     this.period = select.name
   }
 
@@ -118,11 +118,11 @@ export class TraineeTrainingProgramComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.calendar.fullCalendar('destroy');
+    this.trainingcalendar.fullCalendar('destroy');
     this.trainingProgramService.trainingEvents = [];
   }
   
   refetchEvents(){
-      this.calendar.fullCalendar( 'refetchEvents' );
+      this.trainingcalendar.fullCalendar( 'refetchEvents' );
   }
 }
