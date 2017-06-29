@@ -1,41 +1,34 @@
 <div id="content">
-  
+  <div class="row">
     <h1 class="page-title txt-color-blueDark">
     <i class="fa-fw fa fa-file-text-o"></i>{{'Customers' | i18n }}
     <span>> {{'New' | i18n}}</span>
     </h1>
   </div>
-  <sa-widgets-grid>
-      <div class="row">
-      <!-- NEW WIDGET START -->
-      <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
-      <sa-widget class="well">
-
-                <header>
-            <span class="widget-icon"> <i class="fa fa-comments"></i> </span>
-
-            <h2>Widget Title </h2>
+     
+      <sa-widget [editbutton]="false" [custombutton]="false">
+          <header>
           </header>
-
+    <div>
+      <div class="widget-body no-padding">
 <form [formGroup]="customerForm"  novalidate="novalidate" class="smart-form" (submit)="submitCustomer(customerForm)">
 
   <fieldset>
     <div class="row">
       <section class="col col-6">
         <label class="input"> <i class="icon-prepend fa fa-user"></i>
-          <input type="text" formControlName="name" placeholder="Full name">
+          <input type="text" formControlName="name" placeholder="{{'Full name' | i18n}}" spellcheck="false" pattern="{{miscService.namePattern}}">
         </label>
-        <small *ngIf="submitted && !customerForm.controls.kennitala.valid">
+        <small *ngIf="submitted && !customerForm.controls.name.valid">
          {{'Name not valid' | i18n}}
         </small>
       </section>
 
       <section class="col col-6">
         <label class="input"> <i class="icon-prepend fa fa-envelope-o"></i>
-          <input type="email" formControlName="email" placeholder="E-mail">
+          <input type="email" formControlName="email" placeholder="{{'Email' | i18n}}" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" spellcheck="false" autocomplete="off">
         </label>
-        <small *ngIf="submitted && !customerForm.controls.kennitala.valid">
+        <small *ngIf="submitted && !customerForm.controls.email.valid">
          {{'Email not valid' | i18n}}
         </small>
       </section>
@@ -53,7 +46,7 @@
 
       <section class="col col-3">
         <label class="input"> <i class="icon-prepend fa fa-phone"></i>
-          <input type="tel" formControlName="phone" placeholder="Phone">
+          <input type="tel" formControlName="phone" placeholder="{{'Phone' | i18n}}" pattern="\d*" maxlength="7">
         </label>
         <small *ngIf="submitted && !customerForm.controls.phone.valid">
           {{'Phone number not valid' | i18n}}
@@ -68,7 +61,6 @@
             <option value="2">{{'Female' | i18n}}</option>
             <option value="3">{{'Shemale' | i18n}}</option>
             <option value="4">{{'Helicopter' | i18n}}</option>
-
           </select> <i></i> </label>
         <small *ngIf="submitted && !customerForm.controls.gender.valid">
           {{'Please select gender' | i18n}}
@@ -82,10 +74,8 @@
             <option value="0" >{{'Light' | i18n}}</option>
             <option value="1">{{'Medium' | i18n}}</option>
             <option value="2">{{'Hard' | i18n}}</option>
-
-
           </select> <i></i> </label>
-        <small *ngIf="submitted && !customerForm.controls.gender.valid">
+        <small *ngIf="submitted && !customerForm.controls.jobDifficulty.valid">
           {{'Please select job difficulty' | i18n}}
         </small>
       </section>
@@ -117,7 +107,8 @@
     <div class="row">
       <section class="col col-3">
         <label class="input"> <i class="icon-prepend fa fa-expand"></i>
-          <input type="number" formControlName="height" placeholder="Height" >
+          <input type="number" min="0" formControlName="height" placeholder="{{'Height' | i18n}}" pattern="\d*" maxlength="3">
+          <b class="tooltip tooltip-bottom-right">{{'Height in centimeters' | i18n}}</b>
         </label>
         <small *ngIf="submitted && !customerForm.controls.height.valid">
           {{'Please enter height' | i18n}}
@@ -126,19 +117,22 @@
 
       <section class="col col-3">
         <label class="input"> <i class="icon-prepend fa fa-delicious"></i>
-          <input type="" formControlName="foodPref" placeholder="Foodpref">
+          <input type="" formControlName="foodPref" placeholder="{{'Food pref' | i18n}}">
+          <b class="tooltip tooltip-bottom-right">{{'Leave empty if none' | i18n}}</b>
         </label>
       </section>
 
       <section class="col col-3">
         <label class="input"> <i class="icon-prepend fa fa-hospital-o"></i>
-          <input type="" formControlName="injury" placeholder="Injury">
+          <input type="" formControlName="injury" placeholder="{{'Injury' | i18n}}">
+          <b class="tooltip tooltip-bottom-right">{{'Leave empty if none' | i18n}}</b>
         </label>
       </section>
 
       <section class="col col-3">
         <label class="input"> <i class="icon-prepend fa fa-heartbeat"></i>
-          <input type="" formControlName="allergy" placeholder="Allergy">
+          <input type="" formControlName="allergy" placeholder="{{'Allergy' | i18n}}">
+          <b class="tooltip tooltip-bottom-right">{{'Leave empty if none' | i18n}}</b>
         </label>
       </section>
     </div>
@@ -153,7 +147,7 @@
             <option *ngFor="let zipcode of zipcodes" >{{zipcode.ZIP}}</option>         
           </select> <i></i> </label>
         <small *ngIf="submitted && !customerForm.controls.zipcodes_ZIP.valid">
-          {{'Please select Zipcode' | i18n}}
+          {{'Please select zipcode' | i18n}}
         </small>
       </section>
 
@@ -166,8 +160,11 @@
 
     <section class="col col-6">
       <label for="address" class="input"> <i class="icon-prepend fa fa-home"></i>
-        <input type="text" formControlName="address" placeholder="Address">
+        <input type="text" formControlName="address" placeholder="{{'Address' | i18n}}">
       </label>
+        <small *ngIf="submitted && !customerForm.controls.address.valid">
+          {{'Please select address' | i18n}}
+        </small>
     </section>
 
     </div>
@@ -178,10 +175,9 @@
     <button type="submit" class="btn btn-primary">{{'Create' | i18n}}</button>
   </footer>
 </form>
-
- </sa-widget>
-
-      </article>
-      <!-- WIDGET END -->
+      </div>
     </div>
-  </sa-widgets-grid>
+ </sa-widget>
+    </div>
+      
+
