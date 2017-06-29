@@ -24,8 +24,8 @@ export class NewGoalModalComponent implements OnInit {
       percentage: new FormControl('', <any>Validators.required),
       description: new FormControl('', <any>Validators.required),
       diameter: new FormControl('', <any>Validators),
-      startDate: new FormControl(),
-      dueDate: new FormControl()
+      startDate: new FormControl('', ),
+      dueDate: new FormControl('', )
 
     });
   }
@@ -54,15 +54,13 @@ export class NewGoalModalComponent implements OnInit {
 
 
       this.customerService.addNewGoal(goalForm.value, due, start, this.CID)
-        .then((resolve) => {
-          if (resolve === true) {
+        .then((resolve) => {        
             this.goalForm.reset();
             this.submitted = false;
             this.close.emit();
-          }
         });
     }
-    else { this.popUpService.errorMessage("Sorry, something went wrong"); }
+    
   }
 
 }

@@ -1,3 +1,5 @@
+import { Goals } from './../models/goals';
+import { Customer } from './../models/customer';
 import { GalleryImage } from './../models/galleryImage';
 import { MeasurementMM } from './../models/measurementMM';
 import { MeasurementCM } from './../models/measurementCM';
@@ -12,6 +14,8 @@ import { Router } from '@angular/router';
 @Injectable()
 export class CustomerService {
 
+customer : Customer;
+goal : Goals
   constructor
   (
     @Inject("apiRoot") private apiRoot,
@@ -93,7 +97,7 @@ getCustomer(CID: number){
     }
   }
 
-    addNewGoal(goalForm, due, start, cid): Promise<boolean>{
+    addNewGoal(goalForm, due, start, cid) {
     let optionalBody = '';
     for (let x = 0; x < Object.keys(goalForm).length; x++) {
       let value = (<any>Object).values(goalForm)[x];
@@ -106,16 +110,19 @@ getCustomer(CID: number){
     let token = localStorage.getItem('access_token');
     let headers = new Headers({ 'Authorization': "Bearer " + token, 'Content-Type': 'application/x-www-form-urlencoded' });
     let requestOptions = new RequestOptions({ headers: headers });
-    return new Promise((resolve) => {
+ return new Promise((resolve) => {
       this.http.post(url, body, requestOptions)
         .map(res => res.json())
         .subscribe((data) => {
-          resolve(data);
-          data === true ? this.popUpService.successMessage("Goal added", "Just now") : this.popUpService.errorMessage("Sorry, something went wrong");
+          this.goal = data 
+          this.popUpService.successMessage("Goal added", "Just now")
+        resolve(data)
+        },
+        error =>{
+          this.popUpService.errorMessage("Sorry, something went wrong");
         })
-        
-    });
   }
 
+ )};
 
 }

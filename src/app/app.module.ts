@@ -64,6 +64,7 @@ import { FoodProgramCalendarComponent } from './+trainer/food-program/food-progr
 import { AddPortionComponent } from './+trainer/food-program/food-program-new/add-portion/add-portion.component';
 import { SaveFoodProgramComponent } from './+trainer/food-program/food-program-new/save-food-program/save-food-program.component';
 import { NewGoalModalComponent } from './+trainer/+modals/new-goal-modal/new-goal-modal.component';
+import { EditCustomerModalComponent } from './+trainer/+modals/edit-customer-modal/edit-customer-modal.component';
 import { AssignTrainingprogramModalComponent } from './+trainer/+modals/assign-trainingprogram-modal/assign-trainingprogram-modal.component';
 import { AssignFoodprogramModalComponent } from './+trainer/+modals/assign-foodprogram-modal/assign-foodprogram-modal.component';
 
@@ -97,6 +98,7 @@ import { AssignFoodprogramModalComponent } from './+trainer/+modals/assign-foodp
     AddPortionComponent,
     SaveFoodProgramComponent,
     NewGoalModalComponent,
+    EditCustomerModalComponent,
     AssignTrainingprogramModalComponent,
     AssignFoodprogramModalComponent,
   ],
