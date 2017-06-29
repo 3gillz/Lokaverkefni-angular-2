@@ -189,7 +189,10 @@
     "Current training program":"Virkt þjálfunarplan",
     "Current food program":"Virkt matarplan",
     "Update":"Uppfæra",
-    "Customer detail":"Um viðskiptavin"
-    
+    "Customer detail":"Um viðskiptavin",
+    "Assign training program":"Skrá í æfingarplan",
+    "Close":"Loka",
+    "Assign food program":"Skrá í matarplan",
+    "7 point":"7 punkta"
     
 }

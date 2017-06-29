@@ -16,20 +16,20 @@ import { Router } from '@angular/router';
 @Injectable()
 export class CustomerService {
 
-currentFoodprogram: FoodProgram;
-currentTrainingprogram: TrainingProgram;
-customer : Customer;
-goal : Goals
+  currentFoodprogram: FoodProgram;
+  currentTrainingprogram: TrainingProgram;
+  customer: Customer;
+  goal: Goals
   constructor
-  (
+    (
     @Inject("apiRoot") private apiRoot,
     private popUpService: PopUpService,
     private http: Http,
     private router: Router
-  ) { }
+    ) { }
 
-// Get customer informatio for Customer detail page
-getCustomer(CID: number){
+  // Get customer informatio for Customer detail page
+  getCustomer(CID: number) {
     let url = this.apiRoot + "api/Customer/" + CID;
     console.log(url);
     let token = localStorage.getItem('access_token');
@@ -43,9 +43,9 @@ getCustomer(CID: number){
         })
     });
   }
-// Get current goal of customer for Customer detail page
-  getCustomerGoal(CID: number){
-        let url = this.apiRoot + "api/Goals/" + CID;
+  // Get current goal of customer for Customer detail page
+  getCustomerGoal(CID: number) {
+    let url = this.apiRoot + "api/Goals/" + CID;
     console.log(url);
     let token = localStorage.getItem('access_token');
     let headers = new Headers({ 'Authorization': "Bearer " + token, 'Content-Type': 'application/x-www-form-urlencoded' });
@@ -60,8 +60,8 @@ getCustomer(CID: number){
   }
 
   // Get a list of MM measurements for Costumer detail page 
-    getmeasurementsMM(CID: number){
-        let url = this.apiRoot + "api/MeasurmentMM/GetAllByCID/" + CID;
+  getmeasurementsMM(CID: number) {
+    let url = this.apiRoot + "api/MeasurmentMM/GetAllByCID/" + CID;
     console.log(url);
     let token = localStorage.getItem('access_token');
     let headers = new Headers({ 'Authorization': "Bearer " + token, 'Content-Type': 'application/x-www-form-urlencoded' });
@@ -75,7 +75,7 @@ getCustomer(CID: number){
     });
   }
 
-  getCurrentFoodProgram(CID: number){
+  getCurrentFoodProgram(CID: number) {
     let url = this.apiRoot + "api/FoodProgramDate/GetCurrentByCID/" + CID;
     let token = localStorage.getItem('access_token');
     let headers = new Headers({ 'Authorization': "Bearer " + token, 'Content-Type': 'application/x-www-form-urlencoded' });
@@ -83,7 +83,7 @@ getCustomer(CID: number){
     return new Promise((resolve) => {
       this.http.get(url, requestOptions)
         .map(res => res.json())
-        .subscribe(data =>{
+        .subscribe(data => {
           this.currentFoodprogram = data as FoodProgram;
           resolve(data);
         })
@@ -97,16 +97,16 @@ getCustomer(CID: number){
     let headers = new Headers({ 'Authorization': "Bearer " + token, 'Content-Type': 'application/x-www-form-urlencoded' });
     let options = new RequestOptions({ headers: headers });
     return new Promise((resolve) => {
-    this.http.post(url, body, options)
-      .map(res => res.json())
-      .subscribe(response => {
-        this.getCurrentFoodProgram(this.customer.CID);
-        this.popUpService.successMessage("Program assigned", "Just now")
-        resolve(response);
-      }, error => {
-        this.popUpService.errorMessage("Sorry, something went wrong");
-        resolve(error);        
-      });
+      this.http.post(url, body, options)
+        .map(res => res.json())
+        .subscribe(response => {
+          this.getCurrentFoodProgram(this.customer.CID);
+          this.popUpService.successMessage("Program assigned", "Just now")
+          resolve(response);
+        }, error => {
+          this.popUpService.errorMessage("Sorry, something went wrong");
+          resolve(error);
+        });
 
     })
   }
@@ -117,21 +117,21 @@ getCustomer(CID: number){
     let headers = new Headers({ 'Authorization': "Bearer " + token, 'Content-Type': 'application/x-www-form-urlencoded' });
     let options = new RequestOptions({ headers: headers });
     return new Promise((resolve) => {
-    this.http.post(url, body, options)
-      .map(res => res.json())
-      .subscribe(response => {
-        this.getCurrentTrainingProgram(this.customer.CID);
-        this.popUpService.successMessage("Program assigned", "Just now")
-        resolve(response);
-      }, error => {
-        this.popUpService.errorMessage("Sorry, something went wrong");
-        resolve(error);        
-      });
+      this.http.post(url, body, options)
+        .map(res => res.json())
+        .subscribe(response => {
+          this.getCurrentTrainingProgram(this.customer.CID);
+          this.popUpService.successMessage("Program assigned", "Just now")
+          resolve(response);
+        }, error => {
+          this.popUpService.errorMessage("Sorry, something went wrong");
+          resolve(error);
+        });
 
     })
   }
 
-  getCurrentTrainingProgram(CID: number){
+  getCurrentTrainingProgram(CID: number) {
     let url = this.apiRoot + "api/TrainingProgramDate/GetCurrentByCID/" + CID;
     let token = localStorage.getItem('access_token');
     let headers = new Headers({ 'Authorization': "Bearer " + token, 'Content-Type': 'application/x-www-form-urlencoded' });
@@ -139,14 +139,14 @@ getCustomer(CID: number){
     return new Promise((resolve) => {
       this.http.get(url, requestOptions)
         .map(res => res.json())
-        .subscribe(data =>{
+        .subscribe(data => {
           this.currentTrainingprogram = data as TrainingProgram;
           resolve(data);
         })
     });
   }
   // Get progress images for a user for for Customer detail page 
-    getProgressImages(CID: number){
+  getProgressImages(CID: number) {
     let url = this.apiRoot + "api/ProgressImage/GetAllByCID/" + CID;
     let token = localStorage.getItem('access_token');
     let headers = new Headers({ 'Authorization': "Bearer " + token, 'Content-Type': 'application/x-www-form-urlencoded' });
@@ -154,15 +154,15 @@ getCustomer(CID: number){
     return new Promise((resolve) => {
       this.http.get(url, requestOptions)
         .map(res => res.json())
-        .subscribe(progImgData =>{
+        .subscribe(progImgData => {
           resolve(progImgData);
         })
     });
   }
-    public pictures = [];
-  pushImagesToGallery(data){
+  public pictures = [];
+  pushImagesToGallery(data) {
     this.pictures = [];
-    for(let x = 0; x < data.length; x++){
+    for (let x = 0; x < data.length; x++) {
       let image = new GalleryImage(
         data[x].date,
         'data:image/png;base64,' + data[x].image
@@ -171,7 +171,7 @@ getCustomer(CID: number){
     }
   }
 
-    addNewGoal(goalForm, due, start, cid) {
+  addNewGoal(goalForm, due, start, cid) {
     let optionalBody = '';
     for (let x = 0; x < Object.keys(goalForm).length; x++) {
       let value = (<any>Object).values(goalForm)[x];
@@ -179,24 +179,48 @@ getCustomer(CID: number){
         optionalBody += `&${Object.keys(goalForm)[x]}=${(<any>Object).values(goalForm)[x]}`;
       }
     }
-    let body = `${goalForm}`+ "&dueDate=" + due + "&startDate="+ start + "&customer_CID="+ cid + optionalBody;
+    let body = `${goalForm}` + "&dueDate=" + due + "&startDate=" + start + "&customer_CID=" + cid + optionalBody;
     let url = this.apiRoot + "api/Goals/Add";
     let token = localStorage.getItem('access_token');
     let headers = new Headers({ 'Authorization': "Bearer " + token, 'Content-Type': 'application/x-www-form-urlencoded' });
     let requestOptions = new RequestOptions({ headers: headers });
- return new Promise((resolve) => {
+    return new Promise((resolve) => {
       this.http.post(url, body, requestOptions)
         .map(res => res.json())
         .subscribe((data) => {
-          this.goal = data 
+          this.goal = data
           this.popUpService.successMessage("Goal added", "Just now")
-        resolve(data)
+          resolve(data)
         },
-        error =>{
+        error => {
           this.popUpService.errorMessage("Sorry, something went wrong");
         })
-  }
+    }
 
- )};
+    )
+  };
+
+  addNewMeasureMM(measureMMForm): Promise<boolean> {
+    let optionalBody = '';
+    for (let x = 0; x < Object.keys(measureMMForm).length; x++) {
+      let value = (<any>Object).values(measureMMForm)[x];
+      if (value !== null && value !== "") {
+        optionalBody += `&${Object.keys(measureMMForm)[x]}=${(<any>Object).values(measureMMForm)[x]}`;
+      }
+    }
+    let body ="customer_CID=" + this.customer.CID + optionalBody;
+    let url = this.apiRoot + "api/MeasurmentMM/Add";
+    let token = localStorage.getItem('access_token');
+    let headers = new Headers({ 'Authorization': "Bearer " + token, 'Content-Type': 'application/x-www-form-urlencoded' });
+    let requestOptions = new RequestOptions({ headers: headers });
+    return new Promise((resolve) => {
+      this.http.post(url, body, requestOptions)
+        .map(res => res.json())
+        .subscribe((data) => {
+          resolve(data);
+          data === true ? this.popUpService.successMessage("Measurement added", "Just now") : this.popUpService.errorMessage("Sorry, something went wrong");
+        })
+    });
+  }
 
 }

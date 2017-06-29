@@ -1,0 +1,96 @@
+<div class="modal-dialog modal-md">
+
+  <div class="modal-content">
+
+    <div class="modal-header">
+      {{'7 point measure' | i18n}}         <button type="button" class="close" (click)="closeModal(); clear();" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>       </div>
+
+    <div class="modal-body">
+
+      <form [formGroup]="measureMMForm" novalidate="novalidate" class="smart-form">
+<div class="row">
+        <section class="col col-4">
+          <label class="input"> <i class="icon-prepend fa fa-compress"></i>
+          <input type="number" min="2" formControlName="chest" placeholder="{{'Chest' | i18n}}">
+        </label>
+          <small *ngIf="submitted && !measureMMForm.controls.chest.valid">
+                      Chest mm thickness required.
+                    </small>
+        </section>
+
+        <section class="col col-4">
+          <label class="input"> <i class="icon-prepend fa fa-compress"></i>
+          <input type="number"  min="2" formControlName="abdominal" placeholder="{{'Abdominal' | i18n}}">
+        </label>
+          <small *ngIf="submitted && !measureMMForm.controls.abdominal.valid">
+                      Abdominal mm thickness required.
+                    </small>
+        </section>
+
+        <section class="col col-4">
+          <label class="input"> <i class="icon-prepend fa fa-compress"></i>
+          <input type="number" min="2" formControlName="thigh" placeholder="{{'Thigh' | i18n}}">
+        </label>
+          <small *ngIf="submitted && !measureMMForm.controls.thigh.valid">
+                      Thigh mm thickness required.
+                    </small>
+        </section>
+</div>
+<div class="row">
+        <section class="col col-4">
+          <label class="input"> <i class="icon-prepend fa fa-compress"></i>
+          <input type="number" min="2" formControlName="tricep" placeholder="{{'Tricep' | i18n}}">
+        </label>
+          <small *ngIf="submitted && !measureMMForm.controls.tricep.valid">
+                      Tricep mm thickness required.
+                    </small>
+        </section>
+
+        <section class="col col-4">
+          <label class="input"> <i class="icon-prepend fa fa-compress"></i>
+          <input type="number" min="2" formControlName="subscapular" placeholder="{{'Subscapular' | i18n}}">
+        </label>
+          <small *ngIf="submitted && !measureMMForm.controls.subscapular.valid">
+                      Subscapular mm thickness required.
+                    </small>
+        </section>
+
+        <section class="col col-4">
+          <label class="input"> <i class="icon-prepend fa fa-compress"></i>
+          <input type="number" min="2" formControlName="suprailiac" placeholder="{{'Suprailiac' | i18n}}">
+        </label>
+          <small *ngIf="submitted && !measureMMForm.controls.suprailiac.valid">
+                      Suprailiac mm thickness required.
+                    </small>
+        </section>
+</div>
+<div class="row">
+        <section class="col col-4">
+          <label class="input"> <i class="icon-prepend fa fa-compress"></i>
+          <input type="number" min="2" formControlName="axilliary" placeholder="{{'Axilliary' | i18n}}">
+        </label>
+          <small *ngIf="submitted && !measureMMForm.controls.axilliary.valid">
+                      Axilliary mm thickness required.
+                    </small>
+        </section>
+
+        <section class="col col-4">
+          <label class="input"> <i class="icon-prepend fa fa-tachometer"></i>
+          <input type="number" min="2" formControlName="kg" placeholder="{{'Kg' | i18n}}">
+        </label>
+          <small *ngIf="submitted && !measureMMForm.controls.kg.valid">
+                      Weight in kg required.
+                    </small>
+        </section>
+        </div>
+      </form>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" (click)="closeModal(); clear();">{{'Cancel' | i18n}}</button>
+      <button  type="button" class="btn btn-primary" (click)="submitMeasureMM(measureMMForm)">{{'Save' | i18n}}</button>
+      </div>
+  </div>
+</div>

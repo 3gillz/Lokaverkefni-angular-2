@@ -67,6 +67,7 @@ import { NewGoalModalComponent } from './+trainer/+modals/new-goal-modal/new-goa
 import { EditCustomerModalComponent } from './+trainer/+modals/edit-customer-modal/edit-customer-modal.component';
 import { AssignTrainingprogramModalComponent } from './+trainer/+modals/assign-trainingprogram-modal/assign-trainingprogram-modal.component';
 import { AssignFoodprogramModalComponent } from './+trainer/+modals/assign-foodprogram-modal/assign-foodprogram-modal.component';
+import { NewMeasurementModalComponent } from './+trainer/+modals/new-measurement-modal/new-measurement-modal.component';
 
 @NgModule({
   declarations: [
@@ -101,6 +102,7 @@ import { AssignFoodprogramModalComponent } from './+trainer/+modals/assign-foodp
     EditCustomerModalComponent,
     AssignTrainingprogramModalComponent,
     AssignFoodprogramModalComponent,
+    NewMeasurementModalComponent,
   ],
   imports: [
     SmartadminInputModule,
