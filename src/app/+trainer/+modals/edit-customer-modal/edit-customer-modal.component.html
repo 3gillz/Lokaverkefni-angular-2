@@ -1,0 +1,128 @@
+    <div class="modal-dialog modal-md" *ngIf="customerService.customer">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" (click)="closeModal()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">{{'Edit basic info' | i18n}}</h4>
+        </div>
+        <form [formGroup]="basicInfoForm" novalidate (ngSubmit)="submit(basicInfoForm.value, basicInfoForm.valid)">
+          <div class="smart-form">
+            <div class="modal-body">
+              <fieldset>
+                <div class="row"> 
+                  <section class="col col-5">
+                    <label class="label">{{'Name' | i18n}}</label>
+                    <label class="input"> <i class="icon-append fa fa-user"></i>
+                          <input type="text" [ngModel]="customerService.customer.name" formControlName="name" autocomplete="off" spellcheck="false">
+                        </label>
+                    <small [hidden]="basicInfoForm.controls.name.valid">
+                      Please Enter Name.
+                    </small>
+                  </section>
+                  <section class="col col-4">
+                    <label class="label">{{'Kennitala' | i18n}}</label>
+                    <label class="input"> <i class="icon-append fa fa-user"></i>
+                          <input type="text" [ngModel]="customerService.customer.kennitala" formControlName="kennitala" autocomplete="off" spellcheck="false">
+                        </label>
+                    <small [hidden]="basicInfoForm.controls.kennitala.valid">
+                      Please Enter Kennitala.
+                    </small>
+                  </section>
+                  <section class="col col-3">
+                    <label class="label">{{'Height' | i18n}}</label>
+                    <label class="input"> <i class="icon-append fa fa-expand"></i>
+                          <input type="number" [ngModel]="customerService.customer.height" formControlName="height" autocomplete="off" spellcheck="false">
+                        </label>
+                    <small [hidden]="basicInfoForm.controls.height.valid">
+                      Please Enter Height.
+                    </small>
+                  </section>
+                </div>
+                <div class="row">
+                  <section class="col col-6">
+                    <label class="label">{{'Phone' | i18n}}</label>
+                    <label class="input"> <i class="icon-append fa fa-phone"></i>
+                          <input type="text" [ngModel]="customerService.customer.phone" formControlName="phone" autocomplete="off" >
+                          <b class="tooltip tooltip-bottom-right">
+                          <i class="fa fa-warning txt-color-teal"></i>
+                          Some helpful information</b>
+                    </label>
+                    <small [hidden]="basicInfoForm.controls.phone.valid">
+                      Valid phone is required.
+                    </small>
+                  </section>
+                  <section class="col col-6">
+                    <label class="label">{{'Address' | i18n}}</label>
+                    <label class="input"> <i class="icon-append fa fa-home"></i>
+                          <input type="text" [ngModel]="customerService.customer.address" formControlName="address" autocomplete="off" spellcheck="false">
+                        </label>
+                    <small [hidden]="basicInfoForm.controls.address.valid">
+                      Valid address is required.
+                    </small>
+                  </section>
+                </div>
+                <section>
+                  <label class="label">{{'Email' | i18n}}</label>
+                  <label class="input"> <i class="icon-append fa fa-envelope"></i>
+                        <input type="text" [ngModel]="customerService.customer.email" formControlName="email" autocomplete="off" ngControl="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" spellcheck="false">
+                      </label>
+                  <small [hidden]="basicInfoForm.controls.email.valid">
+                    Valid Email is required.
+                  </small>
+                </section>
+                <div class="row">
+                  <section class="col col-6">
+                    <label class="label">{{'Allergy' | i18n}}</label>
+                    <label class="input"> <i class="icon-append fa fa-heartbeat"></i>
+                          <input type="text" [ngModel]="customerService.customer.allergy" formControlName="allergy" autocomplete="off" spellcheck="false">
+                        </label>
+                    <small [hidden]="basicInfoForm.controls.allergy.valid">
+                      Valid allergy is required.
+                    </small>
+                  </section>
+                  <section class="col col-6">
+                    <label class="label">{{'Injury' | i18n}}</label>
+                    <label class="input"> <i class="icon-append fa fa-hospital-o"></i>
+                          <input type="text" [ngModel]="customerService.customer.injury" formControlName="injury" autocomplete="off" spellcheck="false">
+                        </label>
+                    <small [hidden]="basicInfoForm.controls.injury.valid">
+                      Valid injury is required.
+                    </small>
+                  </section>
+                </div>
+                <div class="row">
+                  <section class="col col-6">
+                    <label class="label">{{'Food pref' | i18n}}</label>
+                    <label class="input"> <i class="icon-append fa fa-delicious"></i>
+                          <input type="text" [ngModel]="customerService.customer.foodPref" formControlName="foodPref" autocomplete="off" spellcheck="false">
+                        </label>
+                    <small [hidden]="basicInfoForm.controls.foodPref.valid">
+                      Valid foodPref is required.
+                    </small>
+                  </section>
+                  <section class="col col-6">
+                    <label class="label">{{'Job difficulty' | i18n}}</label>
+                    <label class="select">
+                        <select class="form-control" formControlName="jobDifficulty" [ngModel]="customerService.customer.jobDifficulty">
+                          <option value="0">{{'Light' | i18n}}</option>
+                          <option value="1">{{'Medium' | i18n}}</option>
+                          <option value="2">{{'Hard' | i18n}}</option>
+                        </select> <i></i> 
+                    </label>
+                  </section>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" (click)="closeModal()">
+                {{'Cancel' | i18n}}
+              </button>
+            <button type="button" class="btn btn-primary" [disabled]="!basicInfoForm.valid" type="submit" (click)="closeModal()">
+                {{'Save' | i18n}}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>

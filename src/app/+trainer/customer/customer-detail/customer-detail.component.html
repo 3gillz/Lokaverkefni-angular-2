@@ -37,8 +37,8 @@
                       <img src='{{customer.profileImagePath}}' alt="user profile image">
 
                       <div class="padding-10">
-                        <div *ngIf="goal;else nogoal1">
-                          <h4 class="font-md"><strong>{{goal.kg}} kg</strong>
+                        <div *ngIf="customerService.goal;else nogoal1">
+                          <h4 class="font-md"><strong>{{customerService.goal.kg}} kg</strong>
                             <br>
                             <small>Target weight</small>
                           </h4>
@@ -50,8 +50,8 @@
                           </h4>
                         </ng-template>
                         <br>
-                        <div *ngIf="goal;else nogoal2">
-                          <h4 class="font-md"><strong>{{goal.percentage}} %</strong>
+                        <div *ngIf="customerService.goal;else nogoal2">
+                          <h4 class="font-md"><strong>{{customerService.goal.percentage}} %</strong>
                             <br>
                             <small>Target fat %</small>
                           </h4>
@@ -63,8 +63,8 @@
                           </h4>
                         </ng-template>
                         <br>
-                        <div *ngIf="goal;else nogoal3">
-                          <h4 class="font-md"><strong>{{goal.diameter}} cm</strong>
+                        <div *ngIf="customerService.goal;else nogoal3">
+                          <h4 class="font-md"><strong>{{customerService.goal.diameter}} cm</strong>
                             <br>
                             <small>Target diameter</small>
                           </h4>
@@ -76,8 +76,8 @@
                           </h4>
                         </ng-template>
                         <br>
-                        <div *ngIf="goal;else nogoal4">
-                          <h4 class="font-md"><strong>{{goal.dueDate | date: 'dd.MM yyyy'}}</strong>
+                        <div *ngIf="customerService.goal;else nogoal4">
+                          <h4 class="font-md"><strong>{{customerService.goal.dueDate | date: 'dd.MM yyyy'}}</strong>
                             <br>
                             <small>Due date</small>
                           </h4>
@@ -131,7 +131,7 @@
                         </li>
                         <li>
                           <p class="text-muted">
-                            <i class="fa fa-pencil"></i>&#xA0;&#xA0;<span class="txt-color-darken"><button class="btn btn-info btn-xs">{{'Edit' | i18n}}</button></span>
+                            <i class="fa fa-pencil"></i>&#xA0;&#xA0;<span class="txt-color-darken"><button class="btn btn-info btn-xs" (click)="changeInfoModal.show()">{{'Edit' | i18n}}</button></span>
                           </p>
                         </li>
                       </ul>
@@ -140,9 +140,14 @@
                       <p class="font-md">
                         <i>My goals</i>
                       </p>
-                      <div *ngIf="goal;else nogoal">
-                        <p>
-                          My goal: {{goal.description}}
+                      <div *ngIf="customerService.goal;else nogoal">
+                        <p class="text-muted">
+                          <i class="fa fa-trophy"></i>&#xA0;&#xA0;<span class="txt-color-darken">{{ customerService.goal.description }}</span>
+                        </p>
+                        <p class="text-muted">
+                          <i class="fa fa-pencil"></i>&#xA0;&#xA0;<span class="txt-color-darken"><button class="btn btn-info btn-actions btn-xs" (click)="goalModal.show()">{{'Update' | i18n}}</button>
+                            </span>
+
                         </p>
                       </div>
                       <ng-template #nogoal>No goal set</ng-template>
@@ -152,34 +157,36 @@
                     </div>
                     <div class="col-sm-3">
                       <h1>
-                        <small>{{'Action menu' | i18n}}</small>
+
                       </h1>
-                      <ul class="list-inline actions-list">
-                        <li>
-                          <p class="text-muted">
-                            <i class="fa fa-trophy"></i>&#xA0;&#xA0;<span class="txt-color-darken"><button class="btn btn-info btn-actions btn-xs" (click)="goalModal.show()">{{'Add goal' | i18n}}</button>
+                     <br>
+                      <p class="font-md">
+                        <i>{{'Training program' | i18n}}</i>
+                      </p>
+                      <div>
+                        <p class="text-muted">
+                          <i class="fa fa-heartbeat"></i>&#xA0;&#xA0;<span class="txt-color-darken">Current training program</span>
+                        </p>
+                        <p class="text-muted">
+                          <i class="fa fa-pencil"></i>&#xA0;&#xA0;<span class="txt-color-darken"><button class="btn btn-info btn-actions btn-xs" (click)="assignTrainingprogram.show()">{{'Update' | i18n}}</button>
                             </span>
-                          </p>
-                        </li>
-                        <li>
-                          <p class="text-muted">
-                            <i class="fa fa-trophy"></i>&#xA0;&#xA0;<span class="txt-color-darken"><button class="btn btn-info btn-actions btn-xs" (click)="fourPointModal.show()">{{'Add 4 point measure' | i18n}}</button>
+
+                        </p>
+                      </div>
+                      <br>
+                      <p class="font-md">
+                        <i>{{'Food program' | i18n}}</i>
+                      </p>
+                      <div>
+                        <p class="text-muted">
+                          <i class="fa fa-cutlery"></i>&#xA0;&#xA0;<span class="txt-color-darken">Current food program</span>
+                        </p>
+                        <p class="text-muted">
+                          <i class="fa fa-pencil"></i>&#xA0;&#xA0;<span class="txt-color-darken"><button class="btn btn-info btn-actions btn-xs" (click)="assignFoodprogram.show()">{{'Update' | i18n}}</button>
                             </span>
-                          </p>
-                        </li>
-                        <li>
-                          <p class="text-muted">
-                            <i class="fa fa-trophy"></i>&#xA0;&#xA0;<span class="txt-color-darken"><button class="btn btn-info btn-actions btn-xs" (click)="sevenPointModal.show()">{{'Add 7 point measure' | i18n}}</button>
-                            </span>
-                          </p>
-                        </li>
-                        <li>
-                          <p class="text-muted">
-                            <i class="fa fa-trophy"></i>&#xA0;&#xA0;<span class="txt-color-darken"><button class="btn btn-info btn-actions btn-xs" (click)="girthModal.show()">{{'Add girth measure' | i18n}}</button>
-                            </span>
-                          </p>
-                        </li>                        
-                      </ul>
+
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -197,6 +204,7 @@
                       </li>
                     </ul>
                     <div class="tab-content padding-top-10">
+
                       <div class="tab-pane fade in active " id="measurements">
                         <sa-datatable [options]="options" [detailsFormat]="detailsFormat" tableClass="display projects-table table table-striped table-bordered table-hover"
                           width="100%">
@@ -247,3 +255,21 @@
   <app-new-goal-modal [CID]="CID" (close)="goalModal.hide()"></app-new-goal-modal>
 </div>
 <!--Goal modal ends-->
+<!--Edit info modal begins-->
+<div bsModal #changeInfoModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+  aria-hidden="true">
+  <app-edit-customer-modal (close)="changeInfoModal.hide()"></app-edit-customer-modal>
+</div>
+<!--Edit info modal ends-->
+<!--Assign Trainingprogram Modal begins-->
+<div bsModal #assignTrainingprogram="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+ aria-hidden="true">
+  <app-assign-trainingprogram-modal (close)="assignTrainingprogram.hide()"></app-assign-trainingprogram-modal>
+</div>
+<!--Assign Trainingprogram Modal begins ends-->
+<!--Assign Trainingprogram Modal begins-->
+<div bsModal #assignFoodprogram="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+ aria-hidden="true">
+  <app-assign-foodprogram-modal (close)="assignFoodprogram.hide()"></app-assign-foodprogram-modal>
+</div>
+<!--Assign Trainingprogram Modal begins ends-->
