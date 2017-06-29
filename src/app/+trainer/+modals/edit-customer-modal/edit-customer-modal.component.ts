@@ -29,8 +29,11 @@ export class EditCustomerModalComponent implements OnInit {
       foodPref: new FormControl('')
     });
    }
+   closeModal(){
+     this.close.emit();
+   }
 
-  ngOnInit() {
-    console.log ("Edit: " + this.customerService.customer)
-  }
+    ngOnInit() {
+    
+    }
 }

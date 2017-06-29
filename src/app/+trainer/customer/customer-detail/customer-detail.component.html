@@ -144,13 +144,16 @@
                         <p class="text-muted">
                           <i class="fa fa-trophy"></i>&#xA0;&#xA0;<span class="txt-color-darken">{{ customerService.goal.description }}</span>
                         </p>
-                        <p class="text-muted">
-                          <i class="fa fa-pencil"></i>&#xA0;&#xA0;<span class="txt-color-darken"><button class="btn btn-info btn-actions btn-xs" (click)="goalModal.show()">{{'Update' | i18n}}</button>
-                            </span>
-
-                        </p>
                       </div>
-                      <ng-template #nogoal>No goal set</ng-template>
+                      <ng-template #nogoal>
+                        <p class="text-muted">
+                          <i class="fa fa-trophy"></i>&#xA0;&#xA0;<span class="txt-color-darken">No goal set</span>
+                        </p>
+                        </ng-template>
+                      <p class="text-muted">
+                        <i class="fa fa-pencil"></i>&#xA0;&#xA0;<span class="txt-color-darken"><button class="btn btn-info btn-actions btn-xs" (click)="goalModal.show()">{{'Update' | i18n}}</button>
+                          </span>
+                      </p>
                       <br>
                       <br>
                       <br>
