@@ -12,9 +12,9 @@ declare var $: any;
 })
 export class TraineeFoodProgramComponent implements OnInit {
   private $calendarRef: any;
-  private calendar: any;
+  private foodcalendar: any;
   private language: any;
-  rendered: boolean
+  rendered: boolean = false;
   programName: string;
 
   constructor(
@@ -28,7 +28,7 @@ export class TraineeFoodProgramComponent implements OnInit {
     this.i18nService.calendarLang.subscribe((calendarLang) => {
       this.language = calendarLang;
     });
-    this.foodProgramService.foodeventAdded.subscribe((foodeventAdded) => {
+    this.foodProgramService.foodeventAdded.subscribe((eventAdded) => {
       if(this.rendered){
         this.refetchEvents()
       }
@@ -48,8 +48,8 @@ export class TraineeFoodProgramComponent implements OnInit {
 
   render() {
 
-    this.$calendarRef = $('#calendar', this.el.nativeElement);
-    this.calendar = this.$calendarRef.fullCalendar({
+    this.$calendarRef = $('#foodcalendar', this.el.nativeElement);
+    this.foodcalendar = this.$calendarRef.fullCalendar({
         lang: this.language,
         editable: false,
         draggable: false,
@@ -70,14 +70,13 @@ export class TraineeFoodProgramComponent implements OnInit {
         events: (start, end, timezone, callback) => {
           callback(this.foodProgramService.foodPortionEvents)
         },
-        
         eventRender: (event, element) => {
-          element.find('.fc-title').append("<br/>" + event.grams + " grams");
+          element.find('.fc-title').append("<br/>" + event.quantity + " grams"); 
         }
       }
-    );  
+    );
     $('.fc-toolbar').hide();
-    this.rendered = true
+    this.rendered = true;
   }
 
   public period = 'Day'
@@ -86,7 +85,7 @@ export class TraineeFoodProgramComponent implements OnInit {
     {name: "Day", value:"basicDay"}
   ]
   changeView(select) {
-    this.calendar.fullCalendar('changeView', select.value);
+    this.foodcalendar.fullCalendar('changeView', select.value);
     this.period = select.name
   }
 
@@ -97,13 +96,13 @@ export class TraineeFoodProgramComponent implements OnInit {
   prev() {
     $('.fc-prev-button', this.el.nativeElement).click();
   }
-
   ngOnDestroy() {
-    this.calendar.fullCalendar('destroy');
+    this.foodcalendar.fullCalendar('destroy');
     this.foodProgramService.foodPortionEvents = [];
   }
-  
+
   refetchEvents(){
-      this.calendar.fullCalendar('refetchEvents');
+    this.foodcalendar.fullCalendar( 'refetchEvents' );
   }
+  
 }
